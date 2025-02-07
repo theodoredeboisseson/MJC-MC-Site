@@ -15,6 +15,9 @@ import os
 from pathlib import Path
 from decouple import config
 
+SECRET_KEY = config("SECRET_KEY", default="Provide a secret key in the .env file")
+DEBUG = config("DEBUG", default=False, cast=bool)
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -123,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Paris."
 
 USE_I18N = True
 
