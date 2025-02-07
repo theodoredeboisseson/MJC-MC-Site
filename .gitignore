@@ -1,0 +1,51 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+*.swo
+*.env
+
+# Django
+db.sqlite3
+/media/
+*.log
+/staticfiles/
+*.pot
+*.mo
+
+# Virtual environments
+.venv/
+.env/
+env/
+poetry.lock
+
+# Tailwind CSS & Node.js
+node_modules/
+dist/
+static/css/output.css
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs and Debugging
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Other
+*.bak
+*.orig
+*.tmp
+
+# Git
+*.rej
