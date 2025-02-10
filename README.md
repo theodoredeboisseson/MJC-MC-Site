@@ -39,7 +39,7 @@ Avant de commencer, assurez-vous d’avoir installé :
 ### 🔹 1. Cloner le projet
 ```sh
 git clone git@github.com:theodoredeboisseson/MJC-MC-Site.git
-cd MJC-MC-Website
+cd MJC-MC-Site
 ```
 
 ### 🔹 2. Installer les dépendances
@@ -79,12 +79,7 @@ Installez les dépendances :
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
-Ajoutez Tailwind à votre fichier CSS principal (`static/css/styles.css`) :
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
+
 Lance la compilation de Tailwind :
 ```sh
 npx tailwindcss -i ./static/css/styles.css -o ./static/css/output.css --watch

@@ -40,7 +40,7 @@ WORKDIR /app
 RUN chown wagtail:wagtail /app
 
 # Copy the source code of the project into the container.
-COPY --chown=wagtail:wagtail . .
+COPY --chown=wagtail:wagtail mysite .
 
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail

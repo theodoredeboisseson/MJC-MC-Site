@@ -24,7 +24,7 @@ poetry.lock
 # Tailwind CSS & Node.js
 node_modules/
 dist/
-static/css/output.css
+config/static/css/output.css
 
 # IDEs & Editors
 .vscode/

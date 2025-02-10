@@ -18,7 +18,7 @@ from decouple import config
 SECRET_KEY = config("SECRET_KEY", default="Provide a secret key in the .env file")
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -26,11 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Application definition
 
 INSTALLED_APPS = [
-    "mysite",
     
     # Default apps
-    "mysite.home",
-    "mysite.search",
+    "apps.home",
+    "apps.search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -63,14 +62,12 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
-ROOT_URLCONF = "mysite.mysite.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(PROJECT_DIR, "templates"),
-        ],
+        'DIRS': [BASE_DIR / 'config/templates'],  # Dossier des templates généraux
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -143,7 +140,7 @@ STATICFILES_FINDERS = [
 STATIC_URL = "/static/"
 # Où trouver les fichiers statiques supplémentaires
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "config" / "static",  # Fichiers statiques globaux
 ]
 # Où Django va collecter tous les fichiers statiques lors de `collectstatic`
 STATIC_ROOT = BASE_DIR / "staticfiles"

@@ -1,0 +1,6 @@
+/*Ceci est le fichier CSS principal qui importe tout les autres styles*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
