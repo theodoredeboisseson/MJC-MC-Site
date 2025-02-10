@@ -38,7 +38,7 @@ Avant de commencer, assurez-vous d’avoir installé :
 
 ### 🔹 1. Cloner le projet
 ```sh
-git clone git@github.com:theodoredeboisseson/MJC-MC-Website.git
+git clone git@github.com:theodoredeboisseson/MJC-MC-Site.git
 cd MJC-MC-Website
 ```
 
@@ -162,6 +162,39 @@ L’interface d’administration Wagtail est disponible à **[http://127.0.0.1:8
   ```sh
   poetry run python manage.py collectstatic --noinput
   ```
+---
+
+## ℹ️ Informations utiles
+
+### 📁 Fichiers à la racine
+
+**config/** :
+Contient les fichiers de configuration Django
+
+**mysite/** :
+C'est l'application principale Django/Wagtail.
+
+**Static/** :
+Contient les fichiers statiques (CSS, JS, images) utilisés par Django.
+Avec Tailwind, les fichiers CSS générés peuvent être placés ici après la compilation.
+
+**Templates/** :
+Contient les fichiers HTML utilisés par Django/Wagtail.
+
+**LICENSE** :
+Contient la licence open-source ou propriétaire du projet. Indique comment le code peut être utilisé ou distribué. Ici, c'est une license MIT donc libre.
+
+**README.md** :
+Le fichier que vous êtes en train de lire. C'est la documentation du projet.
+
+**manage.py** : 
+Script principal de Django permettant d'exécuter des commandes (runserver, migrate, createsuperuser, etc.).
+
+**package.json** :
+Fichier de configuration pour npm. Il liste les dépendances JavaScript et les scripts associés (ex : compilation Tailwind).
+
+**pyproject.toml** :
+Fichier principal de configuration pour Poetry. Il définit les dépendances Python et les métadonnées du projet.
 
 ---
 
