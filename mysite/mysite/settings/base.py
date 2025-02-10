@@ -16,26 +16,21 @@ from pathlib import Path
 from decouple import config
 
 SECRET_KEY = config("SECRET_KEY", default="Provide a secret key in the .env file")
-DEBUG = config("DEBUG", default=False, cast=bool)
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.dirname(PROJECT_DIR)
-
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
-TEMPLATES[0]["DIRS"].append(BASE_DIR / "templates")
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    "home",
-    "search",
+    "mysite",
+    
+    # Default apps
+    "mysite.home",
+    "mysite.search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -68,7 +63,7 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
-ROOT_URLCONF = "mysite.urls"
+ROOT_URLCONF = "mysite.mysite.urls"
 
 TEMPLATES = [
     {
@@ -88,16 +83,20 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "mysite.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
 
@@ -126,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Europe/Paris."
+TIME_ZONE = "Europe/Paris"
 
 USE_I18N = True
 
@@ -141,12 +140,13 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, "static"),
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
+# Où trouver les fichiers statiques supplémentaires
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+# Où Django va collecter tous les fichiers statiques lors de `collectstatic`
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
@@ -172,8 +172,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 
 
 # Wagtail settings
-
-WAGTAIL_SITE_NAME = "mysite"
+WAGTAIL_SITE_NAME = config("WAGTAIL_SITE_NAME", default="mysite")
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
@@ -185,10 +184,9 @@ WAGTAILSEARCH_BACKENDS = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = "http://example.com"
+WAGTAILADMIN_BASE_URL = "https://127.0.0.1/"
 
 # Allowed file extensions for documents in the document library.
-# This can be omitted to allow all files, but note that this may present a security risk
-# if untrusted users are allowed to upload files -
+# This can be omitted to allow all files
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
