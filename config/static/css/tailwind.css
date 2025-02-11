@@ -2,6 +2,12 @@
 This is the main CSS files that imports all other general CSS files.
 It will be compiled by the "npm run dev" command, in output.css which is one loaded in base.html. *
 */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+body{
+    font-family: "Comic Sans MS", serif;
+}
+
+h1 {
+    @apply underline;
+}

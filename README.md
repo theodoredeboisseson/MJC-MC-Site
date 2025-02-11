@@ -82,7 +82,8 @@ npx tailwindcss init -p
 
 Lance la compilation de Tailwind :
 ```sh
-npx tailwindcss -i ./static/css/styles.css -o ./static/css/output.css --watch
+npm run dev
+# Vous pouvez ajouter votre commande personnalisée dans package.json
 ```
 
 ### 🔹 6. Créer un super-utilisateur pour l’administration Wagtail
@@ -131,7 +132,7 @@ L’interface d’administration Wagtail est disponible à **[http://127.0.0.1:8
   ```
 - **Recompiler Tailwind à chaque modification** :
   ```sh
-  npx tailwindcss -i ./static/css/styles.css -o ./static/css/output.css --watch
+  npm run dev
   ```
 
 📌 **Gestion de la base de données**

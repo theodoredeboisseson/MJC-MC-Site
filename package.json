@@ -1,21 +1,31 @@
 {
-  "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^4.0.6"
-  },
-  "dependencies": {
-    "@tailwindcss/cli": "^4.0.4"
-  },
-  "name": "mjc_site_fromzero",
+  "name": "mjc-mc-site",
   "version": "1.0.0",
   "description": "Ce projet vise à refondre le site web de la Maison des Jeunes et de la Culture (MJC) de Mauguio-Carnon. L’objectif est de proposer une plateforme ergonomique, esthétique et facile à maintenir, permettant aux visiteurs d’accéder rapidement aux informations sur les activités de l’association.",
-  "main": "index.js",
+  "homepage": "https://github.com/theodoredeboisseson/MJC-MC-Site#readme",
+  "bugs": {
+    "url": "https://github.com/theodoredeboisseson/MJC-MC-Site/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theodoredeboisseson/MJC-MC-Site.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "postcss.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx tailwindcss -i config/static/css/tailwind.css -o config/static/css/output.css --watch"
+    "dev": "postcss config/static/css/tailwind.css -o config/static/css/output.css --watch",
+    "build": "postcss config/static/css/tailwind.css -o config/static/css/output.css"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.0.6",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^4.0.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6"
+  }
 }
