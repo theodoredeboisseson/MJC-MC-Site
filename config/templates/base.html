@@ -24,10 +24,8 @@
         {% if page.search_description %}
             <meta name="description" content="{{ page.search_description }}" />
         {% endif %}
-    
         {# Méta-robots (indexer cette page) #}
         <meta name="robots" content="index, follow" />
-    
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     
         {# Forcer l'ouverture des liens dans un nouvel onglet en mode prévisualisation #}
@@ -49,14 +47,19 @@
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body class="{% block body_class %}{% endblock %} flex flex-col min-h-screen">
+        {% include "includes/header.html" %}
+
+        <main class="flex-1 m-8">
+            {% block content %}{% endblock %}
+        </main>
+            
+        {% include "includes/footer.html" %}
+
         {% wagtailuserbar %}
-
-        {% block content %}{% endblock %}
-
+        
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
-
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
         {% endblock %}
