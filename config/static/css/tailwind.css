@@ -3,11 +3,35 @@ This is the main CSS files that imports all other general CSS files.
 It will be compiled by the "npm run dev" command, in output.css which is one loaded in base.html. *
 */
 @import "tailwindcss";
+@import "./satoshi.css"; /*Font*/
 
-body{
-    font-family: "Comic Sans MS", serif;
+@layer base {
+    h1 { font-size: 2.25rem; /* équivalent à text-4xl */ }
+    h2 { font-size: 1.875rem; /* équivalent à text-3xl */ }
+    h3 { font-size: 1.5rem; /* équivalent à text-2xl */ }
+    h4 { font-size: 1.25rem; /* équivalent à text-xl */ }
+    h5 { font-size: 1.125rem; /* équivalent à text-lg */ }
+    h6 { font-size: 1rem; /* équivalent à text-base */ }
 }
 
-h1 {
-    @apply underline;
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, serif;
+}
+
+nav {
+    a {
+        @apply bg-sky-800 hover:bg-sky-700 rounded-md hover:outline-2 outline-sky-500
+        text-lg font-bold px-4 py-2 mx-2
+        cursor-pointer transition duration-300;
+    }
+} 
+
+table{
+    th{@apply font-bold}
+    td{@apply p-1 mx-2}
+    tr{@apply my-1 text-left}
 }
