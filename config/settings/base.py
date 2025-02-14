@@ -26,7 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+
     
+    # Dependencies for the project
+    "wagtail.contrib.settings",
+
     # Default apps
     "apps.home",
     "apps.search",
