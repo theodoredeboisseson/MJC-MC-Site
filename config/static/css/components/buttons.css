@@ -4,11 +4,11 @@
 
 /* Réutiliser les classes Tailwind avec @apply */
 .btn {
-    @apply px-4 py-2 rounded-lg font-semibold transition duration-300;
+    @apply px-6 py-3 rounded-lg transition duration-300;
 }
 
 .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700;
+    @apply bg-blue-500 text-white hover:bg-blue-600;
 }
 
 .btn-secondary {
