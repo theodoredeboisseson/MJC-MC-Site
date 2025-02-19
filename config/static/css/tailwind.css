@@ -1,37 +1,58 @@
 /*
-This is the main CSS files that imports all other general CSS files.
+This is the main CSS files that imports all other general CSS files and also the TailwindCSS input file.
 It will be compiled by the "npm run dev" command, in output.css which is one loaded in base.html. *
 */
 @import "tailwindcss";
 @import "./satoshi.css"; /*Font*/
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+@import './components/buttons.css';
+
+/*---------------------------------------
+  CUSTOM PROPERTIES ( VARIABLES )             
+-----------------------------------------*/
+:root {
+    --primary-color:                #81B29A;
+    --secondary-color:              #3D405B;
+    --section-bg-color:             #F4F1DE;
+    --custom-btn-bg-color:          #F2CC8F;
+    --custom-btn-bg-hover-color:    #E07A5F;
+    --dark-color:                   #000000;
+    --text-color:                   #717275;
+    --link-hover-color:             #F2CC8F;
+
+    --h1-font-size:                 2.25rem;
+    --h2-font-size:                 1.875rem;
+    --h3-font-size:                 1.5rem;
+    --h4-font-size:                 1.25rem;
+    --h5-font-size:                 1.125rem;
+    --h6-font-size:                 1rem;
+}
+
+:root {
+    --primary-bg: #1f2937; /* bg-gray-800 */
+    --text-color: #ffffff; /* text-white */
+    --hover-color: #d1d5db; /* hover:text-gray-300 */
+    --submenu-bg: #ffffff; /* bg-white */
+    --submenu-hover: #e5e7eb; /* hover:bg-gray-200 */
+}
+
+body {
+    font-family: Roboto, sans-serif;
+}
+
+/*---------------------------------------
+  TYPOGRAPHY               
+-----------------------------------------*/
 
 @layer base {
-    h1 { font-size: 2.25rem; /* équivalent à text-4xl */ }
-    h2 { font-size: 1.875rem; /* équivalent à text-3xl */ }
-    h3 { font-size: 1.5rem; /* équivalent à text-2xl */ }
-    h4 { font-size: 1.25rem; /* équivalent à text-xl */ }
-    h5 { font-size: 1.125rem; /* équivalent à text-lg */ }
-    h6 { font-size: 1rem; /* équivalent à text-base */ }
+    h1 { font-size: var(--h1-font-size); /* équivalent à text-4xl */ }
+    h2 { font-size: var(--h2-font-size); /* équivalent à text-3xl */ }
+    h3 { font-size: var(--h3-font-size); /* équivalent à text-2xl */ }
+    h4 { font-size: var(--h4-font-size); /* équivalent à text-xl */ }
+    h5 { font-size: var(--h5-font-size); /* équivalent à text-lg */ }
+    h6 { font-size: var(--h6-font-size); /* équivalent à text-base */ }
 }
 
 *, ::before, ::after {
     box-sizing: border-box;
-}
-
-html {
-    font-family: Arial, serif;
-}
-
-nav {
-    a {
-        @apply bg-sky-800 hover:bg-sky-700 rounded-md hover:outline-2 outline-sky-500
-        text-lg font-bold px-4 py-2 mx-2
-        cursor-pointer transition duration-300;
-    }
-} 
-
-table{
-    th{@apply font-bold}
-    td{@apply p-1 mx-2}
-    tr{@apply my-1 text-left}
 }
