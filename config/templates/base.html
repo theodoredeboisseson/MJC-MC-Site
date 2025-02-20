@@ -45,11 +45,17 @@
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
 
     <body class="{% block body_class %}{% endblock %} flex flex-col min-h-screen">
         {% include "includes/header.html" %}
-
+        
+        {# Breadcrumb #}
+{#        {% include "includes/breadcrumb.html" %}#}
+        
+        {# Main content #}
         <main class="flex-1">
             {% block content %}{% endblock %}
         </main>
