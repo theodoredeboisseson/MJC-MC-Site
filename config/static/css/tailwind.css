@@ -37,7 +37,7 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 }
 
 body {
-    font-family: Roboto, sans-serif;
+    font-family: "DM Sans", Satoshi, sans-serif;
 }
 
 /*---------------------------------------
@@ -60,6 +60,7 @@ body {
 /*---------------------------------------
   ANIMATED HEADLINE               
 -----------------------------------------*/
+
 .rotating-text-wrapper {
     display: inline-block;
     position: relative;
