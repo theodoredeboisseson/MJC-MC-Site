@@ -39,5 +39,32 @@
             </div>
         </div>
     </section>
-    
+
+    <section class="events-preview bg-white py-16 my-20">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold">Prochains événements</h2>
+                <a href="/agenda/" class="btn btn-primary">Voir tous les événements</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for event in page.get_latest_events %}
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        {% if event.image %}
+                            {% image event.image fill-400x300 as event_img %}
+                            <img src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-48 object-cover">
+                        {% endif %}
+                        <div class="p-6">
+                            <p class="text-[var(--secondary-color)] font-semibold mb-2">{{ event.date }}</p>
+                            <h3 class="text-xl font-bold mb-2">{{ event.title }}</h3>
+                            <div class="prose line-clamp-3">{{ event.description|richtext }}</div>
+                            <a href="{{ event.url }}" class="mt-4 inline-block text-[var(--secondary-color)] hover:text-[var(--link-hover-color)]">
+                                En savoir plus →
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

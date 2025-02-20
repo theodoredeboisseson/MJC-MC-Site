@@ -20,6 +20,10 @@ class PageDAcceuil(Page):
         'wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+'
     )
 
+    def get_latest_events(self):
+        from apps.agenda.models import EventPage
+        return EventPage.objects.live().order_by('date')[:3]  # Limite aux 3 prochains événements
+
     content_panels = Page.content_panels + [
         FieldPanel('intro_title'),
         FieldPanel('hero_image'),
