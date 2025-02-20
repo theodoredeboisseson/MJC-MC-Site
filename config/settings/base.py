@@ -191,3 +191,5 @@ WAGTAILADMIN_BASE_URL = "https://127.0.0.1/"
 # This can be omitted to allow all files
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

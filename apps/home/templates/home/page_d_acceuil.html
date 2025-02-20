@@ -1,8 +1,39 @@
 {% extends "base.html" %}
-{% load static %}
-{% block body_class %}template-pagedacceuil{% endblock %}
-
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <h1 class="flex content-center">Ceci est la page d'accueil</h1>
-{% endblock content %}
+    <section class="hero">
+        {% image page.hero_image fill-1920x400 as hero %}
+        <div class="relative min-h-[400px] w-full">
+            <div class="absolute inset-0 bg-black/30 z-10"></div>
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.url }}');"></div>
+            <div class="container mx-auto h-full relative z-20">
+                <div class="h-full flex items-center justify-between px-6 lg:px-12 py-8">
+                    <div class="max-w-lg leading-tight">
+                        <h2 class="text-white font-bold text-xl md:text-2xl mb-4">{{ page.intro_title }}</h2>
+                        <h1 class="text-white font-bold text-2xl md:text-4xl whitespace-normal md:whitespace-nowrap">
+                            <span>Ici, on vous propose</span>
+                            <span class="rotating-text-wrapper">
+                                {% for word in page.rotating_words.all %}
+                                    <b class="rotating-text {% if forloop.first %}active{% endif %}">{{ word.word }}</b>
+                                {% endfor %}
+                            </span>
+                        </h1>
+                    </div>
+                    <div class="hidden md:block aspect-video w-full max-w-[560px]">
+                        <iframe
+                                class="w-full h-full rounded-lg shadow-lg"
+                                src="https://www.youtube-nocookie.com/embed/EQ-DKvLQlyQ?si=Oxn7-6qkiDU_VKoB"
+                                title="YouTube video player"
+                                frameborder="0"
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

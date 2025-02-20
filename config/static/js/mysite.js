@@ -1,3 +1,4 @@
+// Responsive mobile menu burger button
 document.addEventListener('DOMContentLoaded', function () {
     const burgerButton = document.getElementById('burger-button');
     const closeButton = document.getElementById('close-button');
@@ -28,4 +29,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close menu when clicking overlay
     overlay.addEventListener('click', closeMobileMenu);
+});
+
+
+// Word carrousel for the homepage
+document.addEventListener('DOMContentLoaded', function() {
+    const words = document.querySelectorAll('.rotating-text');
+    let currentIndex = 0;
+
+    setInterval(() => {
+        words[currentIndex].classList.remove('active');
+        words[currentIndex].classList.add('hidden');
+
+        currentIndex = (currentIndex + 1) % words.length;
+
+        words[currentIndex].classList.remove('hidden');
+        words[currentIndex].classList.add('active');
+    }, 3000);
 });
