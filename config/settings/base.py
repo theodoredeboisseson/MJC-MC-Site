@@ -27,6 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 INSTALLED_APPS = [
     "apps.agenda",
+    "apps.association",
     
     # Dependencies for the project
     "wagtail.contrib.settings",
