@@ -26,15 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    # Project apps
     "apps.agenda",
     "apps.association",
-    
-    # Dependencies for the project
-    "wagtail.contrib.settings",
-
-    # Default apps
     "apps.home",
     "apps.search",
+
+    # Wagtail apps.settings",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -46,12 +44,18 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+
+    # Third party apps
     "modelcluster",
     "taggit",
-    "django.contrib.admin", # Do not remove
-    "django.contrib.auth", # Do not remove
-    "django.contrib.contenttypes", # Do not remove
-    "django.contrib.staticfiles", # Do not remove
+
+    # Django apps
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    "django.contrib.staticfiles",
 ]
 
 MIDDLEWARE = [
@@ -60,27 +64,29 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [BASE_DIR / 'config/templates'],  # Dossier des templates généraux
+        'DIRS': [BASE_DIR / 'templates'],  # Dossier des templates généraux
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "core.wsgi.application"
 
 
 # Database
@@ -140,7 +146,7 @@ STATICFILES_FINDERS = [
 STATIC_URL = "/static/"
 # Où trouver les fichiers statiques supplémentaires
 STATICFILES_DIRS = [
-    BASE_DIR / "config" / "static",  # Fichiers statiques globaux
+    BASE_DIR / "static",
 ]
 # Où Django va collecter tous les fichiers statiques lors de `collectstatic`
 STATIC_ROOT = BASE_DIR / "staticfiles"
