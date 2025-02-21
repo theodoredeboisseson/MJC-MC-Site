@@ -6,7 +6,21 @@
         {% image page.hero_image fill-1920x600 as hero %}
         <div class="relative min-h-[600px] w-full flex items-center">
             {# Background image #}
-            <div class="absolute inset-0 bg-black/30 z-10"></div>
+            <div class="absolute inset-0 bg-black/30 z-10 flex flex-col justify-between items-stretch">
+                <svg class="text-[var(--secondary-color)]" viewBox="0 0 1265 144">
+                    <defs>
+                        <path id="wave" d="M 0 40 C 164 40 164 20 328 20 L 328 0 L 0 0 Z 
+                                         M 327 20 C 445.5 20 445.5 89 564 89 L 564 0 L 327 0 Z
+                                         M 563 89 C 724.5 89 724.5 48 886 48 L 886 0 L 563 0 Z
+                                         M 885 48 C 1006.5 48 1006.5 67 1128 67 L 1128 0 L 885 0 Z
+                                         M 1127 67 C 1196 67 1196 0 1265 0 L 1265 0 L 1127 0 Z"></path>
+                    </defs>
+                    <use href="#wave" fill="currentColor"></use>
+                </svg>
+                <svg class="-mb-[1px] rotate-180" viewBox="0 0 1265 144">
+                <use href="#wave" fill="white"></use>
+            </svg>
+            </div>
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.url }}');"></div>
         
             <div class="container mx-auto h-full relative z-20">
@@ -49,7 +63,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for event in page.get_latest_events %}
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="window.location.href='{{ event.url }}'">
                         {% if event.image %}
                             {% image event.image fill-400x300 as event_img %}
                             <img src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-48 object-cover">

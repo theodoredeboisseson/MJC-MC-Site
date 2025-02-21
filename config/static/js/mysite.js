@@ -104,9 +104,23 @@ const MySite = {
             });
         }
     },
+
+    stickyHeader: {
+        init() {
+            const header = document.querySelector('[data-sticky-header]');
+            if (!header) return;
+
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.scrollY;
+                header.classList.toggle('shadow-lg', currentScroll > 0);
+                lastScroll = currentScroll;
+            });
+        }
+    },
     
     init() {
-        ['dropdownMenu', 'mobileMenu', 'wordCarousel'].forEach(module => this[module].init());
+        ['dropdownMenu', 'mobileMenu', 'wordCarousel','stickyHeader'].forEach(module => this[module].init());
     }
 };
 
