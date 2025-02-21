@@ -62,49 +62,6 @@ const MySite = {
         }
     },
 
-    dropdownMenu: {
-        init() {
-            this.dropdowns = document.querySelectorAll('.group .absolute');
-            if (this.dropdowns.length === 0) return;
-            this.adjustPositions();
-            this.bindEvents();
-        },
-
-        adjustPositions() {
-            if (window.innerWidth < 1024) return;
-            
-            const viewportWidth = window.innerWidth;
-            this.dropdowns.forEach(menu => {
-                const isOverflowing = menu.getBoundingClientRect().right > viewportWidth;
-                menu.style.left = isOverflowing ? 'auto' : '0';
-                menu.style.right = isOverflowing ? '0' : 'auto';
-            });
-        },
-
-        bindEvents() {
-            const debounce = (fn, delay) => {
-                let timeout;
-                return () => {
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => fn(), delay);
-                };
-            };
-
-            window.addEventListener('resize', debounce(() => this.adjustPositions(), 100));
-
-            const observer = new MutationObserver(() => {
-                setTimeout(() => this.adjustPositions(), 10);
-            });
-
-            this.dropdowns.forEach(dropdown => {
-                observer.observe(dropdown, {
-                    attributes: true,
-                    attributeFilter: ['class']
-                });
-            });
-        }
-    },
-
     stickyHeader: {
         init() {
             const header = document.querySelector('[data-sticky-header]');
@@ -120,8 +77,41 @@ const MySite = {
     },
     
     init() {
-        ['dropdownMenu', 'mobileMenu', 'wordCarousel','stickyHeader'].forEach(module => this[module].init());
+        this.mobileMenu.init();
+        this.wordCarousel.init();
+        this.stickyHeader.init();
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => MySite.init());
+
+function toggleSubMenu(button) {
+    const submenu = button.parentElement.nextElementSibling;
+    const svg = button.querySelector('svg');
+
+    // Close any other open submenu
+    document.querySelectorAll('.submenu.open').forEach(openSubmenu => {
+        if (openSubmenu !== submenu) {
+            openSubmenu.style.maxHeight = 0;
+            openSubmenu.classList.remove('open');
+            const parentDiv = openSubmenu.previousElementSibling;
+            if (parentDiv) {
+                const btn = parentDiv.querySelector('button');
+                if (btn) {
+                    const otherSvg = btn.querySelector('svg');
+                    otherSvg.classList.remove('rotate-180');
+                }
+            }
+        }
+    });
+
+    if (submenu.classList.contains('open')) {
+        submenu.style.maxHeight = 0;
+        submenu.classList.remove('open');
+        svg.classList.remove('rotate-180');
+    } else {
+        submenu.style.maxHeight = submenu.scrollHeight + "px";
+        submenu.classList.add('open');
+        svg.classList.add('rotate-180');
+    }
+}

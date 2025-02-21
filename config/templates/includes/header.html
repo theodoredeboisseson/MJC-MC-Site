@@ -18,10 +18,14 @@
 
         {# Mobile Burger Menu Button #}
         <div class="flex lg:hidden">
-            <button id="burger-button" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white hover:text-[var(--link-hover-color)]" title="Ouvrir le menu">
+            <button id="burger-button" type="button"
+                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white hover:text-[var(--link-hover-color)]"
+                    title="Ouvrir le menu">
                 <span class="sr-only">Ouvrir le menu principal</span>
-                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                <svg class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                     aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
                 </svg>
             </button>
         </div>
@@ -35,32 +39,37 @@
 
             {# Main Navigation Items #}
             {% for page in site_root.get_children.live.in_menu %}
-            <div class="relative group">
-                <a href="{{ page.url }}" class="nav-link {% if page.url == request.path %}active{% endif %}">
-                    {{ page.title }}
-                    {% if page.get_children.live.in_menu.count > 0 %}
-                    <svg class="size-5 flex-none text-gray-400 group-hover:rotate-180 transition-transform" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
-                    </svg>
-                    {% endif %}
-                </a>
+                <div class="relative group">
+                    <a href="{{ page.url }}" class="nav-link {% if page.url == request.path %}active{% endif %}">
+                        {{ page.title }}
+                        {% if page.get_children.live.in_menu.count > 0 %}
+                            <svg class="size-5 flex-none text-gray-400 group-hover:rotate-180 transition-transform"
+                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                      d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        {% endif %}
+                    </a>
 
-                {# Dropdown Menu #}
-                {% if page.get_children.live.in_menu.count > 0 %}
-                <div class="absolute translate-y-2 group-hover:translate-y-0 group-hover:block top-full left-0 z-11 w-100 max-w-md overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto invisible group-hover:visible" role="menu" aria-orientation="vertical">
-                    <div class="p-4" role="none">
-                        {% for child in page.get_children.live.in_menu %}
-                        <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50">
-                            <a href="{{ child.url }}" class="nav-submenu-link {% if child.url == request.path %}active{% endif %}">
-                                {{ child.title }}
-                                <span class="absolute inset-0"></span>
-                            </a>
+                    {# Dropdown Menu #}
+                    {% if page.get_children.live.in_menu.count > 0 %}
+                        <div class="absolute translate-y-2 group-hover:translate-y-0 group-hover:block top-full right-0 z-11 w-100 max-w-md overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto invisible group-hover:visible"
+                             role="menu" aria-orientation="vertical">
+                            <div class="p-4" role="none">
+                                {% for child in page.get_children.live.in_menu %}
+                                    <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50">
+                                        <a href="{{ child.url }}"
+                                           class="nav-submenu-link {% if child.url == request.path %}active{% endif %}">
+                                            {{ child.title }}
+                                            <span class="absolute inset-0"></span>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                        {% endfor %}
-                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
-            </div>
             {% endfor %}
         </div>
     </nav>
@@ -78,9 +87,12 @@
                     <small class="block leading-0">Mauguio-Carnon</small>
                 </span>
                 </a>
-                <button id="close-button" type="button" class="-m-2.5 rounded-md p-2.5 text-white hover:text-[var(--link-hover-color)]" title="Fermer le menu">
+                <button id="close-button" type="button"
+                        class="-m-2.5 rounded-md p-2.5 text-white hover:text-[var(--link-hover-color)]"
+                        title="Fermer le menu">
                     <span class="sr-only">Fermer le menu principal</span>
-                    <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <svg class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                         aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
                     </svg>
                 </button>
@@ -92,21 +104,31 @@
                     <div class="space-y-2 py-6 -mx-3">
                         <a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">Accueil</a>
                         {% for page in site_root.get_children.live.in_menu %}
-                            <a href="{{ page.url }}" class="mobile-nav-link flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 {% if page.url == request.path %}active{% endif %}">
-                                {{ page.title }}
+                            <div class="flex w-full items-center justify-between rounded-lg mobile-nav-link">
+                                <a href="{{ page.url }}"
+                                   class=" py-2 pr-3.5 pl-3 {% if page.url == request.path %}active{% endif %}">
+                                    {{ page.title }}
+                                </a>
                                 {% if page.get_children.live.in_menu.count > 0 %}
-                                    <svg class="size-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
-                                    </svg>
+                                    <button class="flex flex-1 justify-end self-stretch items-center cursor-pointer"
+                                            onclick="toggleSubMenu(this)">
+                                        <svg class="size-5 transition-transform duration-300" viewBox="0 0 20 20"
+                                             fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                                  clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
                                 {% endif %}
-                            </a>
+                            </div>
                             {% if page.get_children.live.in_menu.count > 0 %}
-                                <div class="mt-2 space-y-2 overflow-hidden transition-all duration-300">
-                                        {% for child in page.get_children.live.in_menu %}
-                                            <a href="{{ child.url }}" class="mobile-nav-link pl-6! text-sm/7! {% if child.url == request.path %}active{% endif %}">
-                                                {{ child.title }}
-                                            </a>
-                                        {% endfor %}
+                                <div class="submenu mt-2 space-y-2 overflow-hidden transition-all duration-300 max-h-0">
+                                    {% for child in page.get_children.live.in_menu %}
+                                        <a href="{{ child.url }}"
+                                           class="mobile-nav-link pl-10! text-sm {% if child.url == request.path %}active{% endif %}">
+                                            {{ child.title }}
+                                        </a>
+                                    {% endfor %}
                                 </div>
                             {% endif %}
                         {% endfor %}

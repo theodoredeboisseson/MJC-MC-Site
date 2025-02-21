@@ -19,6 +19,7 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
     --dark-color:                   #000000;
     --text-color:                   #717275;
     --link-hover-color:             #F2CC8F;
+    --secondary-color-light: color-mix(in srgb, var(--secondary-color) 80%, white 10%);
 
     --h1-font-size:                 2.25rem;
     --h2-font-size:                 1.875rem;
@@ -26,14 +27,6 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
     --h4-font-size:                 1.25rem;
     --h5-font-size:                 1.125rem;
     --h6-font-size:                 1rem;
-}
-
-:root {
-    --primary-bg: #1f2937; /* bg-gray-800 */
-    --text-color: #ffffff; /* text-white */
-    --hover-color: #d1d5db; /* hover:text-gray-300 */
-    --submenu-bg: #ffffff; /* bg-white */
-    --submenu-hover: #e5e7eb; /* hover:bg-gray-200 */
 }
 
 body {
@@ -55,6 +48,11 @@ body {
 
 *, ::before, ::after {
     box-sizing: border-box;
+}
+
+::selection {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 /*---------------------------------------
