@@ -16,8 +16,8 @@
   "main": "postcss.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "postcss core/static/css/tailwind.css -o core/static/css/output.min.css --watch",
-    "build": "postcss core/static/css/tailwind.css -o core/static/css/output.min.css"
+    "dev": "postcss static/css/tailwind.css -o static/css/output.min.css --watch",
+    "build": "postcss static/css/tailwind.css -o static/css/output.min.css"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.6",
