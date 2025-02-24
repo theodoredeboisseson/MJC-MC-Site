@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <div class="container mx-auto px-4 py-8">
+        {% if page.intro %}
+            <div class="prose max-w-none mb-12">
+                {{ page.intro|richtext }}
+            </div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for subpage in subpages %}
+                {% with page=subpage %}
+                    {% include "association/includes/page_card.html" %}
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

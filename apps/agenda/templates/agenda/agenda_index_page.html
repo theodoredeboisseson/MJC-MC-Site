@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <section class="agenda-index py-16">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl font-bold mb-8">Agenda</h1>
+
+            {% if page.intro %}
+                <div class="prose max-w-none mb-12">
+                    {{ page.intro|richtext }}
+                </div>
+            {% endif %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for event in events %}
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        {% if event.image %}
+                            {% image event.image fill-400x300 as event_img %}
+                            <img src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-48 object-cover">
+                        {% endif %}
+                        <div class="p-6">
+                            <p class="text-[var(--secondary-color)] font-semibold mb-2">{{ event.date|date:"d F Y" }}</p>
+                            <h3 class="text-xl font-bold mb-2">{{ event.title }}</h3>
+                            <div class="prose line-clamp-3">{{ event.description|richtext }}</div>
+                            <a href="{{ event.url }}" class="mt-4 inline-block text-[var(--secondary-color)] hover:text-[var(--link-hover-color)]">
+                                En savoir plus →
+                            </a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-span-full text-center py-8">
+                        <p>Aucun événement n'est prévu pour le moment.</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if events.paginator.num_pages > 1 %}
+                <div class="flex justify-center gap-2 mt-8">
+                    {% if events.has_previous %}
+                        <a href="?page={{ events.previous_page_number }}" class="btn btn-secondary">Précédent</a>
+                    {% endif %}
+
+                    {% if events.has_next %}
+                        <a href="?page={{ events.next_page_number }}" class="btn btn-secondary">Suivant</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

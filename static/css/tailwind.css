@@ -1,0 +1,127 @@
+/*
+This is the main CSS files that imports all other general CSS files and also the TailwindCSS input file.
+It will be compiled by the "npm run dev" command, in output.css which is one loaded in base.html. *
+*/
+@import "tailwindcss";
+@import "./satoshi.css"; /*Font*/
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+@import './components/buttons.css';
+
+/*---------------------------------------
+  CUSTOM PROPERTIES ( VARIABLES )             
+-----------------------------------------*/
+:root {
+    --primary-color:                #81B29A;
+    --secondary-color:              #3D405B;
+    --section-bg-color:             #F4F1DE;
+    --custom-btn-bg-color:          #F2CC8F;
+    --custom-btn-bg-hover-color:    #E07A5F;
+    --dark-color:                   #000000;
+    --text-color:                   #717275;
+    --link-hover-color:             #F2CC8F;
+    --secondary-color-light: color-mix(in srgb, var(--secondary-color) 80%, white 10%);
+
+    --h1-font-size:                 2.25rem;
+    --h2-font-size:                 1.875rem;
+    --h3-font-size:                 1.5rem;
+    --h4-font-size:                 1.25rem;
+    --h5-font-size:                 1.125rem;
+    --h6-font-size:                 1rem;
+}
+
+body {
+    font-family: "DM Sans", Satoshi, sans-serif;
+}
+
+/*---------------------------------------
+  TYPOGRAPHY               
+-----------------------------------------*/
+
+@layer base {
+    h1 { font-size: var(--h1-font-size); /* équivalent à text-4xl */ }
+    h2 { font-size: var(--h2-font-size); /* équivalent à text-3xl */ }
+    h3 { font-size: var(--h3-font-size); /* équivalent à text-2xl */ }
+    h4 { font-size: var(--h4-font-size); /* équivalent à text-xl */ }
+    h5 { font-size: var(--h5-font-size); /* équivalent à text-lg */ }
+    h6 { font-size: var(--h6-font-size); /* équivalent à text-base */ }
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/*---------------------------------------
+  ANIMATED HEADLINE               
+-----------------------------------------*/
+
+.rotating-text-wrapper {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    perspective: 300px;
+}
+
+.rotating-text {
+    color: var(--link-hover-color);
+    display: inline-block;
+    position: absolute;
+    white-space: nowrap;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transform-origin: 50% 100%;
+    transform: rotateX(180deg);
+}
+
+.rotating-text.active {
+    position: relative;
+    opacity: 1;
+    transform: rotateX(0deg);
+    animation: rotate-text-in 1.2s;
+}
+
+.rotating-text.hidden {
+    transform: rotateX(180deg);
+    animation: rotate-text-out 1.2s;
+}
+
+@keyframes rotate-text-in {
+    0% {
+        transform: rotateX(180deg);
+        opacity: 0;
+    }
+    35% {
+        transform: rotateX(120deg);
+        opacity: 0;
+    }
+    65% {
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes rotate-text-out {
+    0% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+    35% {
+        transform: rotateX(-40deg);
+        opacity: 1;
+    }
+    65% {
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(180deg);
+        opacity: 0;
+    }
+}

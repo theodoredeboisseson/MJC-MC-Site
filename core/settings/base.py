@@ -26,14 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
-
-    
-    # Dependencies for the project
-    "wagtail.contrib.settings",
-
-    # Default apps
+    # Project apps
+    "apps.agenda",
+    "apps.association",
     "apps.home",
     "apps.search",
+
+    # Wagtail apps.settings",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -45,13 +44,17 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+
+    # Third party apps
     "modelcluster",
     "taggit",
+
+    # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
+    'django.contrib.sessions',
+    'django.contrib.messages',
     "django.contrib.staticfiles",
 ]
 
@@ -60,31 +63,30 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [BASE_DIR / 'config/templates'],  # Dossier des templates généraux
+        'DIRS': [BASE_DIR / 'templates'],  # Dossier des templates généraux
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "core.wsgi.application"
 
 
 # Database
@@ -144,7 +146,7 @@ STATICFILES_FINDERS = [
 STATIC_URL = "/static/"
 # Où trouver les fichiers statiques supplémentaires
 STATICFILES_DIRS = [
-    BASE_DIR / "config" / "static",  # Fichiers statiques globaux
+    BASE_DIR / "static",
 ]
 # Où Django va collecter tous les fichiers statiques lors de `collectstatic`
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -191,3 +193,5 @@ WAGTAILADMIN_BASE_URL = "https://127.0.0.1/"
 # This can be omitted to allow all files
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
