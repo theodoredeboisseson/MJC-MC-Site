@@ -1,0 +1,36 @@
+/*---------------------------------------
+  GENERAL BUTTONS               
+-----------------------------------------*/
+
+/* Réutiliser les classes Tailwind avec @apply */
+.btn {
+    @apply px-6 py-3 rounded-lg transition duration-300;
+}
+
+.btn-primary {
+    @apply bg-blue-500 text-white hover:bg-blue-600;
+}
+
+.btn-secondary {
+    @apply bg-gray-300 text-black hover:bg-gray-400;
+}
+
+
+/*---------------------------------------
+  NAVIGATION
+-----------------------------------------*/
+.nav-link {
+    @apply flex items-center px-2 xl:px-3 py-3 text-base/6 font-bold text-white transition-colors hover:text-[var(--link-hover-color)];
+}
+
+.nav-submenu-link {
+    @apply block font-semibold text-gray-900 transition-colors hover:text-[var(--link-hover-color)];
+}
+
+.mobile-nav-link {
+    @apply flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-white transition-colors hover:text-[var(--link-hover-color)] hover:bg-[var(--secondary-color-light)];
+}
+
+.active {
+    @apply text-[var(--link-hover-color)]!;
+}
