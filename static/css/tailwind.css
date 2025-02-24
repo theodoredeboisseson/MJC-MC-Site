@@ -4,7 +4,6 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 */
 @import "tailwindcss";
 @import "./satoshi.css"; /*Font*/
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 @import './components/buttons.css';
 
 /*---------------------------------------
@@ -30,7 +29,7 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 }
 
 body {
-    font-family: "DM Sans", Satoshi, sans-serif;
+    font-family: Satoshi-Medium, sans-serif;
 }
 
 /*---------------------------------------
@@ -57,7 +56,7 @@ body {
 
 .richtext-content {
     @apply max-w-none my-16 mx-auto px-4 sm:px-6 lg:px-8
-    bg-gray-50 rounded-xl p-8 shadow-sm text-gray-700;
+    bg-gray-50 rounded-xl p-8 pb-4 shadow-sm text-gray-700;
 
 
     /* Paragraphes */
@@ -99,7 +98,23 @@ body {
 
     /* Images */
     & img {
-        @apply rounded-lg shadow-md my-6 mx-auto;
+        @apply rounded-lg shadow-md my-6 w-full;
+    
+        &.richtext-image {
+            @apply max-w-2xl mx-auto block;
+    
+            &.left {
+                    @apply ml-0 mr-auto mb-4 max-w-md;
+            }
+            &.right {
+                    @apply mr-0 ml-auto mb-4 max-w-md;
+            }
+
+            &.full-width {
+                @apply w-full max-w-none float-none mx-auto;
+            }
+            
+        }
     }
 }
 

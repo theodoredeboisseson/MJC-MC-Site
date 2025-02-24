@@ -6,20 +6,30 @@
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto">
                 {% if page.image %}
-                    {% image page.image width-1000 as event_img %}
-                    <img src="{{ event_img.url }}" alt="{{ page.title }}" class="w-full h-[400px] object-cover rounded-lg mb-8">
+                    {% image page.image width-1200 as event_img %}
+                    <div class="relative rounded-xl overflow-hidden mb-8 shadow-lg">
+                        <img src="{{ event_img.url }}" alt="{{ page.title }}" class="w-full max-h-[600px] object-contain bg-gray-100">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-32"></div>
+                        <time class="absolute bottom-6 left-6 text-white bg-[var(--primary-color)]/90 px-4 py-2 rounded-lg font-medium">
+                            {{ page.date|date:"d F Y à H:i" }}
+                        </time>
+                    </div>
                 {% endif %}
 
-                <h1 class="text-4xl font-bold mb-4">{{ page.title }}</h1>
-                <p class="text-[var(--secondary-color)] font-semibold mb-6">{{ page.date|date:"d F Y" }}</p>
+                <h1 class="text-4xl font-bold mb-6 text-[var(--secondary-color)]">{{ page.title }}</h1>
 
-                <div class="prose max-w-none">
+                <div class="richtext-content">
                     {{ page.description|richtext }}
                 </div>
 
-                <a href="/agenda/" class="mt-8 inline-block btn btn-primary">
-                    Retour aux événements
-                </a>
+                <div class="mt-12 flex gap-4">
+                    <a href="/agenda/" class="btn btn-secondary">
+                        ← Retour aux événements
+                    </a>
+                    <a href="#" class="btn btn-primary">
+                        S'inscrire à l'événement
+                    </a>
+                </div>
             </div>
         </div>
     </section>

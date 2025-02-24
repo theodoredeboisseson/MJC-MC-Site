@@ -2,21 +2,39 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <article class="container mx-auto px-4 py-8">
-        <header class="mb-8">
-            <h1 class="text-4xl font-bold mb-2">{{ page.title }}</h1>
-            {% if page.subtitle %}
-                <p class="text-xl text-gray-600">{{ page.subtitle }}</p>
-            {% endif %}
-        </header>
+    <article class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                {% if page.card_image and page.show_image_in_page %}
+                    {% image page.card_image width-1200 as hero %}
+                    <div class="relative rounded-xl overflow-hidden mb-8 shadow-lg">
+                        <img src="{{ hero.url }}"
+                             alt="{{ page.title }}"
+                             class="w-full h-[400px] object-contain bg-gray-50">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-32"></div>
+                    </div>
+                {% endif %}
 
-        {% if page.card_image and page.show_image_in_page %}
-            {% image page.card_image width-1200 as hero %}
-            <img src="{{ hero.url }}" alt="{{ page.title }}" class="w-full h-[400px] object-cover rounded-lg mb-8">
-        {% endif %}
-    
-        <div class="richtext-content">
-            {{ page.body|richtext }}
+                <header class="mb-12">
+                    <h1 class="text-4xl font-bold mb-4 text-[var(--secondary-color)]">{{ page.title }}</h1>
+                    {% if page.subtitle %}
+                        <p class="text-xl text-gray-600">{{ page.subtitle }}</p>
+                    {% endif %}
+                </header>
+
+                <div class="richtext-content">
+                    {{ page.body|richtext }}
+                </div>
+
+                <div class="mt-12">
+                    <a href="/association/" class="btn btn-secondary inline-flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Retour aux sections
+                    </a>
+                </div>
+            </div>
         </div>
     </article>
 {% endblock %}
