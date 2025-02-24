@@ -1,19 +1,19 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<a href="{% pageurl page %}" class="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
-    {% image page.card_image fill-600x600 as img %}
-    <img
-            src="{{ img.url }}"
-            alt="{{ page.title }}"
-            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-            width="{{ img.width }}"
-            height="{{ img.height }}"
-    >
-    <div class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-colors duration-300"></div>
-    <div class="absolute inset-0 p-6 flex flex-col justify-center items-center text-center">
-        <h2 class="text-2xl font-bold text-white mb-2">{{ page.title }}</h2>
-        {% if page.subtitle %}
-            <p class="text-white/80">{{ page.subtitle }}</p>
-        {% endif %}
-    </div>
-</a>
+<div class="h-48 w-72 relative">
+    <a href="{% pageurl page %}" class="block h-full group relative overflow-hidden rounded-lg shadow-lg">
+        {% image page.card_image fill-600x400 as img %}
+        <img src="{{ img.url }}" alt="{{ page.title }}"
+             class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+             width="{{ img.width }}"
+             height="{{ img.height }}"
+             loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/40 group-hover:from-black/80 group-hover:to-black/50 transition-colors duration-300"></div>
+        <div class="absolute inset-x-0 bottom-0 p-6">
+            <h2 class="text-xl font-bold text-white mb-2">{{ page.title }}</h2>
+            {% if page.subtitle %}
+                <p class="text-sm text-white/90">{{ page.subtitle }}</p>
+            {% endif %}
+        </div>
+    </a>
+</div>

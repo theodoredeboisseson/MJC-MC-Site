@@ -55,6 +55,54 @@ body {
     color: white;
 }
 
+.richtext-content {
+    @apply max-w-none my-16 mx-auto px-4 sm:px-6 lg:px-8
+    bg-gray-50 rounded-xl p-8 shadow-sm text-gray-700;
+
+
+    /* Paragraphes */
+    & p {
+        @apply whitespace-pre-wrap break-words mb-6 text-base leading-relaxed;
+    }
+
+    /* Liens */
+    & a {
+        @apply no-underline border-b-2 border-[var(--primary-color)]/30
+        transition-all text-[var(--primary-color)];
+        &:hover {
+            @apply border-[var(--primary-color)]/100 opacity-80;
+        }
+    }
+
+    /* Titres */
+    & h2 {
+        @apply text-[var(--secondary-color)] text-3xl font-bold mt-8 mb-4;
+    }
+
+    & h3 {
+        @apply text-[var(--secondary-color)] text-2xl font-semibold mt-6 mb-3;
+    }
+
+    /* Listes */
+    & ul {
+        @apply list-disc pl-6 mb-6 space-y-2;
+    }
+
+    & ol {
+        @apply list-decimal pl-6 mb-6 space-y-2;
+    }
+
+    /* Citations */
+    & blockquote {
+        @apply pl-4 italic text-gray-700 border-l-4 border-[var(--primary-color)] opacity-50;
+    }
+
+    /* Images */
+    & img {
+        @apply rounded-lg shadow-md my-6 mx-auto;
+    }
+}
+
 /*---------------------------------------
   ANIMATED HEADLINE               
 -----------------------------------------*/
