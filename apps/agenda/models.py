@@ -2,7 +2,7 @@ from wagtail.models import Page
 from django.db import models
 from wagtail.admin.panels import FieldPanel
 from django.core.paginator import Paginator
-from datetime import datetime
+from django.utils import timezone
 
 from apps.common.models import DetailPage
 
@@ -38,7 +38,7 @@ class AgendaIndexPage(EventListPage):
         context = super().get_context(request, *args, **kwargs)
         events_context, paginator = self.get_events_context(
             request, 
-            models.Q(date__gte=datetime.now()), 
+            models.Q(date__gte=timezone.now()),
             'date'
         )
         context.update(events_context)
@@ -54,7 +54,7 @@ class PastEventsPage(EventListPage):
         context = super().get_context(request, *args, **kwargs)
         events_context, paginator = self.get_events_context(
             request, 
-            models.Q(date__lt=datetime.now()), 
+            models.Q(date__lt=timezone.now()),
             '-date'
         )
         context.update(events_context)
@@ -75,7 +75,10 @@ class EventPage(DetailPage):
         (BOTH, 'Mauguio et Carnon'),
     ]
 
-    date = models.DateTimeField("Date de l'événement")
+    date = models.DateTimeField(
+        "Date et heure",
+        help_text="Date et heure de l'événement"
+    )
     ville = models.CharField(
         max_length=10,
         choices=VILLE_CHOICES,

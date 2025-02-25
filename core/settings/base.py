@@ -203,7 +203,7 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
         'OPTIONS': {
             'features': [
                 'h2', 'h3', 'h4',
-                'bold', 'italic', 'underline', 'strikethrough',
+                'bold', 'italic', 'strikethrough',
                 'link',
                 'blockquote',
                 'code',
