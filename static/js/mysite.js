@@ -53,3 +53,27 @@ window.updateURLParameter = function(param, value) {
     url.searchParams.set(param, value);
     window.location.href = url.toString();
 };
+
+window.toggleFilter = function(param, value) {
+    const url = new URL(window.location.href);
+    let values = url.searchParams.get(param) ? url.searchParams.get(param).split(',') : [];
+
+    if (values.includes(value)) {
+        values = values.filter(v => v !== value);
+    } else {
+        values.push(value);
+    }
+
+    if (values.length > 0) {
+        url.searchParams.set(param, values.sort().join(','));
+    } else {
+        url.searchParams.delete(param);
+    }
+
+    window.location.href = url.toString();
+};
+
+// Utilisation pour les villes
+window.toggleVille = function(ville) {
+    toggleFilter('ville', ville);
+};

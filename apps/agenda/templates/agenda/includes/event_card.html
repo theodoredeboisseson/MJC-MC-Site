@@ -10,6 +10,9 @@
             <time class="absolute bottom-4 left-4 text-white font-medium px-3 py-1 bg-[var(--primary-color)]/80 rounded-full text-sm">
                 {{ event.date|date:"d F Y" }}
             </time>
+            <div class="absolute bottom-4 right-4 text-white font-medium px-3 py-1 bg-[var(--primary-color)]/80 rounded-full text-sm">
+                {{ event.get_ville_display }}
+            </div>
         </div>
     {% endif %}
     <div class="p-6 flex flex-col flex-grow">
@@ -21,7 +24,7 @@
         </div>
         <a href="{{ event.url }}" class="btn-outline mt-2">
             En savoir plus
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5">²
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
         </a>

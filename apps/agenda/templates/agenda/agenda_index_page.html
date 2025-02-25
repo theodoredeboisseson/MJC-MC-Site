@@ -4,27 +4,27 @@
 {% block content %}
     <section class="agenda-index py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-6">Événements à venir</h2>
+            <h2 class="font-bold mb-6">Événements à venir</h1>
             {% if page.intro %}
                 <div class="prose max-w-none mb-12">
                     {{ page.intro|richtext }}
                 </div>
             {% endif %}
 
-            <div class="mb-4">
-                <label for="sort_by" class="mr-2">Trier par:</label>
-                <select id="sort_by" name="sort_by" onchange="location = this.value;">
-                    <option value="?sort_by=date" {% if sort_by == 'date' %}selected{% endif %}>Date</option>
-                    <option value="?sort_by=title" {% if sort_by == 'title' %}selected{% endif %}>Titre</option>
-                </select>
-            </div>
+            {% if past_events_page %}
+                <div class="mt-12 flex justify-end">
+                    <a href="{{ past_events_page.url }}" class="btn btn-secondary">Voir les événements passés</a>
+                </div>
+            {% endif %}
+
+            {% include "agenda/includes/sort_filter_buttons.html" %}
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for event in upcoming_events %}
                     {% include "agenda/includes/event_card.html" %}
                     {% empty %}
                     <div class="col-span-full text-center py-8">
-                        <p>Aucun événement à venir n'est prévu pour le moment.</p>
+                        <p>Aucun événement à venir n'est prévu avec votre sélection pour le moment.</p>
                     </div>
                 {% endfor %}
             </div>
@@ -41,11 +41,6 @@
                 </div>
             {% endif %}
 
-            {% if past_events_page %}
-                <div class="mt-12">
-                    <a href="{{ past_events_page.url }}" class="btn btn-secondary">Voir les événements passés</a>
-                </div>
-            {% endif %}
         </div>
     </section>
 {% endblock %}
