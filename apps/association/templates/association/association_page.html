@@ -1,36 +1,16 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags navigation_tags %}
 
 {% block content %}
-    <article class="py-16 container mx-auto max-w-4xl">
-        <header class="mb-12">
-            <h1 class="text-4xl font-bold mb-4 text-[var(--secondary-color)]">{{ page.title }}</h1>
-            {% if page.subtitle %}
-                <p class="text-xl text-gray-600">{{ page.subtitle }}</p>
-            {% endif %}
-        </header>
-        
-        {% if page.image and page.show_image_in_page %}
-            {% image page.image width-1200 as hero %}
-            <div class="relative rounded-xl overflow-hidden mb-8 shadow-lg">
-                <img src="{{ hero.url }}"
-                     alt="{{ page.title }}"
-                     class="w-full h-[400px] object-contain bg-gray-50">
-                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-32"></div>
-            </div>
-        {% endif %}
+    {% include "includes/detail_page.html" %}
+{% endblock %}
 
-        <div class="richtext-content">
-            {{ page.content|richtext }}
-        </div>
-
-        <div class="mt-12">
-            <a href="/lassociation/" class="btn btn-secondary inline-flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                </svg>
-                Retour aux sections
-            </a>
-        </div>
-    </article>
+{% block page_actions %}
+    {% get_parent_url page as parent_url %}
+    <a href="{{ parent_url }}" class="btn btn-secondary inline-flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Retour aux sections
+    </a>
 {% endblock %}

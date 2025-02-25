@@ -1,0 +1,29 @@
+{% load wagtailcore_tags wagtailimages_tags navigation_tags %}
+
+<article class="py-16 container mx-auto max-w-4xl">
+    <header class="mb-12">
+        <h1 class="text-4xl font-bold mb-4 text-[var(--secondary-color)]">{{ page.title }}</h1>
+        {% if page.subtitle %}
+            <p class="text-xl text-gray-600">{{ page.subtitle }}</p>
+        {% endif %}
+    </header>
+
+    {% if page.image %}
+        {% image page.image width-1200 as img %}
+        <div class="relative rounded-xl overflow-hidden mb-8 shadow-lg">
+            <img src="{{ img.url }}"
+                 alt="{{ page.title }}"
+                 class="w-full {% block image_classes %}max-h-[600px] object-contain bg-gray-100{% endblock %}">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-32"></div>
+            {% block image_extra %}{% endblock %}
+        </div>
+    {% endif %}
+
+    <div class="richtext-content">
+        {{ page.content|richtext }}
+    </div>
+
+    <div class="mt-12">
+        {% block page_actions %}{% endblock %}
+    </div>
+</article>
