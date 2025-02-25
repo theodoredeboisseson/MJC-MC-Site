@@ -4,6 +4,9 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from django.core.paginator import Paginator
 
+from apps.home.models import DetailPage
+
+
 class AgendaIndexPage(Page):
     intro = models.TextField(blank=True)
 
@@ -32,21 +35,11 @@ class AgendaIndexPage(Page):
     class Meta:
         verbose_name = "Page Agenda"
 
-class EventPage(Page):
+class EventPage(DetailPage):
     date = models.DateTimeField("Date de l'événement")
-    description = RichTextField()
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
 
-    content_panels = Page.content_panels + [
+    content_panels = DetailPage.content_panels + [
         FieldPanel('date'),
-        FieldPanel('description'),
-        FieldPanel('image'),
     ]
 
     class Meta:

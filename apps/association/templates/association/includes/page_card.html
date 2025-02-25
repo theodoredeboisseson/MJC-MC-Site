@@ -2,7 +2,7 @@
 
 <div class="h-48 w-72 relative">
     <a href="{% pageurl page %}" class="block h-full group relative overflow-hidden rounded-lg shadow-lg">
-        {% image page.card_image fill-600x400 as img %}
+        {% image page.image fill-600x400 as img %}
         <img src="{{ img.url }}" alt="{{ page.title }}"
              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
              width="{{ img.width }}"
