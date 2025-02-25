@@ -1,40 +1,16 @@
-{% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% extends "agenda/event_list_base.html" %}
 
-{% block content %}
-    <section class="past-events py-16">
-        <div class="container mx-auto px-6">
-            <h1 class="font-bold mb-8">Événements passés</h1>
+{% block section_class %}past-events{% endblock %}
+{% block page_title %}Événements passés{% endblock %}
 
-            {% if page.intro %}
-                <div class="prose max-w-none mb-12">
-                    {{ page.intro|richtext }}
-                </div>
-            {% endif %}
-
-            {% include "agenda/includes/sort_filter_buttons.html" %}
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% for event in past_events %}
-                    {% include "agenda/includes/event_card.html" %}
-                    {% empty %}
-                    <div class="col-span-full text-center py-8">
-                        <p>Aucun événement passé n'est disponible avec votre sélection.</p>
-                    </div>
-                {% endfor %}
+{% block event_list %}
+    {% with event_list=past_events %}
+        {% for event in event_list %}
+            {% include "agenda/includes/event_card.html" %}
+            {% empty %}
+            <div class="col-span-full text-center py-8">
+                <p>Aucun événement passé n'est disponible avec votre sélection.</p>
             </div>
-
-            {% if past_events.paginator.num_pages > 1 %}
-                <div class="flex justify-center gap-2 mt-8">
-                    {% if past_events.has_previous %}
-                        <a href="?page={{ past_events.previous_page_number }}&sort_by={{ sort_by }}" class="btn btn-secondary">Précédent</a>
-                    {% endif %}
-
-                    {% if past_events.has_next %}
-                        <a href="?page={{ past_events.next_page_number }}&sort_by={{ sort_by }}" class="btn btn-secondary">Suivant</a>
-                    {% endif %}
-                </div>
-            {% endif %}
-        </div>
-    </section>
+        {% endfor %}
+    {% endwith %}
 {% endblock %}

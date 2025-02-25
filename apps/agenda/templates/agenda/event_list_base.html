@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <section class="{% block section_class %}{% endblock %} py-16">
+        <div class="container mx-auto px-6">
+            <h1 class="font-bold mb-8">{% block page_title %}{% endblock %}</h1>
+
+            {% if page.intro %}
+                <div class="prose max-w-none mb-12">
+                    {{ page.intro|richtext }}
+                </div>
+            {% endif %}
+
+            {% block additional_actions %}{% endblock %}
+
+            {% include "agenda/includes/sort_filter_buttons.html" %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% block event_list %}{% endblock %}
+            </div>
+
+            {% block pagination %}
+                {% with events=event_list %}
+                    {% if events.paginator.num_pages > 1 %}
+                        <div class="flex justify-center gap-2 mt-8">
+                            {% if events.has_previous %}
+                                <a href="?page={{ events.previous_page_number }}&sort_by={{ sort_by }}{% if villes %}&ville={{ villes|join:',' }}{% endif %}"
+                                   class="btn btn-secondary">Précédent</a>
+                            {% endif %}
+
+                            {% if events.has_next %}
+                                <a href="?page={{ events.next_page_number }}&sort_by={{ sort_by }}{% if villes %}&ville={{ villes|join:',' }}{% endif %}"
+                                   class="btn btn-secondary">Suivant</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            {% endblock %}
+        </div>
+    </section>
+{% endblock %}
