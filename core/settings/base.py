@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     # Project apps
     "apps.agenda",
     "apps.association",
+    "apps.common",
     "apps.home",
     "apps.search",
 

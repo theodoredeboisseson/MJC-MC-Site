@@ -1,10 +1,9 @@
 from wagtail.models import Page
 from django.db import models
-from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from django.core.paginator import Paginator
 
-from apps.home.models import DetailPage
+from apps.common.models import DetailPage
 
 
 class AgendaIndexPage(Page):

@@ -3,7 +3,7 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from apps.home.models import DetailPage
+from apps.common.models import DetailPage
 
 
 class AssociationIndexPage(Page):
@@ -43,9 +43,6 @@ class AssociationPage(DetailPage):
     content_panels = DetailPage.content_panels + [
         FieldPanel('show_image_in_page'),
     ]
-
-    parent_page_types = ['association.AssociationIndexPage']
-    subpage_types = []
 
     class Meta:
         verbose_name = "Page Association"

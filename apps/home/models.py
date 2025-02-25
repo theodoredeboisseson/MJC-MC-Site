@@ -1,23 +1,8 @@
 from django.db import models
 from wagtail.admin.panels import FieldPanel, InlinePanel
-from wagtail.fields import RichTextField
 from wagtail.models import Page
 from modelcluster.fields import ParentalKey
 
-class DetailPage(Page):
-    subtitle = models.CharField(max_length=250, blank=True, verbose_name="Sous-titre")
-    content = RichTextField(default='', verbose_name="Contenu")
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        verbose_name="Image"
-    )
-
-    class Meta:
-        abstract = True
 
 class RotatingWord(models.Model):
     page = ParentalKey('home.PageDAcceuil', related_name='rotating_words', on_delete=models.CASCADE)
