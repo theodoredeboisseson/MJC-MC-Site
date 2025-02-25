@@ -196,3 +196,23 @@ WAGTAILADMIN_BASE_URL = "https://127.0.0.1/"
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+        'OPTIONS': {
+            'features': [
+                'h2', 'h3', 'h4',
+                'bold', 'italic', 'underline', 'strikethrough',
+                'link',
+                'blockquote',
+                'code',
+                'embed',
+                'hr',
+                'image',
+                'ol',
+                'ul',
+            ]
+        }
+    }
+}
