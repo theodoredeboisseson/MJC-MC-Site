@@ -13,8 +13,8 @@
         <div class="relative rounded-xl overflow-hidden mb-8 shadow-lg">
             <img src="{{ img.url }}"
                  alt="{{ page.title }}"
-                 class="w-full {% block image_classes %}max-h-[600px] object-contain bg-gray-100{% endblock %}">
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-32"></div>
+                 class="w-full clickable-image {% block image_classes %}max-h-[600px] object-contain bg-gray-100{% endblock %}">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent h-1/4 pointer-events-none"></div>
             {% block image_extra %}{% endblock %}
         </div>
     {% endif %}
@@ -27,3 +27,5 @@
         {% block page_actions %}{% endblock %}
     </div>
 </article>
+
+{% include "components/image_viewer.html" %}

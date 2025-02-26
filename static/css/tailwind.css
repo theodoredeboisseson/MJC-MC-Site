@@ -5,6 +5,7 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 @import "tailwindcss";
 @import "./satoshi.css"; /*Font*/
 @import './components/buttons.css';
+@import './components/modal.css';
 
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             

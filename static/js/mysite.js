@@ -1,6 +1,6 @@
-import MobileMenu from './mobileMenu.js';
-import WordCarousel from './wordCarousel.js';
-import StickyHeader from './stickyHeader.js';
+import MobileMenu from './modules/mobileMenu.js';
+import WordCarousel from './modules/wordCarousel.js';
+import StickyHeader from './modules/stickyHeader.js';
 
 const MySite = {
     config: {
