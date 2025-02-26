@@ -6,7 +6,9 @@
 {% block event_list %}
     {% with event_list=past_events %}
         {% for event in event_list %}
-            {% include "agenda/includes/event_card.html" %}
+            <div class="past-event">
+                {% include "agenda/includes/event_card.html" %}
+            </div>
             {% empty %}
             <div class="col-span-full text-center py-8">
                 <p>Aucun événement passé n'est disponible avec votre sélection.</p>

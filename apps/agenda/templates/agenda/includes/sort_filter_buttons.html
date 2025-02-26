@@ -1,19 +1,14 @@
 {% load wagtailcore_tags %}
 
 <div class="mb-4 flex flex-wrap items-center gap-4">
-    <label for="sort_by" class="mr-2">Trier par:</label>
+    <label for="sort_by" class="mr-2">Trier par :</label>
     <select id="sort_by" name="sort_by" onchange="updateURLParameter('sort_by', this.value);">
         <option value="date" {% if sort_by == 'date' %}selected{% endif %}>Date</option>
         <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Titre</option>
     </select>
     <div class="flex gap-2">
-        <button onclick="toggleVille('Mauguio');"
-                class="btn btn-outline {% if 'Mauguio' in villes %}active{% endif %}">
-            Mauguio
-        </button>
-        <button onclick="toggleVille('Carnon');"
-                class="btn btn-outline {% if 'Carnon' in villes %}active{% endif %}">
-            Carnon
-        </button>
+        <button onclick="toggleVille('Mauguio');" class="btn btn-outline {% if 'Mauguio' in villes %}active{% endif %}">Mauguio</button>
+        <button onclick="toggleVille('Carnon');" class="btn btn-outline {% if 'Carnon' in villes %}active{% endif %}">Carnon</button>
     </div>
+    <input type="text" id="search" name="search" placeholder="Recherche" value="{{ search_query }}" onkeydown="if (event.key === 'Enter') updateURLParameter('search', this.value);" class="ml-4 p-2 border rounded">
 </div>

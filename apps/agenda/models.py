@@ -25,9 +25,16 @@ class EventListPage(Page):
         context = {}
         sort_by = request.GET.get('sort_by', default_sort)
         villes = request.GET.get('ville', '')
-        paginator = Paginator(get_events(date_filter, sort_by, villes), 9)
+        search_query = request.GET.get('search', '')
+        events = get_events(date_filter, sort_by, villes)
+    
+        if search_query:
+            events = events.filter(title__icontains=search_query)
+    
+        paginator = Paginator(events, 9)
         context['sort_by'] = sort_by
         context['villes'] = villes.split(',') if villes else []
+        context['search_query'] = search_query
         return context, paginator
 
     class Meta:
