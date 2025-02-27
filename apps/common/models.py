@@ -6,7 +6,10 @@ from wagtail.models import Page
 
 class DetailPage(Page):
     subtitle = models.CharField(max_length=250, blank=True, verbose_name="Sous-titre")
-    content = RichTextField(default='', verbose_name="Contenu")
+    content = RichTextField(
+        verbose_name="Contenu",
+        blank=True,
+    )
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,

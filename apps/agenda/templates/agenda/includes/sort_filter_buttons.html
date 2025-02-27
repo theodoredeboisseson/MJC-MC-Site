@@ -12,5 +12,5 @@
         <button onclick="toggleVille('Mauguio');" class="btn btn-outline {% if 'Mauguio' in villes %}active{% endif %}">Mauguio</button>
         <button onclick="toggleVille('Carnon');" class="btn btn-outline {% if 'Carnon' in villes %}active{% endif %}">Carnon</button>
     </div>
-    <input type="text" id="search" name="search" placeholder="Recherche" value="{{ search_query }}" onkeydown="if (event.key === 'Enter') updateURLParameter('search', this.value);" class="ml-4 p-2 border rounded w-full lg:w-1/2">
+    <input type="text" id="search" name="search" placeholder="Recherche" value="{{ search_query }}" onkeydown="if (event.key === 'Enter') updateURLParameter('search', this.value);" class="ml-4 p-2 border rounded-xl w-full lg:w-1/2">
 </div>
