@@ -22,8 +22,10 @@ class PageDAcceuil(Page):
     )
 
     def get_latest_events(self):
-        from apps.agenda.models import EventPage
-        return EventPage.objects.live().order_by('date')[:3]  # Limite aux 3 prochains événements
+        from apps.agenda.models import get_events
+        from django.utils import timezone
+        from django.db.models import Q
+        return get_events(date_filter=Q(date__gte=timezone.now()), sort_by='date')[:3]
 
     content_panels = Page.content_panels + [
         FieldPanel('intro_title'),
