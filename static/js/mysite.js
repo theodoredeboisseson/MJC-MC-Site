@@ -9,8 +9,8 @@ const MySite = {
     },
 
     init() {
-        MobileMenu.init();
-        WordCarousel.init();
+        MobileMenu.init(this.config.menuTransitionDelay);
+        WordCarousel.init(this.config.carouselDelay);
         StickyHeader.init();
     }
 };

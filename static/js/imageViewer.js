@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('photoModal');
+    const modal = document.getElementById('imageViewer');
     const modalImg = document.getElementById('modalImage');
-    const closeBtn = document.querySelector('.photo-modal .close');
+    const closeBtn = document.querySelector('.image-viewer .close');
 
     document.querySelectorAll('img.clickable-image, .richtext-content img').forEach(function(img) {
         img.addEventListener('click', function() {

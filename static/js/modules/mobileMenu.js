@@ -1,7 +1,7 @@
 const MobileMenu = {
-    init() {
-        const elements = ['burger-button', 'close-button', 'mobile-menu'].map(id => document.getElementById(id));
-        [this.burgerButton, this.closeButton, this.menu] = elements;
+    init(menuTransitionDelay) {
+        this.menuTransitionDelay = menuTransitionDelay;
+        [this.burgerButton, this.closeButton, this.menu] = ['burger-button', 'close-button', 'mobile-menu'].map(id => document.getElementById(id));
         if (!this.menu) return;
 
         this.panel = this.menu.querySelector('.fixed.inset-y-0');
@@ -29,7 +29,7 @@ const MobileMenu = {
     close() {
         this.overlay.classList.remove('opacity-100');
         this.panel.classList.add('translate-x-full');
-        setTimeout(() => this.menu.classList.add('hidden'), MySite.config.menuTransitionDelay);
+        setTimeout(() => this.menu.classList.add('hidden'), this.menuTransitionDelay);
     }
 };
 

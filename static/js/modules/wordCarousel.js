@@ -1,5 +1,6 @@
 const WordCarousel = {
-    init() {
+    init(carouselDelay) {
+        this.carouselDelay = carouselDelay;
         this.words = document.querySelectorAll('.rotating-text');
         if (this.words.length === 0) return;
         this.currentIndex = 0;
@@ -17,7 +18,7 @@ const WordCarousel = {
             next.classList.add('active');
 
             this.currentIndex = (this.currentIndex + 1) % this.words.length;
-        }, MySite.config.carouselDelay);
+        }, this.carouselDelay || 3000);
     }
 };
 

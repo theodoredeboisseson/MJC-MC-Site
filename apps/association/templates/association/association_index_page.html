@@ -8,13 +8,13 @@
     <div class="container mx-auto px-4 pb-8">
         <div class="max-w-7xl mx-auto">
             <h1 class="text-6xl text-[var(--secondary-color)] font-bold mb-8">{{ page.title }}</h1>
-            <div class="flex flex-wrap justify-evenly gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {% for subpage in subpages %}
                 {% with page=subpage %}
                     {% include "association/includes/page_card.html" %}
                 {% endwith %}
             {% endfor %}
-        </div>
+            </div>
         {% if page.content %}
             <div class="richtext-content">
                 {{ page.content|richtext }}
