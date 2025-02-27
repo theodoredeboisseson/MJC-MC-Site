@@ -4,8 +4,8 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 */
 @import "tailwindcss";
 @import "./satoshi.css"; /*Font*/
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 @import './components/buttons.css';
+@import './components/modal.css';
 
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             
@@ -30,7 +30,7 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 }
 
 body {
-    font-family: "DM Sans", Satoshi, sans-serif;
+    font-family: Satoshi-Medium, sans-serif;
 }
 
 /*---------------------------------------
@@ -53,6 +53,70 @@ body {
 ::selection {
     background-color: var(--primary-color);
     color: white;
+}
+
+.richtext-content {
+    @apply max-w-none my-8 lg:my-16 mx-auto px-4 sm:px-6 lg:px-8
+    bg-gray-50 rounded-xl p-8 pb-4 shadow-sm text-gray-700;
+
+
+    /* Paragraphes */
+    & p {
+        @apply whitespace-pre-wrap break-words mb-6 text-base leading-relaxed;
+    }
+
+    /* Liens */
+    & a {
+        @apply no-underline border-b-2 border-[var(--primary-color)]/30
+        transition-all text-[var(--primary-color)];
+        &:hover {
+            @apply border-[var(--primary-color)]/100 opacity-80;
+        }
+    }
+
+    /* Titres */
+    & h2 {
+        @apply text-[var(--secondary-color)] text-3xl font-bold mt-8 mb-4;
+    }
+
+    & h3 {
+        @apply text-[var(--secondary-color)] text-2xl font-semibold mt-6 mb-3;
+    }
+
+    /* Listes */
+    & ul {
+        @apply list-disc pl-6 mb-6 space-y-2;
+    }
+
+    & ol {
+        @apply list-decimal pl-6 mb-6 space-y-2;
+    }
+
+    /* Citations */
+    & blockquote {
+        @apply pl-4 italic text-gray-700 border-l-4 border-[var(--primary-color)] opacity-50;
+    }
+
+    /* Images */
+    & img {
+        @apply rounded-lg shadow-md my-6 w-full;
+    
+        &.richtext-image {
+            @apply max-w-2xl mx-auto block;
+    
+            &.left {
+                    @apply ml-0 mr-auto mb-4 max-w-md;
+            }
+            &.right {
+                    @apply mr-0 ml-auto mb-4 max-w-md;
+            }
+
+            &.full-width {
+                @apply w-full max-w-none float-none mx-auto;
+            }
+            
+        }
+    }
 }
 
 /*---------------------------------------
@@ -125,3 +189,7 @@ body {
         opacity: 0;
     }
 }
+
+/*---------------------------------------
+  GENERAL               
+-----------------------------------------*/

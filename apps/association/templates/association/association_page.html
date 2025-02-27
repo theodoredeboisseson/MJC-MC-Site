@@ -1,22 +1,20 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags navigation_tags %}
 
 {% block content %}
-    <article class="container mx-auto px-4 py-8">
-        <header class="mb-8">
-            <h1 class="text-4xl font-bold mb-2">{{ page.title }}</h1>
-            {% if page.subtitle %}
-                <p class="text-xl text-gray-600">{{ page.subtitle }}</p>
-            {% endif %}
-        </header>
+    {% if page.show_image_in_page %}
+        {% include "includes/detail_page.html" %}
+    {% else %}
+        {% include "includes/detail_page.html" with hide_image=True %}
+    {% endif %}
+{% endblock %}
 
-        {% if page.card_image and page.show_image_in_page %}
-            {% image page.card_image width-1200 as hero %}
-            <img src="{{ hero.url }}" alt="{{ page.title }}" class="w-full h-[400px] object-cover rounded-lg mb-8">
-        {% endif %}
-    
-        <div class="prose max-w-none">
-            {{ page.body|richtext }}
-        </div>
-    </article>
+{% block page_actions %}
+    {% get_parent_url page as parent_url %}
+    <a href="{{ parent_url }}" class="btn btn-secondary inline-flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Retour aux sections
+    </a>
 {% endblock %}

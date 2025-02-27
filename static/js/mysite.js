@@ -1,85 +1,17 @@
+import MobileMenu from './modules/mobileMenu.js';
+import WordCarousel from './modules/wordCarousel.js';
+import StickyHeader from './modules/stickyHeader.js';
+
 const MySite = {
     config: {
         carouselDelay: 3000,
         menuTransitionDelay: 300
     },
 
-    mobileMenu: {
-        init() {
-            const elements = ['burger-button', 'close-button', 'mobile-menu'].map(id => document.getElementById(id));
-            [this.burgerButton, this.closeButton, this.menu] = elements;
-            if (!this.menu) return;
-
-            this.panel = this.menu.querySelector('.fixed.inset-y-0');
-            this.overlay = this.menu.querySelector('.fixed.inset-0');
-            this.bindEvents();
-        },
-
-        bindEvents() {
-            const handlers = [
-                [this.burgerButton, () => this.open()],
-                [this.closeButton, () => this.close()],
-                [this.overlay, () => this.close()]
-            ];
-            handlers.forEach(([element, handler]) => element?.addEventListener('click', handler));
-        },
-
-        open() {
-            this.menu.classList.remove('hidden');
-            requestAnimationFrame(() => {
-                this.overlay.classList.add('opacity-100');
-                this.panel.classList.remove('translate-x-full');
-            });
-        },
-
-        close() {
-            this.overlay.classList.remove('opacity-100');
-            this.panel.classList.add('translate-x-full');
-            setTimeout(() => this.menu.classList.add('hidden'), MySite.config.menuTransitionDelay);
-        }
-    },
-
-    wordCarousel: {
-        init() {
-            this.words = document.querySelectorAll('.rotating-text');
-            if (this.words.length === 0) return;
-            this.currentIndex = 0;
-            this.startRotation();
-        },
-
-        startRotation() {
-            setInterval(() => {
-                const current = this.words[this.currentIndex];
-                const next = this.words[(this.currentIndex + 1) % this.words.length];
-                
-                current.classList.remove('active');
-                current.classList.add('hidden');
-                next.classList.remove('hidden');
-                next.classList.add('active');
-                
-                this.currentIndex = (this.currentIndex + 1) % this.words.length;
-            }, MySite.config.carouselDelay);
-        }
-    },
-
-    stickyHeader: {
-        init() {
-            const header = document.querySelector('[data-sticky-header]');
-            if (!header) return;
-
-            let lastScroll = 0;
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.scrollY;
-                header.classList.toggle('shadow-lg', currentScroll > 0);
-                lastScroll = currentScroll;
-            });
-        }
-    },
-    
     init() {
-        this.mobileMenu.init();
-        this.wordCarousel.init();
-        this.stickyHeader.init();
+        MobileMenu.init(this.config.menuTransitionDelay);
+        WordCarousel.init(this.config.carouselDelay);
+        StickyHeader.init();
     }
 };
 
@@ -115,3 +47,33 @@ function toggleSubMenu(button) {
         svg.classList.add('rotate-180');
     }
 }
+
+window.updateURLParameter = function(param, value) {
+    const url = new URL(window.location.href);
+    url.searchParams.set(param, value);
+    window.location.href = url.toString();
+};
+
+window.toggleFilter = function(param, value) {
+    const url = new URL(window.location.href);
+    let values = url.searchParams.get(param) ? url.searchParams.get(param).split(',') : [];
+
+    if (values.includes(value)) {
+        values = values.filter(v => v !== value);
+    } else {
+        values.push(value);
+    }
+
+    if (values.length > 0) {
+        url.searchParams.set(param, values.sort().join(','));
+    } else {
+        url.searchParams.delete(param);
+    }
+
+    window.location.href = url.toString();
+};
+
+// Utilisation pour les villes
+window.toggleVille = function(ville) {
+    toggleFilter('ville', ville);
+};

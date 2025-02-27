@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block body_class %} bg-gray-50 {% endblock %}
 {% block content %}
     <section class="hero">
         {% image page.hero_image fill-1920x600 as hero %}
@@ -17,8 +18,8 @@
                     </defs>
                     <use href="#wave" fill="currentColor"></use>
                 </svg>
-                <svg class="-mb-[1px] rotate-180" viewBox="0 0 1265 144">
-                <use href="#wave" fill="white"></use>
+                <svg class="-mb-[1px] rotate-180 text-gray-50" viewBox="0 0 1265 144">
+                <use href="#wave" fill="currentColor"></use>
             </svg>
             </div>
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.url }}');"></div>
@@ -26,7 +27,7 @@
             <div class="container mx-auto h-full relative z-20">
                 <div class="h-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-12 py-8">
                     <div class="xl:w-6/12 px-2 w-full mb-5 lg:mb-0 font-bold">
-                        <h2 class="text-white text-xl md:text-2xl lg:text-3xl">Bienvenue à la MJC</h2>
+                        <h2 class="text-white text-xl md:text-2xl lg:text-3xl">{{ page.intro_title }}</h2>
 
                         <h1 class="rotate-1 text-white mb-4 pb-2 text-2xl md:text-3xl lg:text-4xl">
                             <span>Ici, on vous propose</span>
@@ -54,29 +55,21 @@
         </div>
     </section>
 
-    <section class="events-preview bg-white py-16 my-20">
+    <section class="events-preview py-16 my-20">
         <div class="container mx-auto px-6">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold">Prochains événements</h2>
-                <a href="/agenda/" class="btn btn-primary">Voir tous les événements</a>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-12">
+                <h2 class="text-3xl font-bold text-[var(--secondary-color)]">Prochains événements</h2>
+                <a href="/agenda/" class="group btn btn-primary inline-flex items-center gap-2">
+                    Voir tous les événements
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for event in page.get_latest_events %}
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="window.location.href='{{ event.url }}'">
-                        {% if event.image %}
-                            {% image event.image fill-400x300 as event_img %}
-                            <img src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-48 object-cover">
-                        {% endif %}
-                        <div class="p-6">
-                            <p class="text-[var(--secondary-color)] font-semibold mb-2">{{ event.date }}</p>
-                            <h3 class="text-xl font-bold mb-2">{{ event.title }}</h3>
-                            <div class="prose line-clamp-3">{{ event.description|richtext }}</div>
-                            <a href="{{ event.url }}" class="mt-4 inline-block text-[var(--secondary-color)] hover:text-[var(--link-hover-color)]">
-                                En savoir plus →
-                            </a>
-                        </div>
-                    </div>
+                    {% include "agenda/includes/event_card.html" %}
                 {% endfor %}
             </div>
         </div>

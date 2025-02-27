@@ -38,11 +38,11 @@
             </a>
 
             {# Main Navigation Items #}
-            {% for page in site_root.get_children.live.in_menu %}
+            {% for page in site_root.get_children.live %}
                 <div class="relative group">
                     <a href="{{ page.url }}" class="nav-link {% if page.url == request.path %}active{% endif %}">
                         {{ page.title }}
-                        {% if page.get_children.live.in_menu.count > 0 %}
+                        {% if page.get_children.live.count > 0 %}
                             <svg class="size-5 flex-none text-gray-400 group-hover:rotate-180 transition-transform"
                                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd"
