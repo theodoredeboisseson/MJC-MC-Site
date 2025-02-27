@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block body_class %} bg-gray-50 {% endblock %}
 {% block content %}
     <section class="hero">
         {% image page.hero_image fill-1920x600 as hero %}
@@ -17,8 +18,8 @@
                     </defs>
                     <use href="#wave" fill="currentColor"></use>
                 </svg>
-                <svg class="-mb-[1px] rotate-180" viewBox="0 0 1265 144">
-                <use href="#wave" fill="white"></use>
+                <svg class="-mb-[1px] rotate-180 text-gray-50" viewBox="0 0 1265 144">
+                <use href="#wave" fill="currentColor"></use>
             </svg>
             </div>
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.url }}');"></div>
@@ -54,7 +55,7 @@
         </div>
     </section>
 
-    <section class="events-preview bg-gradient-to-b from-white to-gray-50 py-16 my-20">
+    <section class="events-preview py-16 my-20">
         <div class="container mx-auto px-6">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-12">
                 <h2 class="text-3xl font-bold text-[var(--secondary-color)]">Prochains événements</h2>

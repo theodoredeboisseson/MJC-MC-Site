@@ -2,7 +2,11 @@
 {% load wagtailcore_tags navigation_tags %}
 
 {% block content %}
-    {% include "includes/detail_page.html" %}
+    {% if page.show_image_in_page %}
+        {% include "includes/detail_page.html" %}
+    {% else %}
+        {% include "includes/detail_page.html" with hide_image=True %}
+    {% endif %}
 {% endblock %}
 
 {% block page_actions %}
