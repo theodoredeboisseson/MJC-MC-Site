@@ -20,6 +20,12 @@ class PageDAcceuil(Page):
     hero_image = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+'
     )
+    video_url = models.URLField(
+        verbose_name="URL de la vidéo YouTube",
+        help_text="Collez l'URL de la vidéo YouTube (format embed)",
+        blank=True,
+        null=True
+    )
 
     def get_latest_events(self):
         from apps.agenda.models import get_events
@@ -30,5 +36,6 @@ class PageDAcceuil(Page):
     content_panels = Page.content_panels + [
         FieldPanel('intro_title'),
         FieldPanel('hero_image'),
+        FieldPanel('video_url'),
         InlinePanel('rotating_words', label="Mot à défiler"),
     ]
