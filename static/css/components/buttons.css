@@ -18,7 +18,7 @@
 .btn-outline {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-[var(--secondary-color)] text-[var(--secondary-color)] hover:bg-[var(--primary-color)] hover:text-white hover:border-[var(--primary-color)] transition-all self-start;
     &.active {
-        @apply bg-[var(--primary-color)] text-white border-[var(--primary-color)]!;
+        @apply bg-[var(--primary-color)] text-white border-[var(--primary-color)]! hover:border-[var(--primary-color)];
     }
 }
 
