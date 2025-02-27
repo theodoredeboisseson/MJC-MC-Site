@@ -65,7 +65,7 @@
         {% wagtailuserbar %}
         
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
+        <script type="module" src="{% static 'js/mysite.js' %}"></script>
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
         {% endblock %}

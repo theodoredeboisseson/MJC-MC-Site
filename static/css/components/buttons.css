@@ -15,6 +15,12 @@
     @apply bg-gray-300 text-black hover:bg-gray-400;
 }
 
+.btn-outline {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-[var(--secondary-color)] text-[var(--secondary-color)] hover:bg-[var(--primary-color)] hover:text-white hover:border-[var(--primary-color)] transition-all self-start;
+    &.active {
+        @apply bg-[var(--primary-color)] text-white border-[var(--primary-color)]! hover:border-[var(--primary-color)];
+    }
+}
 
 /*---------------------------------------
   NAVIGATION
@@ -31,6 +37,6 @@
     @apply flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-white transition-colors hover:text-[var(--link-hover-color)] hover:bg-[var(--secondary-color-light)];
 }
 
-.active {
+.nav-link.active, .nav_submenu-link.active, .mobile-nav-link.active {
     @apply text-[var(--link-hover-color)]!;
 }

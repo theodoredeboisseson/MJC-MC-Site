@@ -1,0 +1,16 @@
+{% extends "agenda/event_list_base.html" %}
+
+{% block section_class %}past-events{% endblock %}
+{% block page_title %}Événements passés{% endblock %}
+
+{% block event_list %}
+    {% with event_list=past_events %}
+        {% for event in event_list %}
+            {% include "agenda/includes/event_card.html" with section_class="past-events" %}
+            {% empty %}
+            <div class="col-span-full text-center py-8">
+                <p>Aucun événement passé n'est disponible avec votre sélection.</p>
+            </div>
+        {% endfor %}
+    {% endwith %}
+{% endblock %}
