@@ -42,7 +42,7 @@
                 <div class="relative group">
                     <a href="{{ page.url }}" class="nav-link {% if page.url == request.path %}active{% endif %}">
                         {{ page.title }}
-                        {% if page.get_children.live.count > 0 %}
+                        {% if page.get_children.live.in_menu.count > 0 %}
                             <svg class="size-5 flex-none text-gray-400 group-hover:rotate-180 transition-transform"
                                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd"
@@ -103,7 +103,7 @@
                 <div class="-my-6 divide-y divide-gray-500/10">
                     <div class="space-y-2 py-6 -mx-3">
                         <a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">Accueil</a>
-                        {% for page in site_root.get_children.live.in_menu %}
+                        {% for page in site_root.get_children.live %}
                             <div class="flex w-full items-center justify-between rounded-lg mobile-nav-link">
                                 <a href="{{ page.url }}"
                                    class=" py-2 pr-3.5 pl-3 {% if page.url == request.path %}active{% endif %}">

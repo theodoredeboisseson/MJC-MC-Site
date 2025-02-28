@@ -3,9 +3,9 @@
 
 {% block content %}
     {% if page.show_image_in_page %}
-        {% include "includes/../../../activites/templates/detail_page.html" %}
+        {% include "common/detail_page.html" %}
     {% else %}
-        {% include "includes/../../../activites/templates/detail_page.html" with hide_image=True %}
+        {% include "common/detail_page.html" with hide_image=True %}
     {% endif %}
 {% endblock %}
 

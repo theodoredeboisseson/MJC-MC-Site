@@ -57,7 +57,7 @@ body {
 
 .richtext-content {
     @apply max-w-none my-8 lg:my-16 mx-auto px-4 sm:px-6 lg:px-8
-    bg-gray-50 rounded-xl p-8 pb-4 shadow-sm text-gray-700;
+    bg-gray-50 rounded-xl p-8 pb-4 shadow-md text-gray-700;
 
 
     /* Paragraphes */
