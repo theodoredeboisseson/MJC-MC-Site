@@ -123,33 +123,22 @@ body {
 -----------------------------------------*/
 
 .rotating-text-wrapper {
-    display: inline-block;
-    position: relative;
-    text-align: left;
-    perspective: 300px;
+    @apply inline-block relative text-left perspective-near;
 }
 
 .rotating-text {
-    color: var(--link-hover-color);
-    display: inline-block;
-    position: absolute;
-    white-space: nowrap;
-    left: 0;
-    top: 0;
-    opacity: 0;
+    @apply inline-block absolute whitespace-nowrap left-1 top-0 opacity-0 transform rotate-x-180 text-link-hover;
     transform-origin: 50% 100%;
-    transform: rotateX(180deg);
+
 }
 
 .rotating-text.active {
-    position: relative;
-    opacity: 1;
-    transform: rotateX(0deg);
+    @apply relative opacity-100 transform rotate-x-0;
     animation: rotate-text-in 1.2s;
 }
 
 .rotating-text.hidden {
-    transform: rotateX(180deg);
+    @apply transform rotate-x-180;
     animation: rotate-text-out 1.2s;
 }
 
