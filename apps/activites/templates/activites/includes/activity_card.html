@@ -1,0 +1,17 @@
+{% load wagtailimages_tags %}
+<div class="flex flex-col md:flex-row justify-evenly md:gap-8 md:w-3/4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl pt-8 md:py-0 mx-8 md:mx-auto my-16 shadow-lg">
+    <div class="flex flex-col justify-center items-center text-center md:w-1/2 p-4 md:p-8 pb-0">
+        <h1 class="font-bold text-3xl">{{ page.title }}</h1>
+        <p class="mt-4 text-gray-200">{{ page.subtitle }}</p>
+        <div class="mt-6 flex gap-4 flex-wrap">
+            <a href="{{ page.link }}" class="btn bg-white text-blue-500 hover:bg-gray-200">Voir sur GoAsso</a>
+        </div>
+    </div>
+    <div class="relative flex justify-center items-center transform scale-115 md:scale-120 my-16 md:my-0 md:mx-0 md:w-1/3">
+        {% image page.image fill-1200x1200 as img %}
+        <img src="{{ img.url }}" alt="{{ page.title }}" 
+             class="rounded-xl shadow-lg clickable-image"
+             width="{{ img.width }}" height="{{ img.height }}"
+             loading="lazy">
+    </div>
+</div>
