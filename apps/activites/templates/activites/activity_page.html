@@ -2,63 +2,29 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
+    {% include 'activites/includes/activity_card.html' %}
+
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold mb-8 text-center text-[var(--primary-color)]">{{ page.title }}</h1>
+        <h1 class="text-4xl text-secondary font-bold mb-8 text-center">{{ page.title }}</h1>
         <div class="prose mb-8 text-justify">{{ page.description|richtext }}</div>
 
-        <div class="mb-8">
-            <h3 class="text-2xl font-semibold mb-4 text-[var(--secondary-color)]">Horaires :</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {% for slot in page.time_slots.all %}
-                    <div class="p-4 bg-gray-100 rounded-lg shadow-md">
-                        <p class="font-medium text-lg">{{ slot.label }}</p>
-                    <p class="text-gray-600">{{ slot.days }} : {{ slot.start_time|time:"H:i" }}-{{ slot.end_time|time:"H:i" }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div>
+                <h3 class="text-2xl font-semibold mb-4 text-secondary">Tarifs</h3>
+                <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+                    <p class="text-gray-600">Résidents Mauguio/Carnon : <span class="font-bold">{{ page.price_resident }}€</span></p>
+                    <p class="text-gray-600">Non-résidents : <span class="font-bold">{{ page.price_non_resident }}€</span></p>
                 </div>
-            {% endfor %}
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold mb-4 text-secondary">Animateurs</h3>
+                <p class="text-gray-600 text-lg p-4 bg-gray-100 rounded-lg shadow-md">{{ page.instructors }}</p>
             </div>
         </div>
 
-        <div class="mb-8">
-            <h3 class="text-2xl font-semibold mb-4 text-[var(--secondary-color)]">Tarifs :</h3>
-            <div class="p-4 bg-gray-100 rounded-lg shadow-md">
-                <p class="text-gray-600">Résidents Mauguio/Carnon : <span class="font-bold">{{ page.price_resident }}€</span></p>
-                <p class="text-gray-600">Non-résidents : <span class="font-bold">{{ page.price_non_resident }}€</span></p>
-            </div>
-        </div>
-
-        <div class="mt-8">
-            <h3 class="text-2xl font-semibold mb-4 text-[var(--secondary-color)]">Animateurs :</h3>
-            <p class="text-gray-600 text-lg p-4 bg-gray-100 rounded-lg shadow-md">{{ page.instructors }}</p>
+        <div class="mt-8 flex items-center justify-center">
+            <a href="{{ page.link }}" class="btn btn-primary">Voir sur GoAsso</a>
         </div>
     </div>
+    {% include "components/image_viewer.html" %}
 {% endblock %}
-
-
-{#{% for activity in activities %}#}
-{#    <div class="bg-white rounded-xl shadow-lg p-6">#}
-{#        <h2 class="text-2xl font-semibold mb-4">{{ activity.title }}</h2>#}
-{#        <div class="prose mb-4">{{ activity.description|richtext }}</div>#}
-{##}
-{#        <div class="mb-4">#}
-{#            <h3 class="font-semibold mb-2">Horaires :</h3>#}
-{#            {% for slot in activity.time_slots.all %}#}
-{#                <div class="mb-2">#}
-{#                    <p class="font-medium">{{ slot.label }}</p>#}
-{#                    <p class="text-gray-600">{{ slot.days }} : {{ slot.start_time|time:"H:i" }}-{{ slot.end_time|time:"H:i" }}</p>#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        </div>#}
-{##}
-{#        <div class="mb-4">#}
-{#            <h3 class="font-semibold mb-2">Tarifs :</h3>#}
-{#            <p class="text-gray-600">Résidents Mauguio/Carnon : {{ activity.price_resident }}€</p>#}
-{#            <p class="text-gray-600">Non-résidents : {{ activity.price_non_resident }}€</p>#}
-{#        </div>#}
-{##}
-{#        <div class="mt-4">#}
-{#            <p class="text-gray-700"><span class="font-medium">Animateur(s) :</span> {{ activity.instructors }}</p>#}
-{#        </div>#}
-{#    </div>#}
-{#    {% empty %}#}
-{#    <p class="col-span-full text-center text-gray-500">Aucune activité n'est disponible pour le moment.</p>#}
-{#{% endfor %}#}

@@ -8,38 +8,6 @@ from modelcluster.models import ClusterableModel
 from apps.common.models import DetailPage
 
 
-class TimeSlot(models.Model):
-    label = models.CharField(max_length=100, help_text="Ex: Niveau Débutant")
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-
-    panels = [
-        FieldPanel('label'),
-        FieldPanel('start_time'),
-        FieldPanel('end_time'),
-    ]
-
-    def __str__(self):
-        return f"{self.label}: {self.start_time.strftime('%H:%M')}-{self.end_time.strftime('%H:%M')}"
-
-    class Meta:
-        abstract = True
-
-class ActivityTimeSlot(TimeSlot):
-    activity = ParentalKey(
-        'ActivityPage',
-        on_delete=models.CASCADE,
-        related_name='time_slots'
-    )
-    days = models.CharField(
-        max_length=255,
-        help_text="Ex: Lundi au Vendredi, ou Mardi/Jeudi"
-    )
-
-    panels = TimeSlot.panels + [
-        FieldPanel('days'),
-    ]
-
 class ActivityPage(DetailPage):
     DetailPage.content.verbose_name = "Description"
     instructors = models.CharField(
@@ -47,17 +15,20 @@ class ActivityPage(DetailPage):
         help_text="Nom du/des animateur(s)",
         blank=True,
     )
-    price_resident = models.DecimalField(
-        max_digits=6,
-        decimal_places=2,
+    price_resident = models.CharField(
+        max_length=50,
         help_text="Prix pour les résidents Mauguio/Carnon",
         null=True,
     )
-    price_non_resident = models.DecimalField(
-        max_digits=6,
-        decimal_places=2,
+    price_non_resident = models.CharField(
+        max_length=50,
         help_text="Prix pour les non-résidents",
         null=True,
+    )
+    link = models.URLField(
+        max_length=200,
+        help_text="Lien de redirection pour le bouton",
+        blank=True,
     )
 
     content_panels = DetailPage.content_panels + [
@@ -66,7 +37,7 @@ class ActivityPage(DetailPage):
             FieldPanel('price_resident'),
             FieldPanel('price_non_resident'),
         ], heading="Tarifs"),
-        InlinePanel('time_slots', label="Horaires"),
+        FieldPanel('link'),
     ]
 
     class Meta:
@@ -87,22 +58,3 @@ class ActivityList(Page):
 
     class Meta:
         verbose_name = "Liste des Activités"
-
-
-# class ActivityPage(Page):
-#     description = models.TextField()
-#     price_resident = models.DecimalField(max_digits=6, decimal_places=2)
-#     price_non_resident = models.DecimalField(max_digits=6, decimal_places=2)
-#     instructors = models.CharField(max_length=255)
-# 
-#     content_panels = Page.content_panels + [
-#         FieldPanel('description'),
-#         MultiFieldPanel([
-#             InlinePanel('time_slots', label="Time Slots"),
-#         ], heading="Time Slots"),
-#         MultiFieldPanel([
-#             FieldPanel('price_resident'),
-#             FieldPanel('price_non_resident'),
-#         ], heading="Prices"),
-#         FieldPanel('instructors'),
-#     ]
