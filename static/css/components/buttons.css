@@ -16,9 +16,9 @@
 }
 
 .btn-outline {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-[var(--secondary-color)] text-[var(--secondary-color)] hover:bg-[var(--primary-color)] hover:text-white hover:border-[var(--primary-color)] transition-all self-start;
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-secondary text-secondary hover:bg-primary hover:text-white hover:border-primary transition-all self-start;
     &.active {
-        @apply bg-[var(--primary-color)] text-white border-[var(--primary-color)]! hover:border-[var(--primary-color)];
+        @apply bg-primary text-white border-primary! hover:border-primary;
     }
 }
 
@@ -26,17 +26,17 @@
   NAVIGATION
 -----------------------------------------*/
 .nav-link {
-    @apply flex items-center px-2 xl:px-3 py-3 text-base/6 font-bold text-white transition-colors hover:text-[var(--link-hover-color)];
+    @apply flex items-center px-2 xl:px-3 py-3 text-base/6 font-bold text-white transition-colors hover:text-link-hover;
 }
 
 .nav-submenu-link {
-    @apply block font-semibold text-gray-900 transition-colors hover:text-[var(--link-hover-color)];
+    @apply block font-semibold text-gray-900 transition-colors hover:text-link-hover;
 }
 
 .mobile-nav-link {
-    @apply flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-white transition-colors hover:text-[var(--link-hover-color)] hover:bg-[var(--secondary-color-light)];
+    @apply flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-white transition-colors hover:text-link-hover hover:bg-secondary-light;
 }
 
 .nav-link.active, .nav_submenu-link.active, .mobile-nav-link.active {
-    @apply text-[var(--link-hover-color)]!;
+    @apply text-link-hover!;
 }

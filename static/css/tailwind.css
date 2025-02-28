@@ -10,16 +10,16 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
-:root {
-    --primary-color:                #81B29A;
-    --secondary-color:              #3D405B;
-    --section-bg-color:             #F4F1DE;
-    --custom-btn-bg-color:          #F2CC8F;
-    --custom-btn-bg-hover-color:    #E07A5F;
-    --dark-color:                   #000000;
-    --text-color:                   #717275;
-    --link-hover-color:             #F2CC8F;
-    --secondary-color-light: color-mix(in srgb, var(--secondary-color) 80%, white 10%);
+@theme {
+    --color-primary:                #81B29A;
+    --color-secondary:              #3D405B;
+    --color-section-bg:             #F4F1DE;
+    --color-custom-btn-bg-:         #F2CC8F;
+    --color-custom-btn-bg-hover:    #E07A5F;
+    --color-dark:                   #000000;
+    --color-text-color:             #717275;
+    --color-link-hover:             #F2CC8F;
+    --color-secondary-light: color-mix(in srgb, var(--color-secondary) 80%, white 10%);
 
     --h1-font-size:                 2.25rem;
     --h2-font-size:                 1.875rem;
@@ -51,8 +51,7 @@ body {
 }
 
 ::selection {
-    background-color: var(--primary-color);
-    color: white;
+    @apply text-white bg-primary;
 }
 
 .richtext-content {
@@ -67,20 +66,20 @@ body {
 
     /* Liens */
     & a {
-        @apply no-underline border-b-2 border-[var(--primary-color)]/30
-        transition-all text-[var(--primary-color)];
+        @apply no-underline border-b-2 border-primary/30
+        transition-all text-primary;
         &:hover {
-            @apply border-[var(--primary-color)]/100 opacity-80;
+            @apply border-primary/100 opacity-80;
         }
     }
 
     /* Titres */
     & h2 {
-        @apply text-[var(--secondary-color)] text-3xl font-bold mt-8 mb-4;
+        @apply text-secondary text-3xl font-bold mt-8 mb-4;
     }
 
     & h3 {
-        @apply text-[var(--secondary-color)] text-2xl font-semibold mt-6 mb-3;
+        @apply text-secondary text-2xl font-semibold mt-6 mb-3;
     }
 
     /* Listes */
@@ -94,7 +93,7 @@ body {
 
     /* Citations */
     & blockquote {
-        @apply pl-4 italic text-gray-700 border-l-4 border-[var(--primary-color)] opacity-50;
+        @apply pl-4 italic text-gray-700 border-l-4 border-primary opacity-50;
     }
 
     /* Images */
