@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block image_extra %}
-    <time class="absolute bottom-6 left-6 text-white bg-primary/90 px-4 py-2 rounded-lg font-medium">
+    <time class="absolute bottom-6 left-6 text-white bg-secondary/90 px-4 py-2 rounded-lg font-medium">
         {{ page.date|date:"d F Y à H:i" }}
     </time>
 {% endblock %}
@@ -14,7 +14,7 @@
 {% block page_actions %}
     {% get_parent_url page as parent_url %}
     <div class="flex gap-4">
-        <a href="{{ parent_url }}" class="btn btn-secondary">← Retour aux événements</a>
-        <a href="#" class="btn btn-primary">S'inscrire à l'événement</a>
+        <a href="{{ parent_url }}" class="btn btn-primary">← Retour aux événements</a>
+        <a href="#" class="btn btn-secondary">S'inscrire à l'événement</a>
     </div>
 {% endblock %}

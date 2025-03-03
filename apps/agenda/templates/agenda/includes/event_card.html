@@ -2,9 +2,9 @@
 
 <article class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col hover:scale-[1.03] cursor-pointer"
     onclick="window.location.href='{{ event.url }}'">
-    <div class="relative overflow-hidden h-56 bg-gray-200">
+    <div class="relative overflow-hidden h-56 bg-gray-200 text-light-text">
         {% if section_class == "past-events" %}
-            <div class="absolute z-10 w-full bg-gray-500/90 text-white text-center px-4 py-1 tracking-widest">
+            <div class="absolute z-10 w-full bg-gray-500/90 text-center px-4 py-1 tracking-widest">
                 Passé
             </div>
         {% endif %}
@@ -19,22 +19,22 @@
             </div>
         {% endif %}
         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent h-24"></div>
-        <time class="absolute bottom-4 left-4 text-white font-medium px-3 py-1 bg-primary/80 rounded-full text-sm">
+        <time class="absolute bottom-4 left-4 font-medium px-3 py-1 bg-secondary/80 rounded-full text-sm">
             {{ event.date|date:"d F Y" }}
         </time>
-        <div class="absolute bottom-4 right-4 text-white font-medium px-3 py-1 bg-primary/80 rounded-full text-sm">
+        <div class="absolute bottom-4 right-4 font-medium px-3 py-1 bg-secondary/80 rounded-full text-sm">
             {{ event.get_ville_display }}
         </div>
     </div>
     <div class="p-6 flex flex-col flex-grow h-auto">
         <div class="flex-grow">
-            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+            <h3 class="text-xl font-bold mb-2 group-hover:text-dark-text transition-colors">
                 {{ event.title }}
             </h3>
-            <div class="text-gray-600 line-clamp-3">{{ event.subtitle|default:event.content|richtext }}</div>
+            <div class="text-dark-text/60 line-clamp-3">{{ event.subtitle|default:event.content|richtext }}</div>
         </div>
-        <a href="{{ event.url }}" class="btn-outline mt-2 relative overflow-hidden group-hover:text-white! group-hover:border-primary!">
-            <span class="absolute inset-0 bg-primary transition-transform duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
+        <a href="{{ event.url }}" class="btn-outline mt-2 relative overflow-hidden group-hover:text-white! group-hover:border-secondary!">
+            <span class="absolute inset-0 bg-secondary transition-transform duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
             <span class="relative z-10">En savoir plus</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5 relative z-10">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>

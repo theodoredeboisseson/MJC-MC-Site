@@ -1,11 +1,11 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" class="-mb-4 text-secondary">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160" class="-mb-4 text-primary">
     <path fill="currentColor" fill-opacity="1" d="M0,112L34.3,96C68.6,80,137,48,206,45.3C274.3,43,343,69,411,72C480,75,549,53,617,61.3C685.7,69,754,107,823,120C891.4,133,960,123,1029,112C1097.1,101,1166,91,1234,80C1302.9,69,1371,59,1406,53.3L1440,48L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path>
 </svg>
 <div class="container mx-auto px-4 mb-10">
     <div class="max-w-7xl mx-auto">
-        <h1 class="text-6xl text-secondary font-bold mb-8">{{ page.title }}</h1>
+        <h1 class="text-6xl text-primary font-bold mb-8">{{ page.title }}</h1>
         <div class="flex flex-wrap gap-4 justify-center">
             {% for subpage in subpages %}
                 {% with page=subpage %}

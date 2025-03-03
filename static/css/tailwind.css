@@ -11,15 +11,18 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
 @theme {
-    --color-primary:                #81B29A;
-    --color-secondary:              #3D405B;
-    --color-section-bg:             #F4F1DE;
-    --color-custom-btn-bg-:         #F2CC8F;
-    --color-custom-btn-bg-hover:    #E07A5F;
-    --color-dark:                   #000000;
-    --color-text-color:             #717275;
+    --color-primary:                #0047AB; /*#D9381E #FFD700 #dcba4f #536B1E*/
+    --color-secondary:              #297a62; /* #3A485B #81B29A */
+    --color-background:             #fefff4; /* theme('colors.gray.50') */
+    --color-dark-text:              #222D06; /* theme('colors.gray.700') */
+    --color-light-text:             #FDFFE0;
     --color-link-hover:             #F2CC8F;
-    --color-secondary-light: color-mix(in srgb, var(--color-secondary) 80%, white 10%);
+    --color-primary-light:          color-mix(in srgb, var(--color-primary) 80%, white 10%);
+    --color-section-bg:             #F4F1DE; /* #D7D1C5 */
+    
+    /*--color-custom-btn-bg-:         #F2CC8F;*/
+    /*--color-custom-btn-bg-hover:    #E07A5F;*/
+    /*--color-dark:                   #000000;*/
 
     --h1-font-size:                 2.25rem;
     --h2-font-size:                 1.875rem;
@@ -51,12 +54,12 @@ body {
 }
 
 ::selection {
-    @apply text-white bg-primary;
+    @apply text-white bg-blue-500;
 }
 
 .richtext-content {
     @apply max-w-none my-8 lg:my-16 mx-auto px-4 sm:px-6 lg:px-8
-    bg-gray-50 rounded-xl p-8 pb-4 shadow-md text-gray-700;
+    bg-section-bg rounded-xl p-8 pb-4 shadow-md text-dark-text;
 
 
     /* Paragraphes */
@@ -66,20 +69,20 @@ body {
 
     /* Liens */
     & a {
-        @apply no-underline border-b-2 border-primary/30
-        transition-all text-primary;
+        @apply no-underline border-b-2 border-secondary/30
+        transition-all text-secondary;
         &:hover {
-            @apply border-primary/100 opacity-80;
+            @apply border-secondary/100 opacity-80;
         }
     }
 
     /* Titres */
     & h2 {
-        @apply text-secondary text-3xl font-bold mt-8 mb-4;
+        @apply text-primary text-3xl font-bold mt-8 mb-4;
     }
 
     & h3 {
-        @apply text-secondary text-2xl font-semibold mt-6 mb-3;
+        @apply text-primary text-2xl font-semibold mt-6 mb-3;
     }
 
     /* Listes */
@@ -93,7 +96,7 @@ body {
 
     /* Citations */
     & blockquote {
-        @apply pl-4 italic text-gray-700 border-l-4 border-primary opacity-50;
+        @apply pl-4 italic text-gray-700 border-l-4 border-secondary opacity-50;
     }
 
     /* Images */

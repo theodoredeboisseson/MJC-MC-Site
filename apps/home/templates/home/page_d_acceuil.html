@@ -1,35 +1,31 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %} bg-gray-50 {% endblock %}
+{% block body_class %} bg-background {% endblock %}
 {% block content %}
     <section class="hero">
         {% image page.hero_image fill-1920x600 as hero %}
         <div class="relative min-h-[600px] w-full flex items-center">
             {# Background image #}
             <div class="absolute inset-0 bg-black/30 z-10 flex flex-col justify-between items-stretch">
-                <svg class="text-secondary" viewBox="0 0 1265 144">
+                <svg class="rotate-180 text-primary -mt-[1px]" viewBox="0 0 1440 100">
                     <defs>
-                        <path id="wave" d="M 0 40 C 164 40 164 20 328 20 L 328 0 L 0 0 Z 
-                                         M 327 20 C 445.5 20 445.5 89 564 89 L 564 0 L 327 0 Z
-                                         M 563 89 C 724.5 89 724.5 48 886 48 L 886 0 L 563 0 Z
-                                         M 885 48 C 1006.5 48 1006.5 67 1128 67 L 1128 0 L 885 0 Z
-                                         M 1127 67 C 1196 67 1196 0 1265 0 L 1265 0 L 1127 0 Z"></path>
+                        <path id="wave" d="M0,60L40,51.7C80,43,160,27,240,20C320,13,400,17,480,20C560,23,640,27,720,35C800,43,880,57,960,66.7C1040,77,1120,83,1200,81.7C1280,80,1360,70,1440,56.7C1520,43,1600,27,1680,25C1760,23,1840,37,1920,40C2000,43,2080,37,2160,33.3C2240,30,2320,30,2400,28.3C2480,27,2560,23,2640,30C2720,37,2800,53,2880,55C2960,57,3040,43,3120,46.7C3200,50,3280,70,3360,71.7C3440,73,3520,57,3600,56.7C3680,57,3760,73,3840,76.7C3920,80,4000,70,4080,68.3C4160,67,4240,73,4320,66.7C4400,60,4480,40,4560,30C4640,20,4720,20,4800,21.7C4880,23,4960,27,5040,25C5120,23,5200,17,5280,13.3C5360,10,5440,10,5520,23.3C5600,37,5680,63,5720,76.7L5760,90L5760,100L5720,100C5680,100,5600,100,5520,100C5440,100,5360,100,5280,100C5200,100,5120,100,5040,100C4960,100,4880,100,4800,100C4720,100,4640,100,4560,100C4480,100,4400,100,4320,100C4240,100,4160,100,4080,100C4000,100,3920,100,3840,100C3760,100,3680,100,3600,100C3520,100,3440,100,3360,100C3280,100,3200,100,3120,100C3040,100,2960,100,2880,100C2800,100,2720,100,2640,100C2560,100,2480,100,2400,100C2320,100,2240,100,2160,100C2080,100,2000,100,1920,100C1840,100,1760,100,1680,100C1600,100,1520,100,1440,100C1360,100,1280,100,1200,100C1120,100,1040,100,960,100C880,100,800,100,720,100C640,100,560,100,480,100C400,100,320,100,240,100C160,100,80,100,40,100L0,100Z"></path>
                     </defs>
                     <use href="#wave" fill="currentColor"></use>
                 </svg>
-                <svg class="-mb-[1px] rotate-180 text-gray-50" viewBox="0 0 1265 144">
+                <svg class="-mb-[1px] text-background rotate-y-180" viewBox="0 0 1440 100">
                 <use href="#wave" fill="currentColor"></use>
             </svg>
             </div>
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.url }}');"></div>
         
-            <div class="container mx-auto h-full relative z-20">
+            <div class="container mx-auto h-full relative z-20 text-light-text">
                 <div class="h-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-12 py-8">
                     <div class="xl:w-6/12 px-2 w-full mb-5 lg:mb-0 font-bold">
-                        <h2 class="text-white text-xl md:text-2xl lg:text-3xl">{{ page.intro_title }}</h2>
+                        <h2 class="text-xl md:text-2xl lg:text-3xl">{{ page.intro_title }}</h2>
 
-                        <h1 class="rotate-1 text-white mb-4 pb-2 text-2xl md:text-3xl lg:text-4xl">
+                        <h1 class="rotate-1 mb-4 pb-2 text-2xl md:text-3xl lg:text-4xl">
                             <span>Ici, on vous propose</span>
                             <span class="rotating-text-wrapper md:whitespace-nowrap">
                                 {% for word in page.rotating_words.all %}
@@ -60,7 +56,7 @@
     <section class="events-preview py-16 my-20">
         <div class="container mx-auto px-6">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-12">
-                <h2 class="text-3xl font-bold text-secondary">Prochains événements</h2>
+                <h2 class="text-3xl font-bold text-primary">Prochains événements</h2>
                 <a href="/agenda/" class="group btn btn-primary inline-flex items-center gap-2">
                     Voir tous les événements
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

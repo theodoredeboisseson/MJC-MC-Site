@@ -3,7 +3,7 @@
 
 {% block content %}
     <section class="{% block section_class %}{% endblock %} py-16">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6 text-dark-text">
             <h1 class="font-bold mb-8">{% block page_title %}{% endblock %}</h1>
 
             {% if page.intro %}
@@ -26,12 +26,12 @@
                         <div class="flex justify-center gap-2 mt-8">
                             {% if events.has_previous %}
                                 <a href="?page={{ events.previous_page_number }}&sort_by={{ sort_by }}{% if villes %}&ville={{ villes|join:',' }}{% endif %}"
-                                   class="btn btn-secondary">Précédent</a>
+                                   class="btn btn-primary">Précédent</a>
                             {% endif %}
 
                             {% if events.has_next %}
                                 <a href="?page={{ events.next_page_number }}&sort_by={{ sort_by }}{% if villes %}&ville={{ villes|join:',' }}{% endif %}"
-                                   class="btn btn-secondary">Suivant</a>
+                                   class="btn btn-primary">Suivant</a>
                             {% endif %}
                         </div>
                     {% endif %}

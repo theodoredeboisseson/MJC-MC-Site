@@ -2,14 +2,14 @@
 {% load wagtailcore_tags static navigation_tags %}
 
 {% get_site_root as site_root %}
-<header class="bg-secondary sticky top-0 z-50 transition-shadow duration-300" data-sticky-header>
+<header class="bg-primary sticky top-0 z-50 transition-shadow duration-300 text-light-text" data-sticky-header>
     <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         {# Logo and Site Title Component #}
         <div class="flex lg:flex-1">
             <a href="/" class="-m-1.5 p-1.5 flex items-center">
                 {# Consider adding width and height attributes for better CLS optimization #}
-                <img class="h-15 w-auto" src="{% static 'images/logo-mjc-mc.webp' %}" alt="Logo MJC Mauguio-Carnon">
-                <span class="ms-3 text-3xl bottom-1 relative text-white font-bold leading-snug">
+                <img class="h-15 w-auto rounded-xl" src="{% static 'images/logo-mjc.webp' %}" alt="Logo MJC Mauguio-Carnon">
+                <span class="ms-3 text-3xl bottom-1 relative font-bold leading-snug">
                     MJC
                     <small class="block leading-0 text-sm">Mauguio-Carnon</small>
                 </span>
@@ -19,7 +19,7 @@
         {# Mobile Burger Menu Button #}
         <div class="flex lg:hidden">
             <button id="burger-button" type="button"
-                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white hover:text-link-hover"
+                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 hover:text-link-hover"
                     title="Ouvrir le menu">
                 <span class="sr-only">Ouvrir le menu principal</span>
                 <svg class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -43,7 +43,7 @@
                     <a href="{{ page.url }}" class="nav-link {% if page.url == request.path %}active{% endif %}">
                         {{ page.title }}
                         {% if page.get_children.live.in_menu.count > 0 %}
-                            <svg class="size-5 flex-none text-gray-400 group-hover:rotate-180 transition-transform"
+                            <svg class="size-5 flex-none group-hover:rotate-180 transition-transform"
                                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd"
                                       d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
@@ -77,18 +77,18 @@
     {# Mobile Menu Panel #}
     <div id="mobile-menu" class="lg:hidden hidden" role="dialog" aria-modal="true" aria-expanded="false">
         <div class="fixed inset-0 z-100 bg-black/30 transition-opacity duration-300"></div>
-        <div class="fixed inset-y-0 right-0 z-100 w-full overflow-y-auto bg-secondary px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 translate-x-full transition-all duration-300 ease-in-out">
+        <div class="fixed inset-y-0 right-0 z-100 w-full overflow-y-auto bg-primary px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 translate-x-full transition-all duration-300 ease-in-out">
             {# Mobile Menu Header #}
             <div class="flex items-center justify-between">
                 <a href="/" class="-m-1.5 p-1.5 flex items-center">
                     <img class="h-12 w-auto" src="{% static 'images/logo-mjc-mc.webp' %}" alt="Logo MJC Mauguio-Carnon">
-                    <span class="ms-3 text-lg bottom-1 relative text-white font-bold">
+                    <span class="ms-3 text-lg bottom-1 relative font-bold">
                     MJC
                     <small class="block leading-0">Mauguio-Carnon</small>
                 </span>
                 </a>
                 <button id="close-button" type="button"
-                        class="-m-2.5 rounded-md p-2.5 text-white hover:text-link-hover"
+                        class="-m-2.5 rounded-md p-2.5 hover:text-link-hover"
                         title="Fermer le menu">
                     <span class="sr-only">Fermer le menu principal</span>
                     <svg class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
