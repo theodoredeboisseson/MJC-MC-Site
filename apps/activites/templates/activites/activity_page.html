@@ -4,27 +4,44 @@
 {% block content %}
     {% include 'activites/includes/activity_card.html' %}
 
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl text-secondary font-bold mb-8 text-center">{{ page.title }}</h1>
-        <div class="prose mb-8 text-justify">{{ page.description|richtext }}</div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <div>
-                <h3 class="text-2xl font-semibold mb-4 text-secondary">Tarifs</h3>
-                <div class="p-4 bg-gray-100 rounded-lg shadow-md">
-                    <p class="text-gray-600">Résidents Mauguio/Carnon : <span class="font-bold">{{ page.price_resident }}€</span></p>
-                    <p class="text-gray-600">Non-résidents : <span class="font-bold">{{ page.price_non_resident }}€</span></p>
+    <section class="mx-auto my-8 w-full md:w-3/4">
+        {% if page.animateurs.all %}
+            <div class="flex flex-col md:flex-row flex-wrap items-center justify-center gap-4 w-full md:w-1/2 mx-auto mt-8 mb-6">
+                <h2 class="font-semibold text-secondary">Animé par :</h2>
+                <div class="flex flex-wrap justify-center gap-2">
+                    {% for animateur in page.animateurs.all %}
+                        <span class="inline-block bg-blue-100 text-blue-800 text-lg px-3 py-1 rounded-full">{{ animateur }}</span>
+                    {% endfor %}
                 </div>
             </div>
-            <div>
-                <h3 class="text-2xl font-semibold mb-4 text-secondary">Animateurs</h3>
-                <p class="text-gray-600 text-lg p-4 bg-gray-100 rounded-lg shadow-md">{{ page.instructors }}</p>
-            </div>
-        </div>
+        {% endif %}
 
-        <div class="mt-8 flex items-center justify-center">
+        {% if page.content %}
+            <div class="richtext-content leading-loose text-lg">
+                {{ page.content|richtext }}
+            </div>
+        {% endif %}
+
+        {% if page.sub_activities.all %}
+            <div class="flex flex-col items-center mt-8 px-4 md:px-0">
+                <h3 class="font-semibold mb-4 text-secondary">Sous Activités</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    {% for sub_activity in page.sub_activities.all %}
+                        <div class="flex flex-col justify-center p-4 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-center">
+                            <h4 class="font-bold text-primary">{{ sub_activity.title }}</h4>
+                            {% if sub_activity.description %}
+                                <div>{{ sub_activity.description|richtext }}</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="my-16 flex items-center justify-center">
             <a href="{{ page.link }}" class="btn btn-primary">Voir sur GoAsso</a>
         </div>
-    </div>
+    </section>
+
     {% include "components/image_viewer.html" %}
 {% endblock %}

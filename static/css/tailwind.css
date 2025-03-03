@@ -61,7 +61,7 @@ body {
 
     /* Paragraphes */
     & p {
-        @apply whitespace-pre-wrap break-words mb-6 text-base leading-relaxed;
+        @apply whitespace-pre-wrap break-words mb-6 text-inherit leading-relaxed;
     }
 
     /* Liens */
