@@ -11,7 +11,7 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
 @theme {
-    --color-primary:                #0047AB; /*#D9381E #FFD700 #dcba4f #536B1E*/
+    --color-primary:                #536B1E; /* #D9381E #FFD700 #dcba4f #0047AB*/
     --color-secondary:              #297a62; /* #3A485B #81B29A */
     --color-background:             #fefff4; /* theme('colors.gray.50') */
     --color-dark-text:              #222D06; /* theme('colors.gray.700') */

@@ -38,9 +38,11 @@
             </div>
         {% endif %}
 
-        <div class="my-16 flex items-center justify-center">
-            <a href="{{ page.link }}" class="btn btn-primary">Voir sur GoAsso</a>
-        </div>
+        {% if page.link %}
+            <div class="my-16 flex items-center justify-center">
+                <a href="{{ page.link }}" class="btn btn-primary">Voir sur GoAsso</a>
+            </div>
+        {% endif %}
     </section>
 
     {% include "components/image_viewer.html" %}
