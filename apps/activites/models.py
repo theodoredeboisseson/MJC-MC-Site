@@ -57,7 +57,29 @@ class ActivityList(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['activities'] = ActivityPage.objects.live().order_by('title')
+
+        # Get filter parameters from request
+        sort_by = request.GET.get('sort_by', 'title')
+        search_query = request.GET.get('search', '')
+
+        # Start with all live activities
+        activities = ActivityPage.objects.live()
+
+        # Apply search filter if provided
+        if search_query:
+            activities = activities.filter(title__icontains=search_query)
+
+        # Apply sorting
+        if sort_by == 'latest':
+            activities = activities.order_by('-first_published_at')
+        else:  # Default to sorting by title
+            activities = activities.order_by('title')
+
+        # Pass all parameters to the template
+        context['activities'] = activities
+        context['sort_by'] = sort_by
+        context['search_query'] = search_query
+
         return context
 
     class Meta:
