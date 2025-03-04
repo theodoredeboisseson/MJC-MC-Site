@@ -4,7 +4,8 @@ from wagtail.admin.panels import FieldPanel
 from django.core.paginator import Paginator
 from django.utils import timezone
 
-from apps.common.models import DetailPage
+from apps.common.models import DetailPage, BasePage
+
 
 def get_events(date_filter, sort_by, villes=None):
     events = EventPage.objects.live().filter(date_filter)
@@ -17,7 +18,7 @@ def get_events(date_filter, sort_by, villes=None):
     return events.order_by(sort_by, 'title')
 
 
-class EventListPage(Page):
+class EventListPage(BasePage):
     intro = models.TextField(blank=True)
     content_panels = Page.content_panels + [FieldPanel('intro')]
 

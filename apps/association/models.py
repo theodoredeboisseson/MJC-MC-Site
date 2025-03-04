@@ -3,10 +3,10 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from apps.common.models import DetailPage
+from apps.common.models import DetailPage, BasePage
 
 
-class AssociationIndexPage(Page):
+class AssociationIndexPage(BasePage):
     content = RichTextField(blank=True, verbose_name="Contenu")
 
     content_panels = Page.content_panels + [

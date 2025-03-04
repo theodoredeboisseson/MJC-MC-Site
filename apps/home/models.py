@@ -3,6 +3,8 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.models import Page
 from modelcluster.fields import ParentalKey
 
+from apps.common.models import BasePage
+
 
 class RotatingWord(models.Model):
     page = ParentalKey('home.PageDAcceuil', related_name='rotating_words', on_delete=models.CASCADE)
@@ -15,7 +17,7 @@ class RotatingWord(models.Model):
     def __str__(self):
         return self.word
 
-class PageDAcceuil(Page):
+class PageDAcceuil(BasePage):
     intro_title = models.CharField(max_length=255)
     hero_image = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+'
