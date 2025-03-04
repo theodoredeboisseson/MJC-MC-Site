@@ -11,14 +11,20 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
 @theme {
-    --color-primary:                #536B1E; /* #D9381E #FFD700 #dcba4f #0047AB*/
-    --color-secondary:              #297a62; /* #3A485B #81B29A */
+    --color-primary:                #20223B; /* # #5b9af5 D9381E #536B1E  #dcba4f */
+    --color-secondary:              #CA552F; /* #297a62 #3A485B #81B29A */
     --color-background:             #fefff4; /* theme('colors.gray.50') */
-    --color-dark-text:              #222D06; /* theme('colors.gray.700') */
-    --color-light-text:             #FDFFE0;
-    --color-link-hover:             #F2CC8F;
+    --color-dark-text:              #20223B; /* #222D06 theme('colors.gray.700') */
+    --color-light-text:             #FDFFE0; /* #E1D5BB */
+    --color-link-hover:             #CA552F; /* #F2CC8F */
     --color-primary-light:          color-mix(in srgb, var(--color-primary) 80%, white 10%);
-    --color-section-bg:             #F4F1DE; /* #D7D1C5 */
+    --color-section-bg:             #E1D5BB; /* #F4F1DE #D7D1C5 */
+    
+    /*
+    ;  Blue 
+    #D9381E;  Red 
+    #FFD700;  Yellow 
+     */
     
     /*--color-custom-btn-bg-:         #F2CC8F;*/
     /*--color-custom-btn-bg-hover:    #E07A5F;*/
@@ -54,7 +60,7 @@ body {
 }
 
 ::selection {
-    @apply text-white bg-blue-500;
+    @apply text-light-text bg-secondary
 }
 
 .richtext-content {

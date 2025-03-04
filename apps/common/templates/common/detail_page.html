@@ -1,7 +1,8 @@
 {% load wagtailcore_tags wagtailimages_tags navigation_tags %}
 
 <article class="py-8 sm:py-16 container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-    <header class="mb-6 sm:mb-12">
+    <div class="flex flex-col md:flex-row items-center gap-8 mb-6 sm:mb-12">
+        <header class="md:w-1/2">
         <h1 class="text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 text-primary">{{ page.title }}</h1>
         {% if page.subtitle %}
             <p class="text-lg sm:text-xl text-gray-600">{{ page.subtitle }}</p>
@@ -10,7 +11,7 @@
 
     {% if page.image and not hide_image %}
         {% image page.image width-1200 as img %}
-            <div class="inline-flex w-full justify-center  overflow-hidden mb-4 sm:mb-8">
+                <div class="inline-flex w-full md:w-1/2 justify-center overflow-hidden mb-4 sm:mb-8">
                 <div class="relative rounded-xl overflow-hidden">
                     <img src="{{ img.url }}"
                          alt="{{ page.title }}"
@@ -18,13 +19,16 @@
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent h-1/4 pointer-events-none"></div>
                     {% block image_extra %}{% endblock %}
                 </div>
-
         </div>
     {% endif %}
-
-    <div class="richtext-content">
-        {{ page.content|richtext }}
     </div>
+
+    {% if page.content %}
+        <div class="richtext-content">
+            {{ page.content|richtext }}
+        </div>
+    {% endif %} 
+    
 
     <div class="mt-8 sm:mt-12">
         {% block page_actions %}{% endblock %}
