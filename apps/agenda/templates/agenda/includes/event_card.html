@@ -20,7 +20,7 @@
         {% endif %}
         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent h-24"></div>
         <time class="absolute bottom-4 left-4 font-medium px-3 py-1 bg-secondary/80 rounded-full text-sm">
-            {{ event.date|date:"d F Y" }}
+            {{ event.start_date|date:"d M Y" }}{% if event.end_date %} - {{ event.end_date|date:"d M" }}{% endif %}
         </time>
         <div class="absolute bottom-4 right-4 font-medium px-3 py-1 bg-secondary/80 rounded-full text-sm">
             {{ event.get_ville_display }}
