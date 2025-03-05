@@ -38,8 +38,9 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
     --h6-font-size:                 1rem;
 }
 
-body {
+html {
     font-family: Satoshi-Medium, sans-serif;
+    @apply scroll-smooth;
 }
 
 /*---------------------------------------

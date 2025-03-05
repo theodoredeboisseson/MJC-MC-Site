@@ -3,7 +3,7 @@
 
 {% block body_class %} bg-background {% endblock %}
 {% block content %}
-    <section class="hero">
+    <section id="hero">
         {% image page.hero_image fill-1920x600 as hero %}
         <div class="relative min-h-[600px] w-full flex items-center">
             {# Background image #}
@@ -15,8 +15,15 @@
                     <use href="#wave" fill="currentColor"></use>
                 </svg>
                 <svg class="-mb-[1px] text-background rotate-y-180" viewBox="0 0 1440 100">
-                <use href="#wave" fill="currentColor"></use>
-            </svg>
+                    <use href="#wave" fill="currentColor"></use>
+                </svg>
+                <div class="absolute bottom-4 right-1/4 transform -translate-x-1/2 translate-y-1/2 z-30 md:bottom-0">
+                    <a href="#events-preview" class="btn-primary flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-primary text-light-text rounded-full shadow-lg scroll-smooth">
+                        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.url }}');"></div>
         
@@ -53,7 +60,7 @@
         </div>
     </section>
 
-    <section class="events-preview py-16 my-20">
+    <section id="events-preview" class="py-16 my-20">
         <div class="container mx-auto px-6">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-12">
                 <h2 class="text-3xl font-bold text-primary">Prochains événements</h2>
@@ -66,7 +73,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% for event in page.get_latest_events %}
+                {% for event in page.get_future_events %}
                     {% include "agenda/includes/event_card.html" %}
                 {% endfor %}
             </div>
