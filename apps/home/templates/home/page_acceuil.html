@@ -73,9 +73,13 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% if page.get_future_events %}
                 {% for event in page.get_future_events %}
                     {% include "agenda/includes/event_card.html" %}
                 {% endfor %}
+                {% else %}
+                    <p class="text-2xl text-center col-span-full my-16 underline">Rien pour l'instant !</p>
+                {% endif %}
             </div>
         </div>
     </section>

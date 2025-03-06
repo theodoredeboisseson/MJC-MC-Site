@@ -1,9 +1,10 @@
+{% with settings.common.FooterSettings as footer %}
 <footer class="bg-primary text-light-text/60 pt-12 pb-6">
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
             <!-- MJC Mauguio Info -->
-            <div class="space-y-4">
-                <h3 class="text-xl text-light-text font-bold mb-4">Mauguio</h3>
+            <div>
+                <h3 class="text-light-text font-bold mb-4">Mauguio</h3>
                 <div class="space-y-2">
                     <p class="flex items-start p-2">
                         <svg class="w-5 h-5 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,8 +33,8 @@
             </div>
 
             <!-- MJC Carnon Info -->
-            <div class="space-y-4">
-                <h3 class="text-xl text-light-text font-bold mb-4">Annexe de Carnon - EVS</h3>
+            <div>
+                <h3 class="text-light-text font-bold mb-4">Annexe de Carnon - EVS</h3>
                 <div class="space-y-2">
                     <p class="flex items-start p-2">
                         <svg class="w-5 h-5 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,8 +67,8 @@
             </div>
 
             <!-- Social Links -->
-            <div class="space-y-4">
-                <h3 class="text-xl text-light-text font-bold mb-4">Suivez-nous</h3>
+            <div>
+                <h3 class="text-light-text font-bold mb-4">Suivez-nous</h3>
                 <div class="space-y-4">
                     <div class="flex space-x-4">
                         <a href="https://www.instagram.com/mjc_mauguio_carnon/" target="_blank" class="hover:text-link-hover transition-colors">
@@ -98,6 +99,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- Horaires -->
+        <div class="flex flex-col gap-4 items-center text-light-text/80">
+            <h3 class="text-light-text">Horaires d'ouverture</h3>
+
+            <div class="flex flex-col md:flex-row gap-8">
+            {% if footer.school_hours_content %}
+                <div>
+                    <h4 class="text-light-text">Période scolaire</h4>
+                    <div class="space-y-2 mt-2">
+                            <p class="text-sm">
+                            {{ footer.school_hours_content|safe }}
+                            </p>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if footer.vacation_hours_content %}
+                <div>
+                    <h4 class="text-light-text">Période vacances</h4>
+                    <div class="space-y-2 mt-2">
+                            <p class="text-sm">
+                            {{ footer.vacation_hours_content|safe }}
+                            </p>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+
+            <p class="mb-4">
+                {{ footer.extra|safe }}
+            </p>
+        </div>
+
+        
         
         <!-- Copyright -->
         <div class="border-t pt-6 text-center text-sm">
@@ -105,5 +141,4 @@
         </div>
     </div>
 </footer>
-
-
+{% endwith %}

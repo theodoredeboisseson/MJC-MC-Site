@@ -1,5 +1,8 @@
 from django.db import models
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 
@@ -54,3 +57,29 @@ class DetailPage(BasePage):
 
     class Meta:
         abstract = True
+
+
+@register_setting
+class FooterSettings(ClusterableModel, BaseGenericSetting):
+    
+    school_hours_content = RichTextField(
+        verbose_name="Horaires période scolaire",
+        blank=True,
+    )
+    vacation_hours_content = RichTextField(
+        verbose_name="Horaires période vacances",
+        blank=True,
+    )
+    extra = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name="Message en extra (optionnel)"
+    )
+    panels = [
+        FieldPanel('school_hours_content'),
+        FieldPanel('vacation_hours_content'),
+        FieldPanel('extra'),
+    ]
+
+    class Meta:
+        verbose_name = "Paramètres du pied de page"
