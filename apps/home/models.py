@@ -19,7 +19,7 @@ class RotatingWord(models.Model):
         return self.word
 
 class PageAcceuil(BasePage):
-    intro_title = models.CharField(max_length=255)
+    intro_title = models.CharField(max_length=255, verbose_name="Titre d'introduction", default="Bienvenue à la MJC")
     hero_image = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+'
     )
