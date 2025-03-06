@@ -23,7 +23,7 @@ def get_future_events(limit=5):
 
 class EventListPage(BasePage):
     intro = models.TextField(blank=True)
-    content_panels = Page.content_panels + [FieldPanel('intro')]
+    content_panels = BasePage.content_panels + [FieldPanel('intro')]
 
     def get_events_context(self, request, date_filter, default_sort):
         context = {}

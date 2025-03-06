@@ -3,15 +3,12 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
+from apps.common.mixins import ContentMixin
 from apps.common.models import DetailPage, BasePage
 
 
-class AssociationIndexPage(BasePage):
-    content = RichTextField(blank=True, verbose_name="Contenu")
-
-    content_panels = Page.content_panels + [
-        FieldPanel('content'),
-    ]
+class AssociationIndexPage(BasePage, ContentMixin):
+    content_panels = BasePage.content_panels + ContentMixin.content_panels
 
     def get_context(self, request):
         context = super().get_context(request)

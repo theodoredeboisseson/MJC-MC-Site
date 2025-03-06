@@ -21,7 +21,12 @@ class RotatingWord(models.Model):
 class PageAcceuil(BasePage):
     intro_title = models.CharField(max_length=255, verbose_name="Titre d'introduction", default="Bienvenue à la MJC")
     hero_image = models.ForeignKey(
-        'wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+'
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Image de fond'
     )
     video_url = models.URLField(
         verbose_name="URL de la vidéo YouTube",
