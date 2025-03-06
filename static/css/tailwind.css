@@ -10,16 +10,25 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
-:root {
-    --primary-color:                #81B29A;
-    --secondary-color:              #3D405B;
-    --section-bg-color:             #F4F1DE;
-    --custom-btn-bg-color:          #F2CC8F;
-    --custom-btn-bg-hover-color:    #E07A5F;
-    --dark-color:                   #000000;
-    --text-color:                   #717275;
-    --link-hover-color:             #F2CC8F;
-    --secondary-color-light: color-mix(in srgb, var(--secondary-color) 80%, white 10%);
+@theme {
+    --color-primary:                #20223B; /* # #5b9af5 D9381E #536B1E  #dcba4f */
+    --color-secondary:              #CA552F; /* #297a62 #3A485B #81B29A */
+    --color-background:             #fefff4; /* theme('colors.gray.50') */
+    --color-dark-text:              #20223B; /* #222D06 theme('colors.gray.700') */
+    --color-light-text:             #FDFFE0; /* #E1D5BB */
+    --color-link-hover:             #CA552F; /* #F2CC8F */
+    --color-primary-light:          color-mix(in srgb, var(--color-primary) 80%, white 10%);
+    --color-section-bg:             #E1D5BB; /* #F4F1DE #D7D1C5 */
+    
+    /*
+    ;  Blue 
+    #D9381E;  Red 
+    #FFD700;  Yellow 
+     */
+    
+    /*--color-custom-btn-bg-:         #F2CC8F;*/
+    /*--color-custom-btn-bg-hover:    #E07A5F;*/
+    /*--color-dark:                   #000000;*/
 
     --h1-font-size:                 2.25rem;
     --h2-font-size:                 1.875rem;
@@ -29,8 +38,9 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
     --h6-font-size:                 1rem;
 }
 
-body {
+html {
     font-family: Satoshi-Medium, sans-serif;
+    @apply scroll-smooth;
 }
 
 /*---------------------------------------
@@ -51,36 +61,35 @@ body {
 }
 
 ::selection {
-    background-color: var(--primary-color);
-    color: white;
+    @apply text-light-text bg-secondary
 }
 
 .richtext-content {
     @apply max-w-none my-8 lg:my-16 mx-auto px-4 sm:px-6 lg:px-8
-    bg-gray-50 rounded-xl p-8 pb-4 shadow-sm text-gray-700;
+    bg-section-bg rounded-xl p-8 pb-4 shadow-md text-dark-text;
 
 
     /* Paragraphes */
     & p {
-        @apply whitespace-pre-wrap break-words mb-6 text-base leading-relaxed;
+        @apply whitespace-pre-wrap break-words mb-6 text-inherit leading-relaxed;
     }
 
     /* Liens */
     & a {
-        @apply no-underline border-b-2 border-[var(--primary-color)]/30
-        transition-all text-[var(--primary-color)];
+        @apply no-underline border-b-2 border-secondary/30
+        transition-all text-secondary;
         &:hover {
-            @apply border-[var(--primary-color)]/100 opacity-80;
+            @apply border-secondary/100 opacity-80;
         }
     }
 
     /* Titres */
     & h2 {
-        @apply text-[var(--secondary-color)] text-3xl font-bold mt-8 mb-4;
+        @apply text-primary text-3xl font-bold mt-8 mb-4;
     }
 
     & h3 {
-        @apply text-[var(--secondary-color)] text-2xl font-semibold mt-6 mb-3;
+        @apply text-primary text-2xl font-semibold mt-6 mb-3;
     }
 
     /* Listes */
@@ -94,7 +103,7 @@ body {
 
     /* Citations */
     & blockquote {
-        @apply pl-4 italic text-gray-700 border-l-4 border-[var(--primary-color)] opacity-50;
+        @apply pl-4 italic text-gray-700 border-l-4 border-secondary opacity-50;
     }
 
     /* Images */
@@ -124,33 +133,22 @@ body {
 -----------------------------------------*/
 
 .rotating-text-wrapper {
-    display: inline-block;
-    position: relative;
-    text-align: left;
-    perspective: 300px;
+    @apply inline-block relative text-left perspective-near;
 }
 
 .rotating-text {
-    color: var(--link-hover-color);
-    display: inline-block;
-    position: absolute;
-    white-space: nowrap;
-    left: 0;
-    top: 0;
-    opacity: 0;
+    @apply inline-block absolute whitespace-nowrap left-1 top-0 opacity-0 transform rotate-x-180 text-link-hover;
     transform-origin: 50% 100%;
-    transform: rotateX(180deg);
+
 }
 
 .rotating-text.active {
-    position: relative;
-    opacity: 1;
-    transform: rotateX(0deg);
+    @apply relative opacity-100 transform rotate-x-0;
     animation: rotate-text-in 1.2s;
 }
 
 .rotating-text.hidden {
-    transform: rotateX(180deg);
+    @apply transform rotate-x-180;
     animation: rotate-text-out 1.2s;
 }
 

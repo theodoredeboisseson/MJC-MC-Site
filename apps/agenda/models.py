@@ -4,20 +4,24 @@ from wagtail.admin.panels import FieldPanel
 from django.core.paginator import Paginator
 from django.utils import timezone
 
-from apps.common.models import DetailPage
+from apps.common.models import DetailPage, BasePage
+
 
 def get_events(date_filter, sort_by, villes=None):
     events = EventPage.objects.live().filter(date_filter)
     if villes:
         ville_list = villes.split(',')
         if len(ville_list) == 2:  # Si les deux villes sont sélectionnées
-            events = events.filter(models.Q(ville__in=ville_list) | models.Q(ville=EventPage.BOTH))
+            events = events.filter(models.Q(ville__in=ville_list))
         else:
-            events = events.filter(models.Q(ville=ville_list[0]) | models.Q(ville=EventPage.BOTH))
+            events = events.filter(models.Q(ville=ville_list[0]))
     return events.order_by(sort_by, 'title')
 
+def get_future_events(limit=5):
+    return EventPage.objects.live().filter(start_date__gte=timezone.now()).order_by('start_date')[:limit]
 
-class EventListPage(Page):
+
+class EventListPage(BasePage):
     intro = models.TextField(blank=True)
     content_panels = Page.content_panels + [FieldPanel('intro')]
 
@@ -45,8 +49,8 @@ class AgendaIndexPage(EventListPage):
         context = super().get_context(request, *args, **kwargs)
         events_context, paginator = self.get_events_context(
             request, 
-            models.Q(date__gte=timezone.now()),
-            'date'
+            models.Q(start_date__gte=timezone.now()),
+            'start_date'
         )
         context.update(events_context)
         context['upcoming_events'] = paginator.get_page(request.GET.get('page'))
@@ -61,8 +65,8 @@ class PastEventsPage(EventListPage):
         context = super().get_context(request, *args, **kwargs)
         events_context, paginator = self.get_events_context(
             request, 
-            models.Q(date__lt=timezone.now()),
-            '-date'
+            models.Q(start_date__lt=timezone.now()),
+            '-start_date'
         )
         context.update(events_context)
         context['past_events'] = paginator.get_page(request.GET.get('page'))
@@ -75,16 +79,21 @@ class PastEventsPage(EventListPage):
 class EventPage(DetailPage):
     MAUGUIO = 'Mauguio'
     CARNON = 'Carnon'
-    BOTH = 'Les deux'
     VILLE_CHOICES = [
         (MAUGUIO, 'Mauguio'),
         (CARNON, 'Carnon'),
-        (BOTH, 'Mauguio et Carnon'),
     ]
 
-    date = models.DateTimeField(
-        "Date et heure",
-        help_text="Date et heure de l'événement"
+    start_date = models.DateField(
+        "Date de début",
+        help_text="Date de début de l'événement",
+        default=timezone.now
+    )
+    end_date = models.DateField(
+        "Date de fin",
+        blank=True,
+        null=True,
+        help_text="Date de fin de l'événement (laisser vide si l'événement dure un seul jour)"
     )
     ville = models.CharField(
         max_length=10,
@@ -93,7 +102,8 @@ class EventPage(DetailPage):
     )
 
     content_panels = DetailPage.content_panels + [
-        FieldPanel('date'),
+        FieldPanel('start_date'),
+        FieldPanel('end_date'),
         FieldPanel('ville'),
     ]
 

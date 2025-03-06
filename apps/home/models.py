@@ -3,9 +3,12 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.models import Page
 from modelcluster.fields import ParentalKey
 
+from apps.agenda.models import EventPage, get_future_events
+from apps.common.models import BasePage
+
 
 class RotatingWord(models.Model):
-    page = ParentalKey('home.PageDAcceuil', related_name='rotating_words', on_delete=models.CASCADE)
+    page = ParentalKey('home.PageAcceuil', related_name='rotating_words', on_delete=models.CASCADE)
     word = models.CharField(max_length=255, default="de l'Art")
 
     panels = [
@@ -15,20 +18,27 @@ class RotatingWord(models.Model):
     def __str__(self):
         return self.word
 
-class PageDAcceuil(Page):
+class PageAcceuil(BasePage):
     intro_title = models.CharField(max_length=255)
     hero_image = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+'
     )
+    video_url = models.URLField(
+        verbose_name="URL de la vidéo YouTube",
+        help_text="Collez l'URL de la vidéo YouTube (format embed)",
+        blank=True,
+        null=True
+    )
 
-    def get_latest_events(self):
-        from apps.agenda.models import get_events
-        from django.utils import timezone
-        from django.db.models import Q
-        return get_events(date_filter=Q(date__gte=timezone.now()), sort_by='date')[:3]
+    def get_future_events(self):
+        return get_future_events(3)
 
     content_panels = Page.content_panels + [
         FieldPanel('intro_title'),
         FieldPanel('hero_image'),
+        FieldPanel('video_url'),
         InlinePanel('rotating_words', label="Mot à défiler"),
     ]
+    
+    class Meta:
+        verbose_name = "Page d'Accueil"

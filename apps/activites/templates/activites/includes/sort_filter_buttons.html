@@ -1,0 +1,17 @@
+<div class="mb-4 flex flex-wrap items-center gap-4 lg:gap-8">
+    <div>
+        <label for="sort_by" class="mr-2">Trier par :</label>
+        <select id="sort_by" name="sort_by" onchange="updateURLParameter('sort_by', this.value);" class="p-2 pl-4 rounded-xl border">
+            <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Nom</option>
+            <option value="latest" {% if sort_by == 'latest' %}selected{% endif %}>Nouveauté</option>
+        </select>
+    </div>
+
+    <div class="flex gap-2 flex-wrap">
+        <button onclick="updateURLParameter('search', '');" class="btn btn-outline {% if filter == 'tous' %}active{% endif %}">Toutes les activités</button>
+    </div>
+
+    <input type="text" id="search" name="search" placeholder="Rechercher une activité" value="{{ search_query }}"
+           onkeydown="if (event.key === 'Enter') updateURLParameter('search', this.value);"
+           class="ml-4 p-2 border rounded-xl w-full lg:w-1/2">
+</div>

@@ -27,15 +27,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 INSTALLED_APPS = [
     # Project apps
+    "apps.activites",
     "apps.agenda",
     "apps.association",
     "apps.common",
     "apps.home",
     "apps.search",
 
-    # Wagtail apps.settings",
+    # Wagtail apps",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.settings",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -54,8 +56,8 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    'django.contrib.sessions',
-    'django.contrib.messages',
+    "django.contrib.sessions",
+    "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
 
@@ -82,6 +84,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 'django.contrib.messages.context_processors.messages',
+                'apps.common.seo_context_processors.page_keywords',
+                "wagtail.contrib.settings.context_processors.settings",
             ],
         },
     },

@@ -47,6 +47,7 @@ function toggleSubMenu(button) {
         svg.classList.add('rotate-180');
     }
 }
+window.toggleSubMenu = toggleSubMenu;
 
 window.updateURLParameter = function(param, value) {
     const url = new URL(window.location.href);

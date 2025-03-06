@@ -20,12 +20,16 @@
             {% endblock %}
         </title>
     
+        {# Méta-keywords #}
+        <meta name="keywords" content="{{ dynamic_keywords }}"/>
+
+        {# Méta-charset #}
         {# Méta-description #}
         {% if page.search_description %}
             <meta name="description" content="{{ page.search_description }}" />
         {% endif %}
         {# Méta-robots (indexer cette page) #}
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     
         {# Forcer l'ouverture des liens dans un nouvel onglet en mode prévisualisation #}
@@ -49,14 +53,14 @@
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
 
-    <body class="{% block body_class %}{% endblock %} flex flex-col min-h-screen">
+    <body class="{% block body_class %}bg-background{% endblock %} flex flex-col min-h-screen overflow-x-visible">
         {% include "includes/header.html" %}
         
         {# Breadcrumb #}
 {#        {% include "includes/breadcrumb.html" %}#}
         
         {# Main content #}
-        <main class="flex-1">
+        <main class="flex-1 min-h-[84vh]">
             {% block content %}{% endblock %}
         </main>
             

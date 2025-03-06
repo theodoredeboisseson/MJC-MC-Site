@@ -3,10 +3,10 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from apps.common.models import DetailPage
+from apps.common.models import DetailPage, BasePage
 
 
-class AssociationIndexPage(Page):
+class AssociationIndexPage(BasePage):
     content = RichTextField(blank=True, verbose_name="Contenu")
 
     content_panels = Page.content_panels + [
@@ -25,15 +25,7 @@ class AssociationIndexPage(Page):
 
 
 class AssociationPage(DetailPage):
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text="Cette image sera utilisée pour la vignette dans la page d'index",
-        verbose_name="Image"
-    )
+    DetailPage.image.help_text ="Cette image sera utilisée pour la vignette dans la page d'index",
     show_image_in_page = models.BooleanField(
         default=True,
         verbose_name="Afficher l'image dans la page",
