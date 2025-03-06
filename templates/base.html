@@ -52,14 +52,18 @@
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
 
-    <body class="{% block body_class %}bg-background{% endblock %} flex flex-col min-h-screen overflow-x-visible">
+    <body class="{% block body_class %}bg-background{% endblock %} flex flex-col min-h-screen">
         {% include "includes/header.html" %}
         
-        {# Breadcrumb #}
-{#        {% include "includes/breadcrumb.html" %}#}
-        
         {# Main content #}
-        <main class="flex-1 min-h-[84vh]">
+        <main class="flex-1 min-h-[84vh] relative">
+            {# Breadcrumb #}
+            {% if not page.is_root %}
+                <div class="absolute bg-background/90 z-10 top-2 left-2 md:left-5 shadow-lg rounded-lg">
+                    {% include "components/breadcrumb.html" %}
+                </div>
+            {% endif %}
+        
             {% block content %}{% endblock %}
         </main>
             
