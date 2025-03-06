@@ -18,7 +18,7 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
     --color-light-text:             #FDFFE0; /* #E1D5BB */
     --color-link-hover:             #CA552F; /* #F2CC8F */
     --color-primary-light:          color-mix(in srgb, var(--color-primary) 80%, white 10%);
-    --color-section-bg:             #E1D5BB; /* #F4F1DE #D7D1C5 */
+    --color-section-bg:             #efe7d3; /* #F4F1DE #D7D1C5 */
     
     /*
     ;  Blue 
@@ -66,7 +66,7 @@ html {
 
 .richtext-content {
     @apply max-w-none my-8 lg:my-16 mx-auto px-4 sm:px-6 lg:px-8
-    bg-section-bg rounded-xl p-8 pb-4 shadow-md text-dark-text;
+    bg-section-bg rounded-xl p-8 shadow-md text-dark-text;
 
 
     /* Paragraphes */

@@ -1,5 +1,6 @@
 from django.db import models
 from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.fields import RichTextField
 from wagtail.models import Page
 from modelcluster.fields import ParentalKey
 
@@ -34,6 +35,12 @@ class PageAcceuil(BasePage):
         blank=True,
         null=True
     )
+    flash_message = RichTextField(
+        blank=True,
+        null=True,
+        verbose_name="Message flash",
+        help_text="Message spécial à en dessous de la section d'introduction"
+    )
 
     def get_future_events(self):
         return get_future_events(3)
@@ -42,8 +49,9 @@ class PageAcceuil(BasePage):
         FieldPanel('intro_title'),
         FieldPanel('hero_image'),
         FieldPanel('video_url'),
+        FieldPanel('flash_message'),
         InlinePanel('rotating_words', label="Mot à défiler"),
     ]
-    
+
     class Meta:
         verbose_name = "Page d'Accueil"

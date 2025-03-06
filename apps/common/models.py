@@ -63,4 +63,4 @@ class FooterSettings(ClusterableModel, BaseGenericSetting):
     ]
 
     class Meta:
-        verbose_name = "Paramètres du pied de page"
+        verbose_name = "Informations du Pied de page"
