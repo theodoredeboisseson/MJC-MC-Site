@@ -12,9 +12,9 @@ def get_events(date_filter, sort_by, villes=None):
     if villes:
         ville_list = villes.split(',')
         if len(ville_list) == 2:  # Si les deux villes sont sélectionnées
-            events = events.filter(models.Q(ville__in=ville_list))
+            events = events.filter(models.Q(ville__in=ville_list) | models.Q(ville=EventPage.BOTH))
         else:
-            events = events.filter(models.Q(ville=ville_list[0]))
+            events = events.filter(models.Q(ville=ville_list[0]) | models.Q(ville=EventPage.BOTH))
     return events.order_by(sort_by, 'title')
 
 def get_future_events(limit=5):
@@ -79,9 +79,11 @@ class PastEventsPage(EventListPage):
 class EventPage(DetailPage):
     MAUGUIO = 'Mauguio'
     CARNON = 'Carnon'
+    BOTH = 'Les deux'
     VILLE_CHOICES = [
         (MAUGUIO, 'Mauguio'),
         (CARNON, 'Carnon'),
+        (BOTH, 'Mauguio et Carnon'),
     ]
 
     start_date = models.DateField(
