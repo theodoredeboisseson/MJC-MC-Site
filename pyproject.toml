@@ -12,6 +12,7 @@ wagtail = "^6.4"
 django-decouple = "^2.1"
 psycopg = "^3.2.4"
 python-decouple = "^3.8"
+whitenoise = "^6.9.0"
 
 
 [build-system]
