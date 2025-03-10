@@ -64,3 +64,27 @@ class FooterSettings(ClusterableModel, BaseGenericSetting):
 
     class Meta:
         verbose_name = "Informations du Pied de page"
+
+
+@register_setting
+class FlashMessage(BaseGenericSetting):
+    message = RichTextField(
+        help_text="Jusqu'à 100 caractères",
+        blank=True,
+        null=True
+    )
+    show = models.BooleanField(
+        verbose_name="Montrer",
+        default=False
+    )
+
+    panels = [
+        FieldPanel('message'),
+        FieldPanel('show'),
+    ]
+    
+    class Meta:
+        verbose_name = "Message Flash"
+
+    def __str__(self):
+        return self.message[:100]

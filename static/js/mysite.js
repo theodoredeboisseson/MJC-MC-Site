@@ -78,3 +78,10 @@ window.toggleFilter = function(param, value) {
 window.toggleVille = function(ville) {
     toggleFilter('ville', ville);
 };
+
+window.closeFlashBanner = function() {
+    const flashBanner = document.getElementById('flash-banner');
+    if (flashBanner) {
+        flashBanner.style.display = 'none';
+    }
+}

@@ -69,8 +69,18 @@
             
         {% include "includes/footer.html" %}
 
-        {% wagtailuserbar %}
+        {# Flash Banner #}
+        {% with settings.common.FlashMessage as flash %}
+        {% if flash.message and flash.show %}
+            <div id="flash-banner" class="bg-red-500 text-white p-4 text-center fixed bottom-0 w-full z-1000">
+                <p>{{ flash.message|richtext }}</p>
+                <button class="absolute top-2 right-2 text-4xl text-white cursor-pointer" onclick="closeFlashBanner()">&times;</button>
+            </div>
+        {% endif %} 
         
+        {% endwith %}
+
+        {% wagtailuserbar %}
         {# Global javascript #}
         <script type="module" src="{% static 'js/mysite.js' %}"></script>
         {% block extra_js %}
