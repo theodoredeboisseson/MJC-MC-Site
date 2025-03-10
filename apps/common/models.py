@@ -53,23 +53,43 @@ class DetailPage(BasePage, ContentMixin):
 
 @register_setting
 class FooterSettings(ClusterableModel, BaseGenericSetting):
-    school_hours_content = RichTextField(
-        verbose_name="Horaires période scolaire",
+    school_schedule = RichTextField(
+        verbose_name="Horaires période scolaire Mauguio",
         blank=True,
     )
-    vacation_hours_content = RichTextField(
-        verbose_name="Horaires période vacances",
+    vacation_schedule = RichTextField(
+        verbose_name="Horaires période vacances Mauguio",
         blank=True,
     )
     extra = models.CharField(
         max_length=255,
         blank=True,
-        verbose_name="Message en extra (optionnel)"
+        verbose_name="Message en extra Mauguio (optionnel)"
+    )
+    carnon_school_schedule = RichTextField(
+        verbose_name="Horaires période scolaire Carnon",
+        blank=True,
+    )
+    carnon_vacation_schedule = RichTextField(
+        verbose_name="Horaires période vacances Carnon",
+        blank=True,
+    )
+    carnon_extra = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name="Message en extra Carnon (optionnel)"
     )
     panels = [
-        FieldPanel('school_hours_content'),
-        FieldPanel('vacation_hours_content'),
-        FieldPanel('extra'),
+        MultiFieldPanel([
+            FieldPanel('school_schedule'),
+            FieldPanel('vacation_schedule'),
+            FieldPanel('extra'),
+        ], heading="Mauguio"),
+        MultiFieldPanel([
+            FieldPanel('carnon_school_schedule'),
+            FieldPanel('carnon_vacation_schedule'),
+            FieldPanel('carnon_extra'),
+        ], heading="Carnon"),
     ]
 
     class Meta:
