@@ -19,6 +19,16 @@ class BasePage(Page, SEOMixin):
 
     class Meta:
         abstract = True
+        
+        
+class BaseIndexPage(BasePage):
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['subpages'] = self.get_children().live().order_by('title')
+        return context
+
+    class Meta:
+        verbose_name = "Page d'index de base"
 
 
 class DetailPage(BasePage, ContentMixin):
@@ -38,7 +48,7 @@ class DetailPage(BasePage, ContentMixin):
     ]
 
     class Meta:
-        abstract = True
+        verbose_name = "Page de détail"
 
 
 @register_setting

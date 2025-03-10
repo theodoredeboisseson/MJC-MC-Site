@@ -1,6 +1,2 @@
-{% extends "base.html" %}
+{% extends "common/base_index_page.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
-
-{% block content %}
-    {% include "common/page_list.html" with subpages=subpages %}
-{% endblock %}
