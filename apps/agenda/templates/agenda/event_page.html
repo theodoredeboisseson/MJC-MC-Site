@@ -1,8 +1,8 @@
 {% extends "common/detail_page.html" %}
 {% load wagtailcore_tags navigation_tags %}
 
-{% block image_extra %}
-    <time class="absolute bottom-6 left-6 text-white bg-secondary/90 px-4 py-2 rounded-lg font-medium">
+{% block extra %}
+    <time class="text-light-text bg-secondary/90 px-6 py-2 rounded-xl">
         {{ page.start_date|date:"d F Y" }}{% if page.end_date %} - {{ page.end_date|date:"d F Y" }}{% endif %}
     </time>
 {% endblock %}

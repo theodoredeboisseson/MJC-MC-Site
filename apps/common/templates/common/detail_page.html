@@ -18,10 +18,13 @@
                         <img src="{{ img.url }}" alt="{{ page.title }}"
                              class="clickable-image shadow-lg {% block image_classes %}max-h-[300px] sm:max-h-[500px]{% endblock %}">
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent h-1/4 pointer-events-none"></div>
-                        {% block image_extra %}{% endblock %}
                     </div>
                 </div>
             {% endif %}
+        </div>
+
+        <div class="flex justify-center items-center my-0">
+            {% block extra %}{% endblock %}
         </div>
 
         {% if page.content %}
