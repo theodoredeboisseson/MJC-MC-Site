@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="flex flex-col justify-center items-center mt-8">
+        <h1>Plan du site</h1>
+        <div class="flex flex-col">
+            {% for page in pages %}
+                <a href="{{ page.url }}" style="margin-left: {{ page.margin_left }}em; font-size: {{ page.font_size }}em;">
+                    {{ page.title }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
