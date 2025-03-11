@@ -128,6 +128,14 @@ html {
     }
 }
 
+.link {
+    @apply no-underline border-b-2 border-link-hover/30
+    transition-all text-link-hover;
+    &:hover {
+        @apply border-link-hover/100 opacity-80;
+    }
+}
+
 /*---------------------------------------
   ANIMATED HEADLINE               
 -----------------------------------------*/

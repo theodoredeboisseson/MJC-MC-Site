@@ -42,3 +42,4 @@
 .nav-link.active, .nav_submenu-link.active, .mobile-nav-link.active {
     @apply text-link-hover!;
 }
+
