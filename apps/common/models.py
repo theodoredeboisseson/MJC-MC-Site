@@ -19,7 +19,7 @@ class BasePage(Page, SEOMixin):
     class Meta:
         abstract = True
         
-        
+
 class BaseIndexPage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
@@ -111,7 +111,7 @@ class FlashMessage(BaseGenericSetting):
         FieldPanel('message'),
         FieldPanel('show'),
     ]
-    
+
     class Meta:
         verbose_name = "Message Flash"
 

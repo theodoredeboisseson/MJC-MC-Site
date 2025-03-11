@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from wagtail.models import Page
 from django.db import models
 from wagtail.admin.panels import FieldPanel
@@ -108,6 +109,10 @@ class EventPage(DetailPage):
         FieldPanel('end_date'),
         FieldPanel('ville'),
     ]
+
+    def clean(self):
+        if self.end_date and self.end_date < self.start_date:
+            raise ValidationError("La date de fin ne peut pas être antérieure à la date de début.")
 
     class Meta:
         verbose_name = "Événement"
