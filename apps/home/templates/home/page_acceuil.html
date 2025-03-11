@@ -60,10 +60,10 @@
         </div>
     </section>
 
-    {% if page.flash_message %}
+    {% if page.extra_content %}
         <section id="flash_message" class="my-16 min-h-48 flex flex-col items-center justify-center">
             <div class="richtext-content w-full md:w-1/2 my-8!">
-                {{ page.flash_message|richtext }}
+                {{ page.extra_content|richtext }}
             </div>
         </section>
     {% endif %}

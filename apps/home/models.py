@@ -35,10 +35,10 @@ class PageAcceuil(BasePage):
         blank=True,
         null=True
     )
-    flash_message = RichTextField(
+    extra_content = RichTextField(
         blank=True,
         null=True,
-        verbose_name="Message flash",
+        verbose_name="Contenu optionnel",
         help_text="Message spécial à en dessous de la section d'introduction"
     )
 
@@ -49,7 +49,7 @@ class PageAcceuil(BasePage):
         FieldPanel('intro_title'),
         FieldPanel('hero_image'),
         FieldPanel('video_url'),
-        FieldPanel('flash_message'),
+        FieldPanel('extra_content'),
         InlinePanel('rotating_words', label="Mot à défiler"),
     ]
 
