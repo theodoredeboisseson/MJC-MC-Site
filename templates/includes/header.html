@@ -32,6 +32,12 @@
 
         {# Desktop Navigation Menu #}
         <div class="hidden lg:flex lg:gap-x-4 xl:gap-x-8">
+            {# Search Button #}
+            <a href="{% url 'search' %}" class="px-4! py-0! btn btn-primary flex items-center" aria-label="Rechercher">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 10.5 18a7.5 7.5 0 0 0 6.15-3.35z"></path>
+                </svg>
+            </a>
             {# Home Link #}
             <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">
                 Accueil
@@ -102,6 +108,13 @@
             <div class="mt-6 flow-root">
                 <div class="-my-6 divide-y divide-gray-500/10">
                     <div class="space-y-2 py-6 -mx-3">
+                        {# Search Button #}
+                        <a href="{% url 'search' %}" class="px-4! py-2! btn btn-primary flex items-center text-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 10.5 18a7.5 7.5 0 0 0 6.15-3.35z"></path>
+                            </svg>
+                            Rechercher
+                        </a>
                         <a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">Accueil</a>
                         {% for page in site_root.get_children.live %}
                             <div class="flex w-full items-center justify-between rounded-lg mobile-nav-link">

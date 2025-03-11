@@ -67,6 +67,7 @@ CREATE USER mjc_user WITH PASSWORD 'mot_de_passe';
 CREATE DATABASE mjc_db;
 GRANT ALL PRIVILEGES ON DATABASE mjc_db TO mjc_user;
 GRANT ALL PRIVILEGES ON SCHEMA public TO mjc_user;
+CREATE EXTENSION IF NOT EXISTS pg_trgm; -- Important pour la recherche !
 ```
 Appliquez ensuite les migrations :
 ```sh
