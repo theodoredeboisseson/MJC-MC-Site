@@ -1,12 +1,2 @@
 {% extends "common/detail_page.html" %}
 {% load wagtailcore_tags navigation_tags %}
-
-{% block page_actions %}
-    {% get_parent_url page as parent_url %}
-    <a href="{{ parent_url }}" class="btn btn-secondary inline-flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        Retour aux sections
-    </a>
-{% endblock %}

@@ -6,10 +6,3 @@
         {{ page.start_date|date:"d F Y" }}{% if page.end_date %} - {{ page.end_date|date:"d F Y" }}{% endif %}
     </time>
 {% endblock %}
-
-{% block page_actions %}
-    {% get_parent_url page as parent_url %}
-    <div class="flex gap-4">
-        <a href="{{ parent_url }}" class="btn btn-primary">← Retour aux événements</a>
-    </div>
-{% endblock %}

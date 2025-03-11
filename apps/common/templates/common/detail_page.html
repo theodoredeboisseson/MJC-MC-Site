@@ -30,7 +30,12 @@
             </div>
         {% endif %}
 
-        <div class="mt-8 sm:mt-12">
+        <div class="mt-8 sm:mt-12 flex gap-4">
+            {% if page.get_parent %}
+                <a href="{{ page.get_parent.url }}" class="btn btn-primary">
+                    ← Retour à {{ page.get_parent.title }}
+                </a>
+            {% endif %}
             {% block page_actions %}{% endblock %}
         </div>
     </article>
