@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar wagtailsettings_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +38,21 @@
     
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/output.min.css' %}">
+        {# Admin defined color theme #}
+        {% with settings.common.ThemeSettings as theme %}
+            <style>
+                :root {
+                    --color-primary: {{ theme.color_primary }};
+                    --color-secondary: {{ theme.color_secondary }};
+                    --color-background: {{ theme.color_background }};
+                    --color-dark-text: {{ theme.color_dark_text }};
+                    --color-light-text: {{ theme.color_light_text }};
+                    --color-link-hover: {{ theme.color_link_hover }};
+                    --color-primary-light: {{ theme.color_primary_light }};
+                    --color-section-bg: {{ theme.color_section_bg }};
+                }
+            </style>
+        {% endwith %}
     
         {# Favicon #}
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">

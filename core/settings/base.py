@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "wagtail",
 
     # Third party apps
+    "colorfield",
     "modelcluster",
     "taggit",
 

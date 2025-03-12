@@ -4,6 +4,7 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.fields import RichTextField
 from wagtail.models import Page
+from colorfield.fields import ColorField
 
 from apps.common.mixins import SEOMixin, ContentMixin
 
@@ -18,7 +19,7 @@ class BasePage(Page, SEOMixin):
 
     class Meta:
         abstract = True
-        
+
 
 class BaseIndexPage(BasePage):
     def get_context(self, request):
@@ -117,3 +118,55 @@ class FlashMessage(BaseGenericSetting):
 
     def __str__(self):
         return self.message[:100]
+
+
+@register_setting(icon='cog')
+class ThemeSettings(BaseGenericSetting):
+    color_primary = ColorField(
+        default="#20223B",
+        verbose_name="Couleur primaire (en hexadécimal)",
+        blank=True
+    )
+    color_secondary = ColorField(
+        default="#297a62",
+        verbose_name="Couleur secondaire (en hexadécimal)",
+        blank=True
+    )
+    color_background = ColorField(
+        default="#f0f4f8",
+        verbose_name="Couleur d'arrière-plan (en hexadécimal)",
+        blank=True
+    )
+    color_dark_text = ColorField(
+        default="#20223B",
+        verbose_name="Couleur du texte sombre (en hexadécimal)",
+        blank=True
+    )
+    color_light_text = ColorField(
+        default="#edf2f7",
+        verbose_name="Couleur du texte clair (en hexadécimal)",
+        blank=True
+    )
+    color_link_hover = ColorField(
+        default="#63b3ed",
+        verbose_name="Couleur au survol des liens (en hexadécimal)",
+        blank=True
+    )
+    color_section_bg = ColorField(
+        default="#d7e8ef",
+        verbose_name="Couleur de fond des sections (en hexadécimal)",
+        blank=True
+    )
+
+    panels = [
+        FieldPanel("color_primary"),
+        FieldPanel("color_secondary"),
+        FieldPanel("color_background"),
+        FieldPanel("color_dark_text"),
+        FieldPanel("color_light_text"),
+        FieldPanel("color_link_hover"),
+        FieldPanel("color_section_bg"),
+    ]
+    
+    class Meta:
+        verbose_name = "Thème de couleurs"
