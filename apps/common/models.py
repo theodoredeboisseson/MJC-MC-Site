@@ -24,7 +24,7 @@ class BasePage(Page, SEOMixin):
 class BaseIndexPage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
-        context['subpages'] = self.get_children().live().order_by('title')
+        context['subpages'] = self.get_children().live().specific().order_by('title')
         return context
 
     class Meta:
@@ -99,7 +99,6 @@ class FooterSettings(ClusterableModel, BaseGenericSetting):
 @register_setting
 class FlashMessage(BaseGenericSetting):
     message = RichTextField(
-        help_text="Jusqu'à 100 caractères",
         blank=True,
         null=True
     )

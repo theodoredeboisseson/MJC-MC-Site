@@ -6,8 +6,8 @@
 {% block title %}Résultats de recherche{% endblock %}
 
 {% block content %}
-    <div class="flex flex-col items-center justify-center min-h-[84vh] bg-[var(--color-background)] p-6">
-        <h1 class="text-2xl font-bold mb-6 text-[var(--color-dark-text)]">Résultats de recherche</h1>
+    <div class="flex flex-col items-center justify-center min-h-[84vh] bg-background p-6">
+        <h1 class="font-bold mb-6 text-[var(--color-dark-text)]">Résultats de recherche</h1>
 
         <form action="{% url 'search' %}" method="get" class="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md w-full max-w-3xl">
             <label class="flex-grow">
@@ -25,7 +25,7 @@
             <ul class="bg-white p-6 rounded-lg shadow-md mt-6 w-full max-w-3xl">
                 {% for result in search_results %}
                     <li class="mb-4 border-b pb-2 last:border-none">
-                        <h4><a href="{% pageurl result %}" class="text-[var(--color-primary)] hover:underline font-semibold">{{ result.title }}</a></h4>
+                        <a href="{% pageurl result %}" class="text-xl text-dark-text hover:underline font-semibold">{{ result.title }}</a>
                         {% if result.search_description %}
                             <p class="text-[var(--color-dark-text)]">
                                 {{ result.search_description|truncatewords:30|safe }}
@@ -38,11 +38,11 @@
             <div class="pagination mt-6 flex justify-between w-full max-w-3xl">
                 {% if search_results.has_previous %}
                     <a href="?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}"
-                       class="bg-[var(--color-primary)] text-[var(--color-light-text)] rounded-md p-2 hover:bg-[var(--color-primary-light)]">Précédent</a>
+                       class="btn btn-primary">Précédent</a>
                 {% endif %}
                 {% if search_results.has_next %}
                     <a href="?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}"
-                       class="bg-[var(--color-primary)] text-[var(--color-light-text)] rounded-md p-2 hover:bg-[var(--color-primary-light)]">Suivant</a>
+                       class="btn btn-primary">Suivant</a>
                 {% endif %}
             </div>
         {% elif search_query %}
