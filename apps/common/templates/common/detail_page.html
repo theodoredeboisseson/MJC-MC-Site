@@ -3,7 +3,7 @@
 
 {% block content %}
     <article class="py-8 sm:py-16 container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row items-center gap-8 mb-6 sm:mb-12">
+        <div class="flex flex-col md:flex-row items-center gap-8 mb-6 sm:mb-8">
             <header class="md:w-1/2 mt-8 md:mt-0">
                 <h1 class="text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 text-dark-text">{{ page.title }}</h1>
                 {% if page.subtitle %}
@@ -13,7 +13,7 @@
 
             {% if page.image and not page.show_image_in_page == False %}
                 {% image page.image width-1200 as img %}
-                <div class="inline-flex w-full md:w-1/2 justify-center overflow-hidden mb-4 sm:mb-8">
+                <div class="inline-flex w-full md:w-1/2 justify-center overflow-hidden">
                     <div class="relative rounded-xl overflow-hidden">
                         <img src="{{ img.url }}" alt="{{ page.title }}"
                              class="clickable-image shadow-lg {% block image_classes %}max-h-[300px] sm:max-h-[500px]{% endblock %}">
