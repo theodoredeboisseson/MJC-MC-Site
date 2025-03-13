@@ -197,3 +197,6 @@ Fichier principal de configuration pour Poetry. Il définit les dépendances Pyt
 
 ## 📧 Contact
 Pour toute question ou suggestion, vous pouvez me contacter à **[theodoredeboisseson@gmail.com](mailto:theodoredeboisseson@gmail.com)**.
+
+Backup la DB : 
+` pg_dump -U <username> -h <host> -p <port> <database_name> > backup_$(date +\%Y\%m\%d\%H\%M\%S).sql `

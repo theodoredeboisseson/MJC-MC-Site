@@ -49,3 +49,6 @@ yarn-error.log*
 
 # Git
 *.rej
+
+# Postgres Backups
+backups/*
