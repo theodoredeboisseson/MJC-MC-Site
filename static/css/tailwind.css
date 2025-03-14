@@ -2,10 +2,12 @@
 This is the main CSS files that imports all other general CSS files and also the TailwindCSS input file.
 It will be compiled by the "npm run dev" command, in output.css which is one loaded in base.html. *
 */
-@import "tailwindcss";
 @import "./satoshi.css"; /*Font*/
 @import './components/buttons.css';
 @import './components/modal.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             
