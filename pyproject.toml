@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Site web de la Maison des Jeunes et de la Culture de Mauguio-Carnon. 2025"
 authors = ["Théodore de Boisseson <theodoredeboisseson@gmail.com>"]
 readme = "README.md"
-package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -16,6 +15,8 @@ python-decouple = "^3.8"
 whitenoise = "^6.9.0"
 django-colorfield = "^0.12.0"
 gunicorn = "^23.0.0"
+psycopg2-binary = "^2.9.10"
+dj-database-url = "^2.3.0"
 
 
 [build-system]
