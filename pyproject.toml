@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Site web de la Maison des Jeunes et de la Culture de Mauguio-Carnon. 2025"
 authors = ["Théodore de Boisseson <theodoredeboisseson@gmail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
