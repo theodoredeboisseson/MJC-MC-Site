@@ -22,13 +22,27 @@ class BasePage(Page, SEOMixin):
 
 
 class BaseIndexPage(BasePage):
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Image pour la liste",
+        help_text="L'image sert de miniature si la page est affichée dans une liste"
+    )
+    
+    content_panels = BasePage.content_panels + [
+        FieldPanel('image'),
+    ]
+    
     def get_context(self, request):
         context = super().get_context(request)
         context['subpages'] = self.get_children().live().specific().order_by('title')
         return context
 
     class Meta:
-        verbose_name = "Page d'index de base"
+        verbose_name = "Page liste des sous-pages"
 
 
 class DetailPage(BasePage, ContentMixin):
@@ -39,7 +53,8 @@ class DetailPage(BasePage, ContentMixin):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        verbose_name="Image"
+        verbose_name="Image",
+        help_text="L'image sert de miniature si la page est affichée dans une liste"
     )
 
     content_panels = BasePage.content_panels + ContentMixin.content_panels + [
