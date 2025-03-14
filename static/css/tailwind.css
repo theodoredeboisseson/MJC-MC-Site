@@ -11,24 +11,23 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
 @theme {
-    --color-primary:                #20223B; /* # #5b9af5 D9381E #536B1E  #dcba4f */
-    --color-secondary:              #CA552F; /* #297a62 #3A485B #81B29A */
-    --color-background:             #fefff4; /* theme('colors.gray.50') */
-    --color-dark-text:              #20223B; /* #222D06 theme('colors.gray.700') */
-    --color-light-text:             #FDFFE0; /* #E1D5BB */
-    --color-link-hover:             #CA552F; /* #F2CC8F */
+    /*--color-primary:                #20223B; !* # #5b9af5 D9381E #536B1E  #dcba4f *!*/
+    /*--color-secondary:              #297a62; !* #CA552F  #3A485B #81B29A *!*/
+    /*--color-background:             #f0f4f8; !* theme('colors.gray.100') *!*/
+    /*--color-dark-text:              #20223B; !* #222D06 theme('colors.gray.700') *!*/
+    /*--color-light-text:             #edf2f7; !* #FDFFE0 #E1D5BB *!*/
+    /*--color-link-hover:             #63b3ed; !* #F2CC8F *!*/
+    /*--color-primary-light:          color-mix(in srgb, var(--color-primary) 80%, white 10%);*/
+    /*--color-section-bg:             #d7e8ef; !* #F4F1DE #D7D1C5 *!*/
+    --color-primary:                var(--color-primary);
+    --color-secondary:              var(--color-secondary);
+    --color-background:             var(--color-background);
+    --color-dark-text:              var(--color-dark-text);
+    --color-light-text:             var(--color-light-text);
+    --color-link-hover:             var(--color-link-hover); 
     --color-primary-light:          color-mix(in srgb, var(--color-primary) 80%, white 10%);
-    --color-section-bg:             #E1D5BB; /* #F4F1DE #D7D1C5 */
-    
-    /*
-    ;  Blue 
-    #D9381E;  Red 
-    #FFD700;  Yellow 
-     */
-    
-    /*--color-custom-btn-bg-:         #F2CC8F;*/
-    /*--color-custom-btn-bg-hover:    #E07A5F;*/
-    /*--color-dark:                   #000000;*/
+    --color-section-bg:             var(--color-section-bg);
+
 
     --h1-font-size:                 2.25rem;
     --h2-font-size:                 1.875rem;
@@ -66,7 +65,7 @@ html {
 
 .richtext-content {
     @apply max-w-none my-8 lg:my-16 mx-auto px-4 sm:px-6 lg:px-8
-    bg-section-bg rounded-xl p-8 pb-4 shadow-md text-dark-text;
+    bg-section-bg rounded-xl p-8 shadow-md text-dark-text;
 
 
     /* Paragraphes */
@@ -125,6 +124,14 @@ html {
             }
             
         }
+    }
+}
+
+.link {
+    @apply no-underline border-b-2 border-link-hover/30
+    transition-all text-link-hover;
+    &:hover {
+        @apply border-link-hover/100 opacity-80;
     }
 }
 

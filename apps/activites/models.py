@@ -7,6 +7,7 @@ from wagtail.models import Page, Orderable
 from modelcluster.models import ClusterableModel
 from wagtail.snippets.models import register_snippet
 
+from apps.common.mixins import ContentMixin
 from apps.common.models import DetailPage, SEOMixin, BasePage
 
 
@@ -49,13 +50,9 @@ class ActivityPage(DetailPage):
         verbose_name = "Activité"
 
 
-class ActivityList(BasePage):
-    content = RichTextField(blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('content'),
-    ]
-    promote_panels = Page.promote_panels + SEOMixin.seo_panels
+class ActivityList(BasePage, ContentMixin):
+    content_panels = BasePage.content_panels + ContentMixin.content_panels
+    promote_panels = BasePage.promote_panels
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

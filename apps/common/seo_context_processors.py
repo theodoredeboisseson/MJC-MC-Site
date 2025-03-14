@@ -21,5 +21,4 @@ def page_keywords(request):
 
     dynamic_keywords = ", ".join(filter(None, all_keywords))
 
-    print(f"Page {page.id} ({page.title}) Page keywords: '{all_keywords}'")
     return {'dynamic_keywords': dynamic_keywords}

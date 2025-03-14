@@ -31,7 +31,9 @@
             <h3 class="text-xl font-bold mb-2 group-hover:text-dark-text transition-colors">
                 {{ event.title }}
             </h3>
-            <div class="text-dark-text/60 line-clamp-3">{{ event.subtitle|default:event.content|richtext }}</div>
+            <div class="text-dark-text/60 line-clamp-3">
+                {{ event.subtitle|default:event.content|richtext|striptags|truncatewords:20 }}
+            </div>
         </div>
         <a href="{{ event.url }}" class="btn-outline mt-2 relative overflow-hidden group-hover:text-white! group-hover:border-secondary!">
             <span class="absolute inset-0 bg-secondary transition-transform duration-300 transform -translate-x-full group-hover:translate-x-0"></span>

@@ -67,6 +67,7 @@ CREATE USER mjc_user WITH PASSWORD 'mot_de_passe';
 CREATE DATABASE mjc_db;
 GRANT ALL PRIVILEGES ON DATABASE mjc_db TO mjc_user;
 GRANT ALL PRIVILEGES ON SCHEMA public TO mjc_user;
+CREATE EXTENSION IF NOT EXISTS pg_trgm; -- Important pour la recherche !
 ```
 Appliquez ensuite les migrations :
 ```sh
@@ -196,3 +197,6 @@ Fichier principal de configuration pour Poetry. Il définit les dépendances Pyt
 
 ## 📧 Contact
 Pour toute question ou suggestion, vous pouvez me contacter à **[theodoredeboisseson@gmail.com](mailto:theodoredeboisseson@gmail.com)**.
+
+Backup la DB : 
+` pg_dump -U <username> -h <host> -p <port> <database_name> > backup_$(date +\%Y\%m\%d\%H\%M\%S).sql `

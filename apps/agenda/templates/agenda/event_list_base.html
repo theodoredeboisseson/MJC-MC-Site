@@ -4,7 +4,11 @@
 {% block content %}
     <section class="{% block section_class %}{% endblock %} py-16">
         <div class="container mx-auto px-6 text-dark-text">
-            <h1 class="font-bold mb-8">{% block page_title %}{% endblock %}</h1>
+        
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <h1 class="font-bold mt-8 md:mb-8">{{ page.title }}</h1>
+                {% block additional_actions %}{% endblock %}
+            </div>
 
             {% if page.intro %}
                 <div class="prose max-w-none mb-12">
@@ -12,11 +16,10 @@
                 </div>
             {% endif %}
 
-            {% block additional_actions %}{% endblock %}
 
             {% include "agenda/includes/sort_filter_buttons.html" %}
 
-            <div class="grid grid-cols-1 mx-20 md:mx-0 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% block event_list %}{% endblock %}
             </div>
 

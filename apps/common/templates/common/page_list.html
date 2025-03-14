@@ -5,12 +5,10 @@
 </svg>
 <div class="container mx-auto px-4 mb-10">
     <div class="max-w-7xl mx-auto">
-        <h1 class="text-6xl text-primary font-bold mb-8">{{ page.title }}</h1>
+        <h1 class="text-6xl text-primary font-bold my-8">{{ page.title }}</h1>
         <div class="flex flex-wrap gap-4 justify-center">
-            {% for subpage in subpages %}
-                {% with page=subpage %}
-                    {% include "common/includes/page_card.html" %}
-                {% endwith %}
+            {% for page in subpages %}
+                {% include "common/includes/page_card.html" %}
             {% endfor %}
         </div>
         {% if page.content %}

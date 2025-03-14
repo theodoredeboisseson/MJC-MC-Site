@@ -1,76 +1,123 @@
+{% load wagtailcore_tags %}
 {% with settings.common.FooterSettings as footer %}
-<footer class="bg-primary text-light-text/60 pt-12 pb-6">
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-            <!-- MJC Mauguio Info -->
-            <div>
-                <h3 class="text-light-text font-bold mb-4">Mauguio</h3>
-                <div class="space-y-2">
-                    <p class="flex items-start p-2">
-                        <svg class="w-5 h-5 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        <a href="https://www.google.com/maps/search/?api=1&query=527+Avenue+du+8+Mai+1945%2C+34130+Mauguio%2C+France" target="_blank" class="hover:text-link-hover transition-colors">
-                            527 Avenue du 8 mai 1945<br>34130 Mauguio
-                        </a>
-                    </p>
-                    <p class="flex items-center p-2">
-                        <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                        </svg>
-                        <a href="tel:+33467293499" class="hover:text-link-hover transition-colors">04 67 29 34 99</a>
-                    </p>
-                    <p class="flex items-center p-2">
-                        <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        <a href="mailto:secretariat.mjc.mc@gmail.com" class="hover:text-link-hover transition-colors">
-                            secretariat.mjc.mc@gmail.com
-                        </a>
-                    </p>
+    <footer class="bg-primary text-light-text/80 pt-12 pb-6">
+        <div class="container mx-auto px-6">
+            <!-- Blocs pour Mauguio et Carnon -->
+            <div class="flex flex-col lg:flex-row lg:justify-evenly gap-8 mb-8">
+                <!-- Bloc Mauguio -->
+                <div class="p-6 {#rounded-xl shadow-lg bg-secondary/10#}">
+                    <h2 class="text-light-text font-bold mb-4">Mauguio</h2>
+                    <!-- Informations -->
+                    <div class="space-y-2">
+                        <p class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <a href="https://www.google.com/maps/search/?api=1&query=527+Avenue+du+8+Mai+1945%2C+34130+Mauguio%2C+France" target="_blank" class="hover:text-link-hover transition-colors">
+                                527 Avenue du 8 mai 1945<br>34130 Mauguio
+                            </a>
+                        </p>
+                        <p class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <a href="tel:+33467293499" class="hover:text-link-hover transition-colors">04 67 29 34 99</a>
+                        </p>
+                        <p class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <a href="mailto:secretariat.mjc.mc@gmail.com" class="hover:text-link-hover transition-colors">
+                                secretariat.mjc.mc@gmail.com
+                            </a>
+                        </p>
+                    </div>
+                    <!-- Horaires -->
+                    <div class="mt-6">
+                        <h3 class="text-light-text font-bold mb-2">HORAIRES</h3>
+                        {% if footer.school_schedule or footer.vacation_schedule %}
+                        {% if footer.school_schedule %}
+                            <div class="mb-2">
+                                <h4 class="text-light-text ml-4">Période scolaire</h4>
+                                <div class="ml-8">{{ footer.school_schedule|richtext }}</div>
+                            </div>
+                        {% endif %}
+                        {% if footer.vacation_schedule %}
+                            <div class="mb-2">
+                                <h4 class="text-light-text ml-4">Période vacances</h4>
+                                <div class="ml-8">{{ footer.vacation_schedule|richtext }}</div>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        {% if footer.extra %}
+                            <div class="mt-2">{{ footer.extra|richtext }}</div>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
 
-            <!-- MJC Carnon Info -->
-            <div>
-                <h3 class="text-light-text font-bold mb-4">Annexe de Carnon - EVS</h3>
-                <div class="space-y-2">
-                    <p class="flex items-start p-2">
-                        <svg class="w-5 h-5 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Place+des+Cistes%2C+34130+Carnon%2C+France" target="_blank" class="hover:text-link-hover transition-colors">
-                            Place des Cistes<br>34280 Carnon
-                        </a>
-                    </p>
-                    <p class="flex items-center p-2">
-                        <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                        </svg>
-                        <span class="space-x-2">
+                <!-- Bloc Carnon -->
+                <div class="p-6 {#bg-secondary/10 rounded-xl shadow-xl#}">
+                    <h2 class="text-light-text font-bold mb-4">Annexe de Carnon - EVS</h2>
+                    <!-- Informations -->
+                    <div class="space-y-2">
+                        <p class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Place+des+Cistes%2C+34130+Carnon%2C+France" target="_blank" class="hover:text-link-hover transition-colors">
+                                Place des Cistes<br>34280 Carnon
+                            </a>
+                        </p>
+                        <p class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span class="space-x-2">
                             <a href="tel:+33467682551" class="hover:text-link-hover transition-colors">04 67 68 25 51</a>
                             <span>-</span>
                             <a href="tel:+33640050103" class="hover:text-link-hover transition-colors">06 40 05 01 03</a>
                         </span>
-                    </p>
-                    <p class="flex items-center p-2">
-                        <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        <a href="mailto:mjccarnon@gmail.com" class="hover:text-link-hover transition-colors">
-                            mjccarnon@gmail.com
-                        </a>
-                    </p>
+                        </p>
+                        <p class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <a href="mailto:mjccarnon@gmail.com" class="hover:text-link-hover transition-colors">
+                                mjccarnon@gmail.com
+                            </a>
+                        </p>
+                    </div>
+                    <!-- Horaires -->
+                    <div class="mt-6">
+                        <h3 class="text-light-text font-bold mb-2">HORAIRES</h3>
+                        {% if footer.carnon_school_schedule or footer.carnon_vacation_schedule %}
+                        {% if footer.carnon_school_schedule %}
+                            <div class="mb-2">
+                                <h4 class="text-light-text ml-4">Période scolaire</h4>
+                                <div class="ml-8">{{ footer.carnon_school_schedule|richtext }}</div>
+                            </div>
+                        {% endif %}
+                        {% if footer.carnon_vacation_schedule %}
+                            <div class="mb-2">
+                                <h4 class="text-light-text ml-4">Période vacances</h4>
+                                <div class="ml-8">{{ footer.carnon_vacation_schedule|richtext }}</div>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        {% if footer.carnon_extra %}
+                            <div class="mt-2">{{ footer.carnon_extra|richtext }}</div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
-            <!-- Social Links -->
-            <div>
-                <h3 class="text-light-text font-bold mb-4">Suivez-nous</h3>
-                <div class="space-y-4">
-                    <div class="flex space-x-4">
+            <!-- Section Réseaux sociaux et Copyright -->
+            <div class="flex flex-col gap-4 items-center text-light-text/80">
+                <div class="mb-6">
+                    <h2 class="text-light-text font-bold mb-4">Suivez-nous</h2>
+                    <div class="flex flex-wrap justify-center gap-4">
                         <a href="https://www.instagram.com/mjc_mauguio_carnon/" target="_blank" class="hover:text-link-hover transition-colors">
                             <span class="sr-only">Instagram</span>
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -97,48 +144,12 @@
                         </a>
                     </div>
                 </div>
+                
+                <div class="border-t pt-6 text-center w-full">
+                    <p>&copy; {% now "Y" %} MJC Mauguio Carnon. Tous droits réservés. Développé par <a href="https://github.com/theodoredeboisseson" target="_blank" class="link">Theodore de Boisseson</a>.</p>
+                    <p><a href="{% url 'sitemap' %}" class="link">Plan du site</a> | <a href="{% url 'wagtailadmin_home' %}" class="link">Administration</a></p>
+                </div>
             </div>
         </div>
-
-        <!-- Horaires -->
-        <div class="flex flex-col gap-4 items-center text-light-text/80">
-            <h3 class="text-light-text">Horaires d'ouverture</h3>
-
-            <div class="flex flex-col md:flex-row gap-8">
-            {% if footer.school_hours_content %}
-                <div>
-                    <h4 class="text-light-text">Période scolaire</h4>
-                    <div class="space-y-2 mt-2">
-                            <p class="text-sm">
-                            {{ footer.school_hours_content|safe }}
-                            </p>
-                    </div>
-                </div>
-            {% endif %}
-
-            {% if footer.vacation_hours_content %}
-                <div>
-                    <h4 class="text-light-text">Période vacances</h4>
-                    <div class="space-y-2 mt-2">
-                            <p class="text-sm">
-                            {{ footer.vacation_hours_content|safe }}
-                            </p>
-                    </div>
-                </div>
-            {% endif %}
-            </div>
-
-            <p class="mb-4">
-                {{ footer.extra|safe }}
-            </p>
-        </div>
-
-        
-        
-        <!-- Copyright -->
-        <div class="border-t pt-6 text-center text-sm">
-            <p class="p-2">&copy; {% now "Y" %} MJC Mauguio Carnon. Tous droits réservés.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 {% endwith %}

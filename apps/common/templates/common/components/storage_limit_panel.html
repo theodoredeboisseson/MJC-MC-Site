@@ -1,0 +1,10 @@
+<div style="padding: 10px; background: #1D1D1D; border-radius: 5px;">
+    <strong>📦 Stockage du serveur :</strong>
+    <div>Total : {{ total_gb }} GB</div>
+    <div>Utilisé : {{ used_gb }} GB</div>
+    <div>Libre : {{ free_gb }} GB</div>
+    <div style="position: relative; height: 20px; background: #e0e0e0; border-radius: 10px; margin-top: 10px;">
+        <div style="width: {{ used_percentage }}%; height: 100%; background: #76c7c0; border-radius: 10px;"></div>
+    </div>
+    <div style="text-align: right; font-size: 12px; margin-top: 5px;">{{ used_percentage }}% utilisé</div>
+</div>

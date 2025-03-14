@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from wagtail.models import Page
 from django.db import models
 from wagtail.admin.panels import FieldPanel
@@ -12,9 +13,9 @@ def get_events(date_filter, sort_by, villes=None):
     if villes:
         ville_list = villes.split(',')
         if len(ville_list) == 2:  # Si les deux villes sont sélectionnées
-            events = events.filter(models.Q(ville__in=ville_list))
+            events = events.filter(models.Q(ville__in=ville_list) | models.Q(ville=EventPage.BOTH))
         else:
-            events = events.filter(models.Q(ville=ville_list[0]))
+            events = events.filter(models.Q(ville=ville_list[0]) | models.Q(ville=EventPage.BOTH))
     return events.order_by(sort_by, 'title')
 
 def get_future_events(limit=5):
@@ -23,7 +24,7 @@ def get_future_events(limit=5):
 
 class EventListPage(BasePage):
     intro = models.TextField(blank=True)
-    content_panels = Page.content_panels + [FieldPanel('intro')]
+    content_panels = BasePage.content_panels + [FieldPanel('intro')]
 
     def get_events_context(self, request, date_filter, default_sort):
         context = {}
@@ -79,9 +80,11 @@ class PastEventsPage(EventListPage):
 class EventPage(DetailPage):
     MAUGUIO = 'Mauguio'
     CARNON = 'Carnon'
+    BOTH = 'Les deux'
     VILLE_CHOICES = [
         (MAUGUIO, 'Mauguio'),
         (CARNON, 'Carnon'),
+        (BOTH, 'Mauguio et Carnon'),
     ]
 
     start_date = models.DateField(
@@ -106,6 +109,10 @@ class EventPage(DetailPage):
         FieldPanel('end_date'),
         FieldPanel('ville'),
     ]
+
+    def clean(self):
+        if self.end_date and self.end_date < self.start_date:
+            raise ValidationError("La date de fin ne peut pas être antérieure à la date de début.")
 
     class Meta:
         verbose_name = "Événement"

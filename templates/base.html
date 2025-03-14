@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar wagtailsettings_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +22,7 @@
     
         {# Méta-keywords #}
         <meta name="keywords" content="{{ dynamic_keywords }}"/>
-
-        {# Méta-charset #}
+    
         {# Méta-description #}
         {% if page.search_description %}
             <meta name="description" content="{{ page.search_description }}" />
@@ -39,6 +38,21 @@
     
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/output.min.css' %}">
+        {# Admin defined color theme #}
+        {% with settings.common.ThemeSettings as theme %}
+            <style>
+                :root {
+                    --color-primary: {{ theme.color_primary }};
+                    --color-secondary: {{ theme.color_secondary }};
+                    --color-background: {{ theme.color_background }};
+                    --color-dark-text: {{ theme.color_dark_text }};
+                    --color-light-text: {{ theme.color_light_text }};
+                    --color-link-hover: {{ theme.color_link_hover }};
+                    --color-primary-light: {{ theme.color_primary_light }};
+                    --color-section-bg: {{ theme.color_section_bg }};
+                }
+            </style>
+        {% endwith %}
     
         {# Favicon #}
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
@@ -53,21 +67,35 @@
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
 
-    <body class="{% block body_class %}bg-background{% endblock %} flex flex-col min-h-screen overflow-x-visible">
+    <body class="{% block body_class %}bg-background{% endblock %} flex flex-col min-h-screen">
         {% include "includes/header.html" %}
         
-        {# Breadcrumb #}
-{#        {% include "includes/breadcrumb.html" %}#}
-        
         {# Main content #}
-        <main class="flex-1 min-h-[84vh]">
+        <main class="flex-1 min-h-[84vh] relative">
+            {# Breadcrumb #}
+            {% if not page.is_root %}
+                <div class="absolute bg-background/90 z-10 top-2 left-2 md:left-5 shadow-lg rounded-lg">
+                    {% include "components/breadcrumb.html" %}
+                </div>
+            {% endif %}
+        
             {% block content %}{% endblock %}
         </main>
             
         {% include "includes/footer.html" %}
 
-        {% wagtailuserbar %}
+        {# Flash Banner #}
+        {% with settings.common.FlashMessage as flash %}
+        {% if flash.message and flash.show %}
+            <div id="flash-banner" class="hidden bg-red-500 text-white p-4 text-center fixed bottom-0 w-full z-1000">
+                <p>{{ flash.message|richtext }}</p>
+                <button class="absolute top-2 right-2 text-4xl text-white cursor-pointer" onclick="closeFlashBanner()">&times;</button>
+            </div>
+        {% endif %} 
         
+        {% endwith %}
+
+        {% wagtailuserbar %}
         {# Global javascript #}
         <script type="module" src="{% static 'js/mysite.js' %}"></script>
         {% block extra_js %}
