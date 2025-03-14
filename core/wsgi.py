@@ -15,9 +15,9 @@ from pathlib import Path
 env = os.environ.get('DJANGO_ENV', 'dev')
 
 if env == 'prod':
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'your_project.settings.prod')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings.prod')
 else:
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'your_project.settings.dev')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings.dev')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
