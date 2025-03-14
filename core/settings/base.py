@@ -11,6 +11,8 @@ import os
 from pathlib import Path
 from decouple import config
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'www.mjcmauguiocarnon.com','mjcmauguiocarnon.com']
+
 SECRET_KEY = config("SECRET_KEY", default="Provide a secret key in the .env file")
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
