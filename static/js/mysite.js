@@ -15,7 +15,12 @@ const MySite = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => MySite.init());
+document.addEventListener('DOMContentLoaded', () => {
+    MySite.init();
+    if (!sessionStorage.getItem('flashBannerClosed')) {
+        document.getElementById('flash-banner').style.display = 'block';
+    }
+});
 
 function toggleSubMenu(button) {
     const submenu = button.parentElement.nextElementSibling;
@@ -79,9 +84,8 @@ window.toggleVille = function(ville) {
     toggleFilter('ville', ville);
 };
 
-window.closeFlashBanner = function() {
-    const flashBanner = document.getElementById('flash-banner');
-    if (flashBanner) {
-        flashBanner.style.display = 'none';
-    }
+
+window.closeFlashBanner = function () {
+    document.getElementById('flash-banner').style.display = 'none';
+    sessionStorage.setItem('flashBannerClosed', 'true');
 }
