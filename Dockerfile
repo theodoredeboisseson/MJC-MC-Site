@@ -42,12 +42,12 @@ COPY --chown=wagtail:wagtail pyproject.toml poetry.lock ./
 
 # Install the project dependencies
 RUN poetry install --no-dev --no-root
-
+    
 # Set this directory to be owned by the "wagtail" user.
 RUN chown wagtail:wagtail /app
 
 # Copy the source code of the project into the container.
-COPY --chown=wagtail:wagtail . .
+COPY --chown=wagtail:wagtail . ./
 
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
@@ -64,4 +64,4 @@ RUN python manage.py collectstatic --noinput --clear
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD set -xe; python manage.py migrate; gunicorn core.wsgi:application
+CMD ["sh", "-c", "set -xe && python manage.py migrate && gunicorn core.wsgi:application"]

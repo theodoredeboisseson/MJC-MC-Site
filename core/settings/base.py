@@ -16,7 +16,7 @@ SECRET_KEY = config("SECRET_KEY", default="Provide a secret key in the .env file
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-print(BASE_DIR)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/

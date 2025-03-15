@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
@@ -27,26 +28,16 @@ from apps.search import views as search_views
 from apps.home import views as home_views
 
 urlpatterns = [
+    path("", include(wagtail_urls)),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("sitemap/", home_views.sitemap, name="sitemap"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
-    # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-urlpatterns = urlpatterns + [
-    # For anything not caught by a more specific rule above, hand over to
-    # Wagtail's page serving mechanism. This should be the last pattern in
-    # the list:
-    path("", include(wagtail_urls)),
-]
+    
