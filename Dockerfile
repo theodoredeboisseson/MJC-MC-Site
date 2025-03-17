@@ -41,7 +41,7 @@ WORKDIR /app
 COPY --chown=wagtail:wagtail pyproject.toml poetry.lock ./
 
 # Install the project dependencies
-RUN poetry install --no-dev --no-root
+RUN poetry install --no-root
     
 # Set this directory to be owned by the "wagtail" user.
 RUN chown wagtail:wagtail /app
