@@ -1,0 +1,62 @@
+#services:
+#  db:
+#    image: postgres:latest
+#    container_name: db_1
+#    volumes:
+#      - db_data:/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#      POSTGRES_DB: mjc_db
+#
+#  web:
+#    build: .
+#    container_name: web_1
+#    volumes:
+#      - ./:/app
+#      - ./media:/app/media
+#      - db_data:/app/data/db
+#    ports:
+#      - "8000:8000"
+#    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+#
+#  nginx:
+#    image: nginx:latest
+#    container_name: nginx_1
+#    volumes:
+#      - ./nginx.conf:/etc/nginx/nginx.conf
+#      - ./media:/app/media
+#    ports:
+#      - "80:80"
+#
+#volumes:
+#  db_data:
+
+
+
+services:
+  web:
+    build: .
+    container_name: web_1
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:13
+    container_name: db_1
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=mjc_db
+
+volumes:
+  postgres_data:
+  media_volume:

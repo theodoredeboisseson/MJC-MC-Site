@@ -13,7 +13,7 @@ EXPOSE 8000
 #    command.
 ENV PYTHONUNBUFFERED=1 \
     PORT=8000 \
-    POETRY_VERSION=1.7.1 \
+    POETRY_VERSION=1.8.2 \
     POETRY_HOME="/opt/poetry" \
     POETRY_VIRTUALENVS_CREATE=false \
     POETRY_NO_INTERACTION=1
@@ -27,14 +27,12 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     zlib1g-dev \
     libwebp-dev \
     curl \
- && rm -rf /var/lib/apt/lists/*
+    tzdata \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="${POETRY_HOME}/bin:${PATH}"
-
-# Install the application server.
-RUN pip install "gunicorn==20.0.4"
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
@@ -43,13 +41,13 @@ WORKDIR /app
 COPY --chown=wagtail:wagtail pyproject.toml poetry.lock ./
 
 # Install the project dependencies
-RUN poetry install --no-dev --no-root
-
+RUN poetry install --no-root
+    
 # Set this directory to be owned by the "wagtail" user.
 RUN chown wagtail:wagtail /app
 
 # Copy the source code of the project into the container.
-COPY --chown=wagtail:wagtail . .
+COPY --chown=wagtail:wagtail . ./
 
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
@@ -66,4 +64,4 @@ RUN python manage.py collectstatic --noinput --clear
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD set -xe; python manage.py migrate --noinput; gunicorn config.wsgi:application
+CMD ["sh", "-c", "set -xe && python manage.py migrate && gunicorn core.wsgi:application"]
