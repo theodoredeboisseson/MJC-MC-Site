@@ -4,13 +4,7 @@ FROM python:3.12-slim-bookworm
 # Add user that will be used in the container.
 RUN useradd wagtail
 
-# Port used by this container to serve HTTP.
-EXPOSE 8000
-
 # Set environment variables.
-# 1. Force Python stdout and stderr streams to be unbuffered.
-# 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
-#    command.
 ENV PYTHONUNBUFFERED=1 \
     PORT=8000 \
     POETRY_VERSION=1.8.2 \
@@ -37,12 +31,12 @@ ENV PATH="${POETRY_HOME}/bin:${PATH}"
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
 
-# Copy poetry files
+# Copy poetry files first to leverage Docker cache
 COPY --chown=wagtail:wagtail pyproject.toml poetry.lock ./
 
 # Install the project dependencies
 RUN poetry install --no-root
-    
+
 # Set this directory to be owned by the "wagtail" user.
 RUN chown wagtail:wagtail /app
 
@@ -54,6 +48,9 @@ USER wagtail
 
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
+
+# Expose the port for Gunicorn or Django development server
+EXPOSE 8000
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:
