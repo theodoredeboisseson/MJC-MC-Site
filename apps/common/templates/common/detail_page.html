@@ -2,38 +2,36 @@
 {% load wagtailcore_tags wagtailimages_tags navigation_tags %}
 
 {% block content %}
-    <article class="py-8 sm:py-16 container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row items-center gap-8 mb-6 sm:mb-8">
-            <header class="md:w-1/2 mt-8 md:mt-0">
-                <h1 class="text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 text-dark-text">{{ page.title }}</h1>
-                {% if page.subtitle %}
-                    <p class="text-lg sm:text-xl text-dark-text/80">{{ page.subtitle }}</p>
-                {% endif %}
-            </header>
-
-            {% if page.image and not page.show_image_in_page == False %}
-                {% image page.image width-1200 as img %}
-                <div class="inline-flex w-full md:w-1/2 justify-center overflow-hidden">
-                    <div class="relative rounded-xl overflow-hidden">
-                        <img src="{{ img.url }}" alt="{{ page.title }}"
-                             class="clickable-image shadow-lg {% block image_classes %}max-h-[300px] sm:max-h-[500px]{% endblock %}">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent h-1/4 pointer-events-none"></div>
-                    </div>
-                </div>
+    <article class="py-16 mt-8 container mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 xl:px-10">
+        <header class="text-center mb-6 sm:mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 sm:mb-4 text-dark-text">{{ page.title }}</h1>
+            {% if page.subtitle %}
+                <p class="text-lg sm:text-xl md:text-2xl text-dark-text/80">{{ page.subtitle }}</p>
             {% endif %}
-        </div>
+        </header>
 
-        <div class="flex justify-center items-center my-0">
+        <div class="flex justify-center items-center">
             {% block extra %}{% endblock %}
         </div>
 
-        {% if page.content %}
-            <div class="richtext-content">
-                {{ page.content|richtext }}
+        <div class="flex flex-col md:flex-row-reverse justify-evenly gap-8 mt-16">
+            {% if page.image and not page.show_image_in_page == False %}
+                {% image page.image width-1200 as img %}
+                <div class=" md:max-w-[50%] object-contain">
+                    <img src="{{ img.url }}" alt="{{ img.alt }}" class="clickable-image rounded-xl shadow-lg max-h-[75vh]{% block image_classes %}{% endblock %}">
+                </div>
+            {% endif %}
+        
+            <div class="md:w-1/2">
+                {% if page.content %}
+                    <div class="richtext-content mt-0! text-base sm:text-lg md:text-xl">
+                        {{ page.content|richtext }}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
+        </div>
 
-        <div class="mt-8 sm:mt-12 flex gap-4">
+        <div class="mt-8 flex gap-4 flex-wrap">
             {% if page.get_parent %}
                 <a href="{{ page.get_parent.url }}" class="btn btn-primary">
                     ← Retour à {{ page.get_parent.title }}
