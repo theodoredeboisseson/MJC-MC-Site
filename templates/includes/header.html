@@ -6,7 +6,7 @@
     <nav class="mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8 md:mx-2 lg:mx-5" aria-label="Global">
         {# Logo and Site Title Component #}
         <div class="flex lg:flex-1">
-            <a href="/" class="nav-link -m-1.5 p-1.5! flex items-center">
+            <a href="/" class="nav-link -m-1.5 p-1.5! flex items-center transform-none!">
                 {# Consider adding width and height attributes for better CLS optimization #}
                 <img class="h-15 w-auto rounded-xl" src="{% static 'images/logo-mjc.webp' %}" alt="Logo MJC Mauguio-Carnon">
                 <span class="ms-3 text-3xl bottom-1 relative font-bold leading-snug">
@@ -31,9 +31,9 @@
         </div>
 
         {# Desktop Navigation Menu #}
-        <div class="hidden lg:flex lg:gap-x-4 xl:gap-x-8">
+        <div class="hidden lg:flex lg:gap-x-2 xl:gap-x-3">
             {# Search Button #}
-            <a href="{% url 'search' %}" class="px-4! py-0! btn btn-primary flex items-center" aria-label="Rechercher">
+            <a href="{% url 'search' %}" class="px-4! py-0! flex items-center nav-link" aria-label="Rechercher">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 10.5 18a7.5 7.5 0 0 0 6.15-3.35z"></path>
                 </svg>
@@ -83,7 +83,7 @@
     {# Mobile Menu Panel #}
     <div id="mobile-menu" class="lg:hidden hidden" role="dialog" aria-modal="true" aria-expanded="false">
         <div class="fixed inset-0 z-100 bg-black/30 transition-opacity duration-300"></div>
-        <div class="fixed inset-y-0 right-0 z-100 w-full overflow-y-auto bg-primary px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 translate-x-full transition-all duration-300 ease-in-out">
+        <div class="fixed inset-y-0 right-0 z-100 w-full overflow-y-auto bg-primary px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 translate-x-full transition-all duration-500 ease-[cubic-bezier(.8,0,.2,1)]">
             {# Mobile Menu Header #}
             <div class="flex items-center justify-between">
                 <a href="/" class="nav-link -m-1.5 p-1.5 flex items-center">
@@ -105,48 +105,44 @@
             </div>
 
             {# Mobile Menu Content #}
-            <div class="mt-6 flow-root">
-                <div class="-my-6 divide-y divide-gray-500/10">
-                    <div class="space-y-2 py-6 -mx-3">
-                        {# Search Button #}
-                        <a href="{% url 'search' %}" class="px-4! py-2! btn btn-primary flex items-center text-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 10.5 18a7.5 7.5 0 0 0 6.15-3.35z"></path>
-                            </svg>
-                            Rechercher
+            <div class="mt-10 space-y-1 -mx-3 text-light-text">
+                {# Search Button #}
+                <a href="{% url 'search' %}" class="mobile-nav-link justify-start! gap-2 ">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 10.5 18a7.5 7.5 0 0 0 6.15-3.35z"></path>
+                    </svg>
+                    Rechercher
+                </a>
+                <a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">Accueil</a>
+                {% for page in site_root.get_children.live %}
+                    <div class="mobile-nav-link !p-0">
+                        <a href="{{ page.url }}"
+                           class="py-4 px-6{% if page.url == request.path %}active{% endif %} {% if page.get_children.live.in_menu.count == 0 %}w-full{% endif %}">
+                            {{ page.title }}
                         </a>
-                        <a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">Accueil</a>
-                        {% for page in site_root.get_children.live %}
-                            <div class="flex w-full items-center justify-between rounded-lg mobile-nav-link">
-                                <a href="{{ page.url }}"
-                                   class=" py-2 pr-3.5 pl-3 {% if page.url == request.path %}active{% endif %}">
-                                    {{ page.title }}
-                                </a>
-                                {% if page.get_children.live.in_menu.count > 0 %}
-                                    <button class="flex flex-1 justify-end self-stretch items-center cursor-pointer"
-                                            onclick="toggleSubMenu(this)">
-                                        <svg class="size-5 transition-transform duration-300" viewBox="0 0 20 20"
-                                             fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                                                  clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
-                                {% endif %}
-                            </div>
-                            {% if page.get_children.live.in_menu.count > 0 %}
-                                <div class="submenu mt-2 space-y-2 overflow-hidden transition-all duration-300 max-h-0">
-                                    {% for child in page.get_children.live.in_menu %}
-                                        <a href="{{ child.url }}"
-                                           class="mobile-nav-link pl-10! text-sm {% if child.url == request.path %}active{% endif %}">
-                                            {{ child.title }}
-                                        </a>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+                        {% if page.get_children.live.in_menu.count > 0 %}
+                            <button class="flex flex-1 justify-end self-stretch items-center cursor-pointer px-4"
+                                    onclick="toggleSubMenu(this)">
+                                <svg class="size-5 transition-transform duration-300" viewBox="0 0 20 20"
+                                     fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        {% endif %}
                     </div>
-                </div>
+                    {% if page.get_children.live.in_menu.count > 0 %}
+                        <div class="submenu w-full mt-2 space-y-2 overflow-hidden transition-all duration-300 max-h-0 text-right">
+                            {% for child in page.get_children.live.in_menu %}
+                                <a href="{{ child.url }}"
+                                   class="mobile-nav-link pl-10! py-2! text-light-text/70{% if child.url == request.path %}active{% endif %}">
+                                    {{ child.title }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
