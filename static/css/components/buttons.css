@@ -39,7 +39,7 @@
     @apply flex w-full items-center justify-between rounded-lg py-4 pr-3.5 pl-3 text-base/7 font-semibold transition-colors hover:text-link-hover hover:bg-black/10;
 }
 
-.nav-link.active, .nav_submenu-link.active, .mobile-nav-link.active {
+.nav-link.active, .nav_submenu-link.active, .mobile-nav-link.active, .mobile-nav-link > *.active {
     @apply text-link-hover!;
 }
 
