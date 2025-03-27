@@ -37,8 +37,13 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
     --h6-font-size:                 1rem;
 }
 
+meta[name="theme-color"] {
+    content: var(--color-primary);
+}
+
 html {
     font-family: Satoshi-Medium, sans-serif;
+    scrollbar-color: var(--color-primary) var(--color-background);
     @apply scroll-smooth;
 }
 
