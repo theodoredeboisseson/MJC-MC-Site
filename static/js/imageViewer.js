@@ -7,16 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
         img.addEventListener('click', function() {
             modal.style.display = 'flex';
             modalImg.src = this.src;
+            document.body.classList.add('no-scroll');
         });
     });
 
     closeBtn.addEventListener('click', function() {
         modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
     });
 
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             modal.style.display = 'none';
         }
+        document.body.classList.remove('no-scroll');
     });
 });
