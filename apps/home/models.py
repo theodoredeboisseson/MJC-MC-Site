@@ -9,7 +9,7 @@ from apps.common.models import BasePage
 
 
 class RotatingWord(models.Model):
-    page = ParentalKey('home.PageAcceuil', related_name='rotating_words', on_delete=models.CASCADE)
+    page = ParentalKey('home.PageAccueil', related_name='rotating_words', on_delete=models.CASCADE)
     word = models.CharField(max_length=255, default="de l'Art")
 
     panels = [
@@ -19,7 +19,7 @@ class RotatingWord(models.Model):
     def __str__(self):
         return self.word
 
-class PageAcceuil(BasePage):
+class PageAccueil(BasePage):
     intro_title = models.CharField(max_length=255, verbose_name="Titre d'introduction", default="Bienvenue à la MJC")
     hero_image = models.ForeignKey(
         'wagtailimages.Image',
