@@ -213,3 +213,16 @@ html {
 .no-scroll {
     overflow: hidden;
 }
+
+.scrolling-text-container {
+    @apply w-full overflow-hidden whitespace-nowrap py-4;
+}
+
+.scrolling-text {
+    @apply inline-block pl-[100%] animate-[scroll-text_20s_linear_infinite] text-xl text-white;
+}
+
+@keyframes scroll-text {
+    from {transform: translateX(0);}
+    to {transform: translateX(-100%);}
+}

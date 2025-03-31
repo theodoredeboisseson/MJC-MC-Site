@@ -87,9 +87,14 @@
         {# Flash Banner #}
         {% with settings.common.FlashMessage as flash %}
         {% if flash.message and flash.show %}
-            <div id="flash-banner" class="hidden bg-red-500 text-white p-4 text-center fixed bottom-0 w-full z-1000">
-                <p>{{ flash.message|richtext }}</p>
-                <button class="absolute top-2 right-2 text-4xl text-white cursor-pointer" onclick="closeFlashBanner()">&times;</button>
+            <div id="flash-banner" class="hidden scrolling-text-container fixed bottom-0 bg-red-600 text-white">
+                <div class="scrolling-text">{{ flash.message|richtext }}</div>
+                <button class="absolute top-1/2 right-4 transform -translate-y-1/2" onclick="closeFlashBanner()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-10" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
             </div>
         {% endif %} 
         
