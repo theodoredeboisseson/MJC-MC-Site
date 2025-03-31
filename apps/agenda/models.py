@@ -31,6 +31,19 @@ class EventListPage(BasePage):
         sort_by = request.GET.get('sort_by', default_sort)
         villes = request.GET.get('ville', '')
         search_query = request.GET.get('search', '')
+    
+        # Validate sort_by
+        if sort_by not in ['start_date', 'title', 'end_date']:
+            sort_by = default_sort
+    
+        # Validate villes
+        if villes:
+            ville_list = villes.split(',')
+            for ville in ville_list:
+                if ville not in [EventPage.MAUGUIO, EventPage.CARNON, EventPage.BOTH]:
+                    villes = ''
+                    break
+    
         events = get_events(date_filter, sort_by, villes)
     
         if search_query:
