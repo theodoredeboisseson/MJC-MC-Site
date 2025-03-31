@@ -9,4 +9,4 @@ class WagtailPageSitemap(Sitemap):
         return Page.objects.live().public()
 
     def location(self, item):
-        return item.url
+        return item.url if item.url else ''
