@@ -2,7 +2,7 @@
 {% load wagtailcore_tags navigation_tags %}
 
 {% block extra %}
-    <time class="text-light-text bg-secondary/90 px-6 py-2 rounded-xl">
-        {{ page.start_date|date:"d F Y" }}{% if page.end_date %} - {{ page.end_date|date:"d F Y" }}{% endif %}
-    </time>
+    <div class="info-bubble text-lg!">
+        <time>{{ page.start_date|date:"d F Y" }}{% if page.end_date %} - {{ page.end_date|date:"d F Y" }} {% endif %}</time> à {{ page.ville }}
+    </div>
 {% endblock %}

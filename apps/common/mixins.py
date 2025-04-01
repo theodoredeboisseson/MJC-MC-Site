@@ -31,3 +31,26 @@ class ContentMixin(models.Model):
 
     class Meta:
         abstract = True
+           
+class VilleMixin(models.Model):
+    MAUGUIO = 'Mauguio'
+    CARNON = 'Carnon'
+    BOTH = 'Les deux'
+    VILLE_CHOICES = [
+        (MAUGUIO, 'Mauguio'),
+        (CARNON, 'Carnon'),
+        (BOTH, 'Mauguio et Carnon'),
+    ]
+    ville = models.CharField(
+        max_length=10,
+        choices=VILLE_CHOICES,
+        default=MAUGUIO,
+        blank=True
+    )
+    
+    content_panels = [
+        FieldPanel('ville'),
+    ]
+    
+    class Meta:
+        abstract = True

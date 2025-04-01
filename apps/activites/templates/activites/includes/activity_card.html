@@ -3,9 +3,13 @@
     <div class="flex flex-col justify-center items-center text-center md:w-1/2 p-4 md:p-8 pb-0">
         <h1 class="font-bold">{{ page.title }}</h1>
         <p class="mt-4 mb-8 text-white/80">{{ page.subtitle }}</p>
-        {% if page.link %}
-            <a href="{{ page.link }}" target="_blank" class="btn bg-white text-blue-500 hover:bg-gray-200">Voir plus</a>
-        {% endif %}
+        <div class="flex flex-row gap-8 items-center">
+            <div class="info-bubble text-lg!"> 📍 {{ page.ville }}</div>
+            {% if page.link %}
+                <a href="{{ page.link }}" target="_blank" class="btn bg-white text-blue-500 hover:bg-gray-200">Voir plus</a>
+            {% endif %}
+        </div>
+        
     </div>
     {% if page.image %}
         <div class="relative flex justify-center items-center scale-115 md:scale-120 transform mx-0 my-16 md:my-0 md:mx-0 md:w-1/3 max-w-[95vw]">

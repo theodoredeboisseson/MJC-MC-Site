@@ -12,6 +12,13 @@
         </div>
     {% endif %}
     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/40 group-hover:from-black/20 group-hover:to-black/10 transition-colors duration-300"></div>
+
+    {% if page.ville %}
+        <div class="absolute top-2 right-2 info-bubble">
+            {{ page.ville }}
+        </div>
+    {% endif %}
+
     <div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
         <h2 class="text-lg sm:text-xl font-bold text-white mb-1 sm:mb-2">{{ page.title }}</h2>
         {% if page.subtitle %}

@@ -213,6 +213,10 @@ html {
     @apply bg-white/30 backdrop-blur-xl text-dark-text rounded-lg ring-1 ring-white/50;
 }
 
+.info-bubble {
+    @apply px-3 py-1 bg-secondary text-white text-sm font-bold rounded-full shadow-md
+}
+
 .no-scroll {
     overflow: hidden;
 }

@@ -5,6 +5,7 @@ from wagtail.admin.panels import FieldPanel
 from django.core.paginator import Paginator
 from django.utils import timezone
 
+from apps.common.mixins import VilleMixin
 from apps.common.models import DetailPage, BasePage
 
 
@@ -85,16 +86,7 @@ class AgendaIndexPage(EventListPage):
         verbose_name = "Page Agenda"
 
 
-class EventPage(DetailPage):
-    MAUGUIO = 'Mauguio'
-    CARNON = 'Carnon'
-    BOTH = 'Les deux'
-    VILLE_CHOICES = [
-        (MAUGUIO, 'Mauguio'),
-        (CARNON, 'Carnon'),
-        (BOTH, 'Mauguio et Carnon'),
-    ]
-
+class EventPage(DetailPage, VilleMixin):
     start_date = models.DateField(
         "Date de début",
         help_text="Date de début de l'événement",
@@ -106,13 +98,8 @@ class EventPage(DetailPage):
         null=True,
         help_text="Date de fin de l'événement (laisser vide si l'événement dure un seul jour)"
     )
-    ville = models.CharField(
-        max_length=10,
-        choices=VILLE_CHOICES,
-        default=MAUGUIO,
-    )
 
-    content_panels = DetailPage.content_panels + [
+    content_panels = DetailPage.content_panels + VilleMixin.content_panels + [
         FieldPanel('start_date'),
         FieldPanel('end_date'),
         FieldPanel('ville'),

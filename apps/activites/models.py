@@ -7,7 +7,7 @@ from wagtail.models import Page, Orderable
 from modelcluster.models import ClusterableModel
 from wagtail.snippets.models import register_snippet
 
-from apps.common.mixins import ContentMixin
+from apps.common.mixins import ContentMixin, VilleMixin
 from apps.common.models import DetailPage, SEOMixin, BasePage
 
 
@@ -31,7 +31,7 @@ class SubActivity(Orderable):
     def __str__(self):
         return self.title
 
-class ActivityPage(DetailPage):
+class ActivityPage(DetailPage, VilleMixin):
     DetailPage.content.verbose_name = "Description"
     animateurs = ParentalManyToManyField('activites.Animateur', blank=True)
     link = models.URLField(
@@ -40,7 +40,7 @@ class ActivityPage(DetailPage):
         blank=True,
     )
 
-    content_panels = DetailPage.content_panels + [
+    content_panels = DetailPage.content_panels + VilleMixin.content_panels + [
         FieldPanel('animateurs', widget=CheckboxSelectMultiple),
         InlinePanel('sub_activities', label="Sous Activités"),
         FieldPanel('link'),
