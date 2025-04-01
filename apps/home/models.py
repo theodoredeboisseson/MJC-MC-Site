@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 from modelcluster.fields import ParentalKey
@@ -47,10 +47,12 @@ class PageAccueil(BasePage):
         return get_future_events(3)
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro_title'),
-        FieldPanel('intro_subtitle'),
-        InlinePanel('rotating_words', label="Mot à défiler"),
-        FieldPanel('hero_image'),
+        MultiFieldPanel([
+            FieldPanel('intro_title'),
+            FieldPanel('intro_subtitle'),
+            InlinePanel('rotating_words', label="Mot à défiler"),
+            FieldPanel('hero_image'),
+        ], heading="Introduction"),
         FieldPanel('video_url'),
         FieldPanel('extra_content'),
     ]
