@@ -11,7 +11,7 @@
         {% endif %}
         {% if event.image %}
             {% image event.image fill-400x300 as event_img %}
-            <img src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-full object-cover">
+            <img loading="lazy" src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-full object-cover">
         {% else %}
             <div class="flex items-center justify-center h-full">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="size-20 text-gray-400">

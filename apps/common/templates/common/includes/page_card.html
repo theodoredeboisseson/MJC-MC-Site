@@ -3,11 +3,7 @@
 <a href="{% pageurl page %}" class="block h-48 w-3/4 sm:w-72 group relative overflow-hidden rounded-lg shadow-lg hover:scale-105 transition-transform duration-200 ease-in-out">
     {% if page.image %}
         {% image page.image fill-600x400 as img %}
-        <img src="{{ img.url }}" alt="{{ page.title }}"
-             class="w-full h-full object-cover"
-             width="{{ img.width }}"
-             height="{{ img.height }}"
-             loading="lazy">
+        <img src="{{ img.url }}" alt="{{ page.title }}" class="w-full h-full object-cover" loading="lazy">
     {% else %}
         <div class="flex items-center justify-center h-full">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="size-20 text-dark-text">

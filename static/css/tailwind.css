@@ -148,7 +148,7 @@ html {
 -----------------------------------------*/
 
 .rotating-text-wrapper {
-    @apply inline-block relative text-left perspective-near;
+    @apply inline-block relative text-left perspective-near w-50;
 }
 
 .rotating-text {
@@ -207,7 +207,7 @@ html {
   GENERAL               
 -----------------------------------------*/
 .glass-div {
-    @apply bg-white/20 backdrop-blur-lg text-dark-text rounded-lg ring-1 ring-white/50;
+    @apply bg-white/30 backdrop-blur-xl text-dark-text rounded-lg ring-1 ring-white/50;
 }
 
 .no-scroll {
