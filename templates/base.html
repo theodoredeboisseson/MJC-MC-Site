@@ -11,11 +11,9 @@
                 {% else %}
                     {{ page.title }}
                 {% endif %}
-                {% if page.seo_title or page.title %}
-                    {% wagtail_site as current_site %}
-                    {% if current_site and current_site.site_name %}
-                        - {{ current_site.site_name }}
-                    {% endif %}
+                {% wagtail_site as current_site %}
+                {% if current_site and current_site.site_name %}
+                    - {{ current_site.site_name }}
                 {% endif %}
             {% endblock %}
         </title>
@@ -58,7 +56,17 @@
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+        <link rel="icon" href="{% static 'images/favicon/favicon.ico' %}" type="image/x-icon">
         <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "MJC Mauguio-Carnon",
+              "url": "https://mjcmauguiocarnon.com",
+              "logo": "https://mjcmauguiocarnon.com/static/logo.png"
+            }
+        </script>
     
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -87,9 +95,9 @@
         {# Flash Banner #}
         {% with settings.common.FlashMessage as flash %}
         {% if flash.message and flash.show %}
-            <div id="flash-banner" class="hidden scrolling-text-container fixed bottom-0 bg-red-600 text-white">
+            <div id="flash-banner" class="hidden scrolling-text-container fixed bottom-0 bg-red-600 text-white z-1000">
                 <div class="scrolling-text">{{ flash.message|richtext }}</div>
-                <button class="absolute top-1/2 right-4 transform -translate-y-1/2" onclick="closeFlashBanner()">
+                <button class="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer" onclick="closeFlashBanner()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-10" xmlns="http://www.w3.org/2000/svg">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
