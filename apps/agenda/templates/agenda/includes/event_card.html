@@ -4,7 +4,7 @@
     onclick="window.location.href='{{ event.url }}'">
     {# Image et les dates #}
     <div class="relative overflow-hidden h-full bg-gray-200 text-light-text">
-        {% if section_class == "past-events" %}
+        {% if showing_past %}
             <div class="absolute z-10 w-full text-center px-4 py-1 tracking-widest glass-div">
                 Passé
             </div>

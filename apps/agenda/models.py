@@ -61,33 +61,28 @@ class EventListPage(BasePage):
 class AgendaIndexPage(EventListPage):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        events_context, paginator = self.get_events_context(
-            request, 
-            models.Q(start_date__gte=timezone.now()),
-            'start_date'
-        )
-        context.update(events_context)
-        context['upcoming_events'] = paginator.get_page(request.GET.get('page'))
-        context['past_events_page'] = self.get_children().type(PastEventsPage).live().first()
+
+        filter_type = request.GET.get('filter')
+
+        # Filtrage des événements en fonction de la date
+        if filter_type == 'past':
+            events = EventPage.objects.live().filter(start_date__lt=timezone.now()).order_by('-start_date')
+            context['showing_past'] = True
+        else:
+            events = EventPage.objects.live().filter(start_date__gte=timezone.now()).order_by('start_date')
+            context['showing_past'] = False
+
+        # Pagination (10 événements par page)
+        paginator = Paginator(events, 10)
+        context['event_list'] = paginator.get_page(request.GET.get('page'))
+
+        # Générer l'URL du bouton toggle
+        context['toggle_url'] = f"{self.url}?filter={'upcoming' if context['showing_past'] else 'past'}"
+
         return context
 
     class Meta:
         verbose_name = "Page Agenda"
-
-class PastEventsPage(EventListPage):
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        events_context, paginator = self.get_events_context(
-            request, 
-            models.Q(start_date__lt=timezone.now()),
-            '-start_date'
-        )
-        context.update(events_context)
-        context['past_events'] = paginator.get_page(request.GET.get('page'))
-        return context
-
-    class Meta:
-        verbose_name = "Événements passés"
 
 
 class EventPage(DetailPage):
