@@ -26,7 +26,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("sitemap/", home_views.sitemap, name="sitemap"),
-    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap.xml"),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),]
 
 if settings.DEBUG:
