@@ -5,7 +5,6 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
 @import "./satoshi.css"; /*Font*/
 @import './components/buttons.css';
 @import './components/modal.css';
-@import "tailwindcss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -159,7 +158,6 @@ html {
 .rotating-text {
     @apply inline-block absolute whitespace-nowrap left-1 top-0 opacity-0 transform rotate-x-180 text-link-hover;
     transform-origin: 50% 100%;
-
 }
 
 .rotating-text.active {

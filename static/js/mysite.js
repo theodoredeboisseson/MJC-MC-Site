@@ -4,7 +4,7 @@ import StickyHeader from './modules/stickyHeader.js';
 
 const MySite = {
     config: {
-        carouselDelay: 3000,
+        carouselDelay: 4000,
         menuTransitionDelay: 300
     },
 

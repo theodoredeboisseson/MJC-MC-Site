@@ -21,6 +21,7 @@ class RotatingWord(models.Model):
 
 class PageAccueil(BasePage):
     intro_title = models.CharField(max_length=255, verbose_name="Titre d'introduction", default="Bienvenue à la MJC")
+    intro_subtitle = models.CharField(max_length=255, verbose_name="Sous-titre d'introduction", default="Ici, on vous propose")
     hero_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -47,10 +48,11 @@ class PageAccueil(BasePage):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro_title'),
+        FieldPanel('intro_subtitle'),
+        InlinePanel('rotating_words', label="Mot à défiler"),
         FieldPanel('hero_image'),
         FieldPanel('video_url'),
         FieldPanel('extra_content'),
-        InlinePanel('rotating_words', label="Mot à défiler"),
     ]
 
     class Meta:
