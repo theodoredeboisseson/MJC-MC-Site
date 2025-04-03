@@ -3,6 +3,6 @@
 
 {% block extra %}
     <div class="info-bubble text-lg!">
-        <time>{{ page.start_date|date:"d F Y" }}{% if page.end_date %} - {{ page.end_date|date:"d F Y" }} {% endif %}</time> à {{ page.ville }}
+        {{ page.start_date|date:"d F Y" }}{% if page.end_date %} - {{ page.end_date|date:"d F Y" }} {% endif %} à {{ page.ville }}
     </div>
 {% endblock %}
