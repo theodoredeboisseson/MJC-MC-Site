@@ -3,31 +3,42 @@
 
 {% block body_class %} bg-background {% endblock %}
 {% block content %}
-    <section id="hero">
-        {% image page.hero_image fill-1920x600 as hero %}
+    <section id="hero" class="relative">
+        {% image page.hero_image fill-1920x600 format-webp as hero_1920 %}
+        {% image page.hero_image fill-1200x800 format-webp as hero_1200 %}
+        {% image page.hero_image fill-600x400 format-webp as hero_600 %}
+
+        <!-- Image de fond optimisée -->
+        <div class="absolute inset-0 w-full h-full">
+            <img
+                    src="{{ hero_1920.url }}"
+                    srcset="{{ hero_600.url }} 600w, {{ hero_1200.url }} 1200w, {{ hero_1920.url }} 1920w"
+                    sizes="(max-width: 600px) 600px, (max-width: 1200px) 1200px, 1920px"
+                    alt="{{ page.hero_image.alt }}"
+                    class="w-full h-full object-cover"
+                    loading="eager"
+                    fetchpriority="high"
+            >
+            <div class="absolute inset-0 bg-black/20"></div>
+        </div>
+    
         <div class="relative min-h-[60vw] md:min-h-[45vw] lg:min-h-[35vw] w-full flex items-center">
-            {# Background waves and image #}
-            <div class="absolute inset-0 bg-black/20 z-10 flex flex-col justify-between items-stretch">
-                <svg xmlns="http://www.w3.org/2000/svg" class="rotate-180 text-primary -mt-[1px]" viewBox="0 0 1440 100">
-                    <defs>
-                        <path id="wave" d="M 0.001 99.696 L 101.799 68.248 C 140.202 60.351 169.599 41.323 250.483 36.092 C 331.367 30.861 418.007 67.864 493.941 56.343 C 569.875 44.822 640.001 44.175 720.001 52.175 C 800.001 60.175 880.001 74.175 960.001 83.875 C 1040.001 94.175 1120.001 100.175 1200.001 98.875 C 1280.001 97.175 1367.617 71.826 1439.815 52.37 L 1440 100 C 1360 100 1280 100 1200 100 C 1120 100 1040 100 960 100 C 880 100 800 100 720 100 C 640 100 560 100 480 100 C 400 100 320 100 240 100 C 160 100 80 100 40 100 L 0 100 L 0.001 99.696 Z"></path>
-                    </defs>
-                    <use href="#wave" fill="currentColor"></use>
+            <!-- Vagues SVG -->
+            <div class="absolute inset-x-0 -top-[1px] z-10 leading-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="rotate-180 text-primary" viewBox="0 0 1440 100">
+                    <path fill="currentColor" d="M 0.001 99.696 L 101.799 68.248 C 140.202 60.351 169.599 41.323 250.483 36.092 C 331.367 30.861 418.007 67.864 493.941 56.343 C 569.875 44.822 640.001 44.175 720.001 52.175 C 800.001 60.175 880.001 74.175 960.001 83.875 C 1040.001 94.175 1120.001 100.175 1200.001 98.875 C 1280.001 97.175 1367.617 71.826 1439.815 52.37 L 1440 100 C 1360 100 1280 100 1200 100 C 1120 100 1040 100 960 100 C 880 100 800 100 720 100 C 640 100 560 100 480 100 C 400 100 320 100 240 100 C 160 100 80 100 40 100 L 0 100 L 0.001 99.696 Z"></path>
                 </svg>
-                <svg class="-mb-[1px] text-background rotate-y-180" viewBox="0 0 1440 100">
-                    <use href="#wave" fill="currentColor"></use>
-                </svg>
-                <a href="#events-preview" class="absolute -bottom-6 md:bottom-8 right-5/32 transform z-30 md:bottom-0 btn-primary flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-primary text-light-text rounded-full shadow-lg scroll-smooth" aria-label="Bouton de scroll vers le bas">
-                    <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </a>
             </div>
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.url }}');"></div>
-        
-            <div class="container mx-auto h-full relative z-20 text-light-text flex flex-col items-center justify-between px-6 lg:px-12 py-8 font-bold">
+            <div class="absolute inset-x-0 bottom-0 z-10 leading-none">
+                <svg class="text-background rotate-y-180" viewBox="0 0 1440 100">
+                    <path fill="currentColor" d="M 0.001 99.696 L 101.799 68.248 C 140.202 60.351 169.599 41.323 250.483 36.092 C 331.367 30.861 418.007 67.864 493.941 56.343 C 569.875 44.822 640.001 44.175 720.001 52.175 C 800.001 60.175 880.001 74.175 960.001 83.875 C 1040.001 94.175 1120.001 100.175 1200.001 98.875 C 1280.001 97.175 1367.617 71.826 1439.815 52.37 L 1440 100 C 1360 100 1280 100 1200 100 C 1120 100 1040 100 960 100 C 880 100 800 100 720 100 C 640 100 560 100 480 100 C 400 100 320 100 240 100 C 160 100 80 100 40 100 L 0 100 L 0.001 99.696 Z"></path>
+                </svg>
+            </div>
+
+            <!-- Contenu -->
+            <div class="relative mx-auto z-20 flex flex-col items-center justify-center min-h-[60vw] md:min-h-[45vw] lg:min-h-[35vw] px-6 lg:px-12 py-8 text-light-text text-center font-bold">
                 <h1 class="text-xl md:text-2xl lg:text-3xl drop-shadow-lg">{{ page.intro_title }}</h1>
-                <h2 class="mb-4 pb-2 text-2xl md:text-3xl lg:text-4xl drop-shadow-lg flex flex-col md:flex-row items-center gap-2">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl drop-shadow-lg flex flex-col md:flex-row items-center gap-2">
                     <span>{{ page.intro_subtitle }}</span>
                     <span class="rotating-text-wrapper md:whitespace-nowrap">
                         {% for word in page.rotating_words.all %}
@@ -37,6 +48,13 @@
                 </h2>
             </div>
         </div>
+
+        <!-- Bouton scroll -->
+        <a href="#events-preview" class="absolute -bottom-6 md:bottom-8 right-5/32 transform z-30 md:bottom-0 btn-primary flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-primary text-light-text rounded-full shadow-lg scroll-smooth" aria-label="Bouton de scroll vers le bas">
+            <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </a>
     </section>
 
     {% if page.video_url %}
