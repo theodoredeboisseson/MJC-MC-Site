@@ -12,13 +12,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from apps.search import views as search_views
 from apps.home import views as home_views
-from apps.common.sitemap import StaticViewSitemap
 from apps.common.wagtail_sitemap import WagtailPageSitemap
-
-sitemaps = {
-    "static": StaticViewSitemap(),
-    "wagtail": WagtailPageSitemap(),
-}
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -26,8 +20,9 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("sitemap/", home_views.sitemap, name="sitemap"),
-    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap.xml"),
-    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),]
+    path("sitemap.xml", sitemap, {"sitemaps": {"wagtail": WagtailPageSitemap()}}, name="sitemap.xml"),
+    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+]
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
