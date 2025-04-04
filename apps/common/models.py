@@ -21,7 +21,7 @@ class BasePage(Page, SEOMixin):
         abstract = True
 
 
-class BaseIndexPage(BasePage):
+class BaseIndexPage(BasePage, ContentMixin):
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -32,7 +32,7 @@ class BaseIndexPage(BasePage):
         help_text="L'image sert de miniature si la page est affichée dans une liste"
     )
     
-    content_panels = BasePage.content_panels + [
+    content_panels = BasePage.content_panels + ContentMixin.content_panels + [
         FieldPanel('image'),
     ]
     
@@ -56,10 +56,16 @@ class DetailPage(BasePage, ContentMixin):
         verbose_name="Image",
         help_text="L'image sert de miniature si la page est affichée dans une liste"
     )
+    show_image_in_page = models.BooleanField(
+        default=True,
+        verbose_name="Afficher l'image dans la page",
+        help_text="Décochez pour afficher l'image uniquement dans la grille de la page parente"
+    )
 
     content_panels = BasePage.content_panels + ContentMixin.content_panels + [
         FieldPanel('subtitle'),
         FieldPanel('image'),
+        FieldPanel('show_image_in_page'),
     ]
 
     class Meta:
