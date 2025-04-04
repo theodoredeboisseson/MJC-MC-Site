@@ -13,7 +13,7 @@ class BasePage(Page, VilleMixin, SEOMixin):
     """Base page class with SEO enhancements for all site pages."""
 
     # Add any fields that should be common to all pages
-    content_panels = VilleMixin.content_panels + []
+    content_panels = Page.content_panels + VilleMixin.content_panels + []
 
     # Add SEO panels to promote_panels
     promote_panels = Page.promote_panels + SEOMixin.seo_panels
