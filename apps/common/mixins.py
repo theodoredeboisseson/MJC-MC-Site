@@ -44,7 +44,6 @@ class VilleMixin(models.Model):
     ville = models.CharField(
         max_length=17,
         choices=VILLE_CHOICES,
-        default=MAUGUIO,
         blank=True
     )
     

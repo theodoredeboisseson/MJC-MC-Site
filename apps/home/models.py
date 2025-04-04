@@ -19,7 +19,7 @@ class RotatingWord(models.Model):
     def __str__(self):
         return self.word
 
-class PageAccueil(BasePage):
+class PageAccueil(Page):
     intro_title = models.CharField(max_length=255, verbose_name="Titre d'introduction", default="Bienvenue à la MJC")
     intro_subtitle = models.CharField(max_length=255, verbose_name="Sous-titre d'introduction", default="Ici, on vous propose")
     hero_image = models.ForeignKey(

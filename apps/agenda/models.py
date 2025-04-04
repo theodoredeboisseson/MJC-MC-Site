@@ -86,7 +86,7 @@ class AgendaIndexPage(EventListPage):
         verbose_name = "Page Agenda"
 
 
-class EventPage(DetailPage, VilleMixin):
+class EventPage(DetailPage):
     start_date = models.DateField(
         "Date de début",
         help_text="Date de début de l'événement",
@@ -99,7 +99,7 @@ class EventPage(DetailPage, VilleMixin):
         help_text="Date de fin de l'événement (laisser vide si l'événement dure un seul jour)"
     )
 
-    content_panels = DetailPage.content_panels + VilleMixin.content_panels + [
+    content_panels = DetailPage.content_panels + [
         FieldPanel('start_date'),
         FieldPanel('end_date'),
         FieldPanel('ville'),

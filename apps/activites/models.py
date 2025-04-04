@@ -42,13 +42,13 @@ class SubActivity(Orderable):
     def __str__(self):
         return self.title
 
-class ActivityPage(DetailPage, VilleMixin):
+class ActivityPage(DetailPage):
     DetailPage.content.verbose_name = "Description"
     animateurs = ParentalManyToManyField('activites.Animateur', blank=True)
     link = models.URLField(max_length=200, help_text="Lien de redirection pour le bouton", blank=True)
     categories = models.ManyToManyField(ActivityCategory, blank=True, related_name="activities", help_text='Pour chercher par catégorie dans la liste des activités')
     
-    content_panels = DetailPage.content_panels + VilleMixin.content_panels + [
+    content_panels = DetailPage.content_panels + [
         FieldPanel('animateurs', widget=CheckboxSelectMultiple),
         InlinePanel('sub_activities', label="Sous Activités"),
         FieldPanel('link'),

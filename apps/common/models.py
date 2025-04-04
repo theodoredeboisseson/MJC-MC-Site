@@ -6,13 +6,14 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page
 from colorfield.fields import ColorField
 
-from apps.common.mixins import SEOMixin, ContentMixin
+from apps.common.mixins import SEOMixin, ContentMixin, VilleMixin
 
 
-class BasePage(Page, SEOMixin):
+class BasePage(Page, VilleMixin, SEOMixin):
     """Base page class with SEO enhancements for all site pages."""
 
     # Add any fields that should be common to all pages
+    content_panels = VilleMixin.content_panels + []
 
     # Add SEO panels to promote_panels
     promote_panels = Page.promote_panels + SEOMixin.seo_panels
