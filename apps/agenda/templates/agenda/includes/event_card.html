@@ -31,7 +31,7 @@
     
         <div class="font-medium text-sm">
             <div class="absolute bottom-4 left-4 info-bubble">
-                { event.start_date|date:"d M Y" }}{% if event.end_date %} - {{ event.end_date|date:"d M" }}{% endif %}
+                {{ event.start_date|date:"d M Y" }}{% if event.end_date %} - {{ event.end_date|date:"d M" }}{% endif %}
             </div>
             <div class="absolute bottom-4 right-4 info-bubble">
                 {{ event.ville }}
