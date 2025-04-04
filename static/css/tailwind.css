@@ -77,7 +77,7 @@ html {
     & p {
         @apply whitespace-pre-wrap break-words text-inherit leading-relaxed;
         &:not(:last-child) {
-            @apply mb-6;
+            @apply mb-4;
         }
     }
 

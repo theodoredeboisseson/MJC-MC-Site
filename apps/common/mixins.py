@@ -35,14 +35,14 @@ class ContentMixin(models.Model):
 class VilleMixin(models.Model):
     MAUGUIO = 'Mauguio'
     CARNON = 'Carnon'
-    BOTH = 'Les deux'
+    BOTH = 'Mauguio et Carnon'
     VILLE_CHOICES = [
         (MAUGUIO, 'Mauguio'),
         (CARNON, 'Carnon'),
         (BOTH, 'Mauguio et Carnon'),
     ]
     ville = models.CharField(
-        max_length=10,
+        max_length=17,
         choices=VILLE_CHOICES,
         default=MAUGUIO,
         blank=True
