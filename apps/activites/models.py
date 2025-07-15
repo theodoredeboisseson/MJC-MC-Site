@@ -46,7 +46,12 @@ class ActivityPage(DetailPage):
     DetailPage.content.verbose_name = "Description"
     animateurs = ParentalManyToManyField('activites.Animateur', blank=True)
     link = models.URLField(max_length=200, help_text="Lien de redirection pour le bouton", blank=True)
-    categories = models.ManyToManyField(ActivityCategory, blank=True, related_name="activities", help_text='Pour chercher par catégorie dans la liste des activités')
+    categories = ParentalManyToManyField(
+        'activites.ActivityCategory',
+        blank=True,
+        related_name='activities',
+        help_text='Pour chercher par catégorie dans la liste des activités'
+    )
     
     content_panels = DetailPage.content_panels + [
         FieldPanel('animateurs', widget=CheckboxSelectMultiple),
