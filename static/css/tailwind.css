@@ -19,15 +19,13 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
     /*--color-dark-text:              #20223B; !* #222D06 theme('colors.gray.700') *!*/
     /*--color-light-text:             #edf2f7; !* #FDFFE0 #E1D5BB *!*/
     /*--color-link-hover:             #63b3ed; !* #F2CC8F *!*/
-    /*--color-primary-light:          color-mix(in srgb, var(--color-primary) 80%, white 10%);*/
     /*--color-section-bg:             #d7e8ef; !* #F4F1DE #D7D1C5 *!*/
     --color-primary:                var(--color-primary);
     --color-secondary:              var(--color-secondary);
     --color-background:             var(--color-background);
     --color-dark-text:              var(--color-dark-text);
     --color-light-text:             var(--color-light-text);
-    --color-link-hover:             var(--color-link-hover); 
-    --color-primary-light:          color-mix(in srgb, var(--color-primary) 80%, white 10%);
+    --color-link-hover:             var(--color-link-hover);
     --color-section-bg:             var(--color-section-bg);
 
 
@@ -39,8 +37,13 @@ It will be compiled by the "npm run dev" command, in output.css which is one loa
     --h6-font-size:                 1rem;
 }
 
+meta[name="theme-color"] {
+    content: var(--color-primary);
+}
+
 html {
     font-family: Satoshi-Medium, sans-serif;
+    scrollbar-color: var(--color-primary) var(--color-background);
     @apply scroll-smooth;
 }
 
@@ -72,7 +75,10 @@ html {
 
     /* Paragraphes */
     & p {
-        @apply whitespace-pre-wrap break-words mb-6 text-inherit leading-relaxed;
+        @apply whitespace-pre-wrap break-words text-inherit leading-relaxed;
+        &:not(:last-child) {
+            @apply mb-4;
+        }
     }
 
     /* Liens */
@@ -127,6 +133,10 @@ html {
             
         }
     }
+
+    & iframe {
+        @apply w-full h-auto aspect-video rounded-3xl shadow-2xl;
+    }
 }
 
 .link {
@@ -142,13 +152,12 @@ html {
 -----------------------------------------*/
 
 .rotating-text-wrapper {
-    @apply inline-block relative text-left perspective-near;
+    @apply inline-block relative text-left perspective-near w-50;
 }
 
 .rotating-text {
     @apply inline-block absolute whitespace-nowrap left-1 top-0 opacity-0 transform rotate-x-180 text-link-hover;
     transform-origin: 50% 100%;
-
 }
 
 .rotating-text.active {
@@ -200,3 +209,27 @@ html {
 /*---------------------------------------
   GENERAL               
 -----------------------------------------*/
+.glass-div {
+    @apply bg-white/30 backdrop-blur-xl text-dark-text rounded-lg ring-1 ring-white/50;
+}
+
+.info-bubble {
+    @apply px-3 py-1 bg-secondary text-white text-sm font-bold rounded-full shadow-md
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.scrolling-text-container {
+    @apply w-full overflow-hidden whitespace-nowrap py-4;
+}
+
+.scrolling-text {
+    @apply inline-block pl-[100%] animate-[scroll-text_20s_linear_infinite] text-xl text-white;
+}
+
+@keyframes scroll-text {
+    from {transform: translateX(0);}
+    to {transform: translateX(-100%);}
+}

@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 from modelcluster.fields import ParentalKey
@@ -9,7 +9,7 @@ from apps.common.models import BasePage
 
 
 class RotatingWord(models.Model):
-    page = ParentalKey('home.PageAcceuil', related_name='rotating_words', on_delete=models.CASCADE)
+    page = ParentalKey('home.PageAccueil', related_name='rotating_words', on_delete=models.CASCADE)
     word = models.CharField(max_length=255, default="de l'Art")
 
     panels = [
@@ -19,8 +19,9 @@ class RotatingWord(models.Model):
     def __str__(self):
         return self.word
 
-class PageAcceuil(BasePage):
+class PageAccueil(Page):
     intro_title = models.CharField(max_length=255, verbose_name="Titre d'introduction", default="Bienvenue à la MJC")
+    intro_subtitle = models.CharField(max_length=255, verbose_name="Sous-titre d'introduction", default="Ici, on vous propose")
     hero_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -46,11 +47,14 @@ class PageAcceuil(BasePage):
         return get_future_events(3)
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro_title'),
-        FieldPanel('hero_image'),
+        MultiFieldPanel([
+            FieldPanel('intro_title'),
+            FieldPanel('intro_subtitle'),
+            InlinePanel('rotating_words', label="Mot à défiler"),
+            FieldPanel('hero_image'),
+        ], heading="Introduction"),
         FieldPanel('video_url'),
         FieldPanel('extra_content'),
-        InlinePanel('rotating_words', label="Mot à défiler"),
     ]
 
     class Meta:

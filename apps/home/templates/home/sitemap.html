@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="flex flex-col justify-center items-center mt-8">
-        <h1>Plan du site</h1>
+    <div class="flex flex-col justify-center items-center my-8">
+        <h1 class="text-8xl">Plan du site</h1>
         <div class="flex flex-col">
             {% for page in pages %}
-                <a href="{{ page.url }}" style="margin-left: {{ page.margin_left }}em; font-size: {{ page.font_size }}em;">
+                <a href="{{ page.url }}" style="margin-left: {{ page.margin_left }}rem; font-size: calc(4em - {{ page.depth }}em / 2);">
                     {{ page.title }}
                 </a>
             {% endfor %}

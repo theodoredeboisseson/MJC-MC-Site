@@ -6,13 +6,14 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page
 from colorfield.fields import ColorField
 
-from apps.common.mixins import SEOMixin, ContentMixin
+from apps.common.mixins import SEOMixin, ContentMixin, VilleMixin
 
 
-class BasePage(Page, SEOMixin):
+class BasePage(Page, VilleMixin, SEOMixin):
     """Base page class with SEO enhancements for all site pages."""
 
     # Add any fields that should be common to all pages
+    content_panels = Page.content_panels + VilleMixin.content_panels + []
 
     # Add SEO panels to promote_panels
     promote_panels = Page.promote_panels + SEOMixin.seo_panels
@@ -21,7 +22,7 @@ class BasePage(Page, SEOMixin):
         abstract = True
 
 
-class BaseIndexPage(BasePage):
+class BaseIndexPage(BasePage, ContentMixin):
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -32,7 +33,7 @@ class BaseIndexPage(BasePage):
         help_text="L'image sert de miniature si la page est affichée dans une liste"
     )
     
-    content_panels = BasePage.content_panels + [
+    content_panels = BasePage.content_panels + ContentMixin.content_panels + [
         FieldPanel('image'),
     ]
     
@@ -56,10 +57,16 @@ class DetailPage(BasePage, ContentMixin):
         verbose_name="Image",
         help_text="L'image sert de miniature si la page est affichée dans une liste"
     )
+    show_image_in_page = models.BooleanField(
+        default=True,
+        verbose_name="Afficher l'image dans la page",
+        help_text="Décochez pour afficher l'image uniquement dans la grille de la page parente"
+    )
 
     content_panels = BasePage.content_panels + ContentMixin.content_panels + [
         FieldPanel('subtitle'),
         FieldPanel('image'),
+        FieldPanel('show_image_in_page'),
     ]
 
     class Meta:

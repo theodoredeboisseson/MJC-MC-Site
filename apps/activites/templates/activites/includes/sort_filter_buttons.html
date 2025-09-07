@@ -1,4 +1,4 @@
-<div class="mb-4 flex flex-wrap items-center gap-4 lg:gap-8">
+<div class="mb-4 flex flex-wrap items-center gap-4 lg:gap-6 lg:justify-evenly">
     <div>
         <label for="sort_by" class="mr-2">Trier par :</label>
         <select id="sort_by" name="sort_by" onchange="updateURLParameter('sort_by', this.value);" class="p-2 pl-4 rounded-xl border">
@@ -7,11 +7,24 @@
         </select>
     </div>
 
-    <div class="flex gap-2 flex-wrap">
-        <button onclick="updateURLParameter('search', '');" class="btn btn-outline {% if filter == 'tous' %}active{% endif %}">Toutes les activités</button>
+    <div>
+        <label for="category_filter" class="mr-2">Catégorie :</label>
+        <select id="category_filter" name="category" onchange="updateURLParameter('category', this.value);" class="p-2 pl-4 rounded-xl border">
+            <option value="" {% if not selected_category %}selected{% endif %}>Toutes</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+            {% endfor %}
+        </select>
     </div>
 
-    <input type="text" id="search" name="search" placeholder="Rechercher une activité" value="{{ search_query }}"
-           onkeydown="if (event.key === 'Enter') updateURLParameter('search', this.value);"
-           class="ml-4 p-2 border rounded-xl w-full lg:w-1/2">
+    <div class="flex gap-2 flex-wrap">
+        <button onclick="toggleVille('Mauguio');" class="btn btn-outline {% if 'Mauguio' in villes %}active{% endif %}">Mauguio</button>
+        <button onclick="toggleVille('Carnon');" class="btn btn-outline {% if 'Carnon' in villes %}active{% endif %}">Carnon</button>
+    </div>
+
+    <label for="search"></label><input type="text" id="search" name="search" placeholder="Rechercher une activité" value="{{ search_query }}"
+                                       onkeydown="if (event.key === 'Enter') updateURLParameter('search', this.value);"
+                                       class="ml-4 p-2 border rounded-xl w-full lg:w-1/3">
 </div>

@@ -18,8 +18,11 @@ django-colorfield = "^0.12.0"
 gunicorn = "^23.0.0"
 psycopg2-binary = "^2.9.10"
 dj-database-url = "^2.3.0"
+pymemcache = "^4.0.0"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+# poetry config virtualenvs.in-project true

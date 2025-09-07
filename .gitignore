@@ -24,7 +24,6 @@ poetry.lock
 # Tailwind CSS & Node.js
 node_modules/
 dist/
-static/css/output.min.css
 
 # IDEs & Editors
 .vscode/
@@ -54,3 +53,4 @@ yarn-error.log*
 backups/*
 
 data/*
+.qodo

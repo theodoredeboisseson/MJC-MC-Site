@@ -5,6 +5,7 @@ from wagtail.admin.panels import FieldPanel
 from django.core.paginator import Paginator
 from django.utils import timezone
 
+from apps.common.mixins import VilleMixin
 from apps.common.models import DetailPage, BasePage
 
 
@@ -31,6 +32,19 @@ class EventListPage(BasePage):
         sort_by = request.GET.get('sort_by', default_sort)
         villes = request.GET.get('ville', '')
         search_query = request.GET.get('search', '')
+    
+        # Validate sort_by
+        if sort_by not in ['start_date', 'title', 'end_date']:
+            sort_by = default_sort
+    
+        # Validate villes
+        if villes:
+            ville_list = villes.split(',')
+            for ville in ville_list:
+                if ville not in [EventPage.MAUGUIO, EventPage.CARNON, EventPage.BOTH]:
+                    villes = ''
+                    break
+    
         events = get_events(date_filter, sort_by, villes)
     
         if search_query:
@@ -48,45 +62,31 @@ class EventListPage(BasePage):
 class AgendaIndexPage(EventListPage):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        events_context, paginator = self.get_events_context(
-            request, 
-            models.Q(start_date__gte=timezone.now()),
-            'start_date'
-        )
-        context.update(events_context)
-        context['upcoming_events'] = paginator.get_page(request.GET.get('page'))
-        context['past_events_page'] = self.get_children().type(PastEventsPage).live().first()
+
+        filter_type = request.GET.get('filter')
+
+        # Filtrage des événements en fonction de la date
+        if filter_type == 'past':
+            events = EventPage.objects.live().filter(start_date__lt=timezone.now()).order_by('-start_date')
+            context['showing_past'] = True
+        else:
+            events = EventPage.objects.live().filter(start_date__gte=timezone.now()).order_by('start_date')
+            context['showing_past'] = False
+
+        # Pagination (10 événements par page)
+        paginator = Paginator(events, 10)
+        context['event_list'] = paginator.get_page(request.GET.get('page'))
+
+        # Générer l'URL du bouton toggle
+        context['toggle_url'] = f"{self.url}?filter={'upcoming' if context['showing_past'] else 'past'}"
+
         return context
 
     class Meta:
         verbose_name = "Page Agenda"
 
-class PastEventsPage(EventListPage):
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        events_context, paginator = self.get_events_context(
-            request, 
-            models.Q(start_date__lt=timezone.now()),
-            '-start_date'
-        )
-        context.update(events_context)
-        context['past_events'] = paginator.get_page(request.GET.get('page'))
-        return context
-
-    class Meta:
-        verbose_name = "Événements passés"
-
 
 class EventPage(DetailPage):
-    MAUGUIO = 'Mauguio'
-    CARNON = 'Carnon'
-    BOTH = 'Les deux'
-    VILLE_CHOICES = [
-        (MAUGUIO, 'Mauguio'),
-        (CARNON, 'Carnon'),
-        (BOTH, 'Mauguio et Carnon'),
-    ]
-
     start_date = models.DateField(
         "Date de début",
         help_text="Date de début de l'événement",
@@ -97,11 +97,6 @@ class EventPage(DetailPage):
         blank=True,
         null=True,
         help_text="Date de fin de l'événement (laisser vide si l'événement dure un seul jour)"
-    )
-    ville = models.CharField(
-        max_length=10,
-        choices=VILLE_CHOICES,
-        default=MAUGUIO,
     )
 
     content_panels = DetailPage.content_panels + [

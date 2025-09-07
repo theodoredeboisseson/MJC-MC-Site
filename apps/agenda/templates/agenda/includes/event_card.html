@@ -2,15 +2,16 @@
 
 <article class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col hover:scale-[1.03] cursor-pointer"
     onclick="window.location.href='{{ event.url }}'">
-    <div class="relative overflow-hidden h-56 bg-gray-200 text-light-text">
-        {% if section_class == "past-events" %}
-            <div class="absolute z-10 w-full bg-gray-500/90 text-center px-4 py-1 tracking-widest">
+    {# Image et les dates #}
+    <div class="relative overflow-hidden h-full bg-gray-200 text-light-text">
+        {% if showing_past %}
+            <div class="absolute z-10 w-full text-center px-4 py-1 tracking-widest glass-div">
                 Passé
             </div>
         {% endif %}
         {% if event.image %}
             {% image event.image fill-400x300 as event_img %}
-            <img src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-56 object-cover">
+            <img loading="lazy" src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-full object-cover">
         {% else %}
             <div class="flex items-center justify-center h-full">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="size-20 text-gray-400">
@@ -18,29 +19,23 @@
                 </svg>
             </div>
         {% endif %}
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent h-24"></div>
-        <time class="absolute bottom-4 left-4 font-medium px-3 py-1 bg-secondary/80 rounded-full text-sm">
-            {{ event.start_date|date:"d M Y" }}{% if event.end_date %} - {{ event.end_date|date:"d M" }}{% endif %}
-        </time>
-        <div class="absolute bottom-4 right-4 font-medium px-3 py-1 bg-secondary/80 rounded-full text-sm">
-            {{ event.get_ville_display }}
-        </div>
-    </div>
-    <div class="p-6 flex flex-col flex-grow h-auto">
-        <div class="flex-grow">
-            <h3 class="text-xl font-bold mb-2 group-hover:text-dark-text transition-colors">
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/20 to-transparent h-full"></div>
+        <div class="absolute bottom-14 left-4 right-4 p-4 glass-div">
+            <h3 class="text-2xl font-bold mb-2  line-clamp-1">
                 {{ event.title }}
             </h3>
-            <div class="text-dark-text/60 line-clamp-3">
+            <div class="opacity-80 line-clamp-2">
                 {{ event.subtitle|default:event.content|richtext|striptags|truncatewords:20 }}
             </div>
         </div>
-        <a href="{{ event.url }}" class="btn-outline mt-2 relative overflow-hidden group-hover:text-white! group-hover:border-secondary!">
-            <span class="absolute inset-0 bg-secondary transition-transform duration-300 transform -translate-x-full group-hover:translate-x-0"></span>
-            <span class="relative z-10">En savoir plus</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5 relative z-10">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
-        </a>
+    
+        <div class="font-medium text-sm">
+            <div class="absolute bottom-4 left-4 info-bubble">
+                {{ event.start_date|date:"d M Y" }}{% if event.end_date %} - {{ event.end_date|date:"d M" }}{% endif %}
+            </div>
+            <div class="absolute bottom-4 right-4 info-bubble">
+                {{ event.ville }}
+            </div>
+        </div>
     </div>
 </article>

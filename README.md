@@ -1,202 +1,225 @@
-# 🌐 Site Web de la MJC Mauguio-Carnon
+# MJC-MC-Site
 
-Ce projet vise à refondre le site web de la Maison des Jeunes et de la Culture (MJC) de Mauguio-Carnon. L’objectif est de proposer une plateforme ergonomique, esthétique et facile à maintenir, permettant aux visiteurs d’accéder rapidement aux informations sur les activités de l’association.
+## Description du projet
+Site web pour la Maison des Jeunes et de la Culture (MJC), développé avec Django et Wagtail. Ce site permet de gérer les activités, l'agenda des événements et les informations sur l'association.
 
----
+## 🚀 Démarrage rapide
 
-## 🚀 Objectifs du projet
-✅ **Interface moderne et responsive** : Utilisation de **Tailwind CSS** pour un design épuré et adaptatif.  
-✅ **Gestion simplifiée du contenu** : Intégration de **Wagtail CMS** pour permettre aux non-développeurs de gérer facilement le site (actualités, activités, événements…).  
-✅ **Maintenance optimisée** : Code organisé et utilisation d’outils modernes pour réduire la charge de maintenance.
+### Prérequis
+- Python 3.12+
+- Node.js et npm
+- Docker et Docker Compose (optionnel, pour le développement avec conteneurs)
+- [Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) (gestionnaire de dépendances Python)
 
----
+### Installation
 
-## 🛠️ Technologies utilisées
-| Technologie  | Utilisation  |
-|-------------|-------------|
-| **[Django](https://www.djangoproject.com/)**  | Framework backend (Python) |
-| **[Wagtail CMS](https://wagtail.org/)**  | Gestionnaire de contenu basé sur Django |
-| **[PostgreSQL](https://www.postgresql.org/)**  | Base de données |
-| **[Tailwind CSS](https://tailwindcss.com/)**  | Framework CSS moderne |
-| **[Poetry](https://python-poetry.org/)**  | Gestion des dépendances Python |
-| **[dotenv](https://pypi.org/project/python-dotenv/)**  | Gestion des variables d’environnement |
-
-📌 D’autres technologies comme **Alpine.js** et **AWS S3** pourraient être ajoutées à l’avenir.
-
----
-
-## 📋 Prérequis
-Avant de commencer, assurez-vous d’avoir installé :
-- **Python 3.10+**
-- **Poetry** *(gestion des dépendances Python)*
-- **Node.js & npm** *(pour Tailwind CSS)*
-- **PostgreSQL** *(ou Docker pour un conteneur PostgreSQL)*
-
----
-
-## ⚙️ Installation et configuration
-
-### 🔹 1. Cloner le projet
-```sh
+#### Option 1: Installation locale
+```bash
+# Cloner le dépôt
 git clone git@github.com:theodoredeboisseson/MJC-MC-Site.git
 cd MJC-MC-Site
-```
 
-### 🔹 2. Installer les dépendances
-```sh
+# Installer les dépendances Python avec Poetry
 poetry install
-poetry env use python3.12  # (ou une version compatible)
+poetry env use python3.12 # (ou une version compatible)
+
+# Installer les dépendances JavaScript
+npm install
+
+# Compiler les assets CSS avec Tailwind
+npm run build
+
+# Veuillez d'abord configurer la BD
+# Appliquer les changements de Django à la BD
+python manage.py migrate
+
+# Collecter les fichiers statiques (nécessaire en prod)
+python manage.py collectstatic --noinput
+
+# Créer un superutilisateur pour se connecter à l'interface d'administration
+python manage.py createsuperuser
+
+# Lancer le serveur de développement
+python manage.py runserver
 ```
 
-### 🔹 3. Configurer les variables d’environnement
-Copiez l’exemple de fichier `.env` et modifiez-le avec vos informations :
-```sh
-cp .env.example .env
-```
-Exemple de contenu du `.env` :
-```
-DEBUG=True
-SECRET_KEY=supersecretkey
-DATABASE_URL=postgres://user:password@localhost/dbname
+#### Option 2: Utilisation de Docker
+```bash
+# Cloner le dépôt
+git clone https://github.com/votre-username/MJC-MC-Site.git
+cd MJC-MC-Site
+
+# Lancer les conteneurs Docker
+docker-compose up -d # -d lancer les conteneur en arrière plan
+
+# Pour créer un superutilisateur
+docker-compose exec web python manage.py createsuperuser
 ```
 
-### 🔹 4. Configurer la base de données
-Si vous n’avez pas encore de base de données, créez-la avec PostgreSQL :
-```sql
-CREATE USER mjc_user WITH PASSWORD 'mot_de_passe';
-CREATE DATABASE mjc_db;
-GRANT ALL PRIVILEGES ON DATABASE mjc_db TO mjc_user;
-GRANT ALL PRIVILEGES ON SCHEMA public TO mjc_user;
-CREATE EXTENSION IF NOT EXISTS pg_trgm; -- Important pour la recherche !
+## 📁 Structure du projet
+
 ```
-Appliquez ensuite les migrations :
-```sh
-poetry run python manage.py migrate
+MJC-MC-Site/
+├── apps/                   # Applications Django
+│   ├── activites/          # Gestion des activités
+│   ├── agenda/             # Gestion des événements
+│   ├── association/        # Informations sur l'association
+│   ├── common/             # Fonctionnalités partagées
+│   ├── home/               # Page d'accueil
+│   └── search/             # Fonctionnalité de recherche
+├── core/                   # Configuration centrale de Django
+│   ├── settings/           # Paramètres du projet
+│   ├── urls.py             # Configurations des URLs
+│   └── wsgi.py             # Configuration WSGI
+├── media/                  # Fichiers média uploadés
+├── static/                 # Fichiers statiques
+│   ├── css/                # Styles CSS
+│   ├── fonts/              # Polices
+│   ├── images/             # Images statiques
+│   └── js/                 # Scripts JavaScript
+├── templates/              # Templates HTML
+│   ├── components/         # Composants réutilisables
+│   └── includes/           # Éléments inclus dans plusieurs pages
+├── docker-compose.yml      # Configuration Docker Compose
+├── Dockerfile              # Configuration Docker
+├── manage.py               # Script de gestion Django
+├── package.json            # Dépendances Node.js
+├── pyproject.toml          # Configuration Poetry et dépendances Python
+└── tailwind.config.js      # Configuration TailwindCSS
 ```
 
-### 🔹 5. Installer et configurer Tailwind CSS
-Installez les dépendances :
-```sh
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+## 🛠️ Développement
+
+### Commandes utiles
+
+#### Gestion de Django
+```bash
+# Créer de nouvelles migrations
+python manage.py makemigrations
+
+# Appliquer les migrations
+python manage.py migrate
+
+# Lancer les tests (Si vous en créez)
+python manage.py test
+
+# Collecter les fichiers statiques
+python manage.py collectstatic
 ```
 
-Lance la compilation de Tailwind :
-```sh
+#### Gestion des assets frontend
+```bash
+# Compiler les styles CSS (mode développement)
 npm run dev
-# Vous pouvez ajouter votre commande personnalisée dans package.json
+
+# Compiler les styles CSS (mode production)
+npm run build
 ```
 
-### 🔹 6. Créer un super-utilisateur pour l’administration Wagtail
-```sh
-poetry run python manage.py createsuperuser
-```
-Suivez les instructions pour définir un **nom d’utilisateur, un e-mail et un mot de passe**.
+#### Docker
+```bash
+# Démarrer les conteneurs
+docker-compose up -d
 
-### 🔹 7. Lancer le serveur
-```sh
-poetry run python manage.py runserver
-```
-Accédez ensuite au site sur **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**.  
-L’interface d’administration Wagtail est disponible à **[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)**.
+# Arrêter les conteneurs
+docker-compose down
 
----
+# Voir les logs
+docker-compose logs -f
 
-## 📂 Structure du projet
-```
-.
-├── config/                     # Fichiers de configuration Django
-│   ├── settings.py             # Paramètres Django et Wagtail
-│   ├── urls.py                 # Routage principal
-├── mysite/                     # Application principale Wagtail
-│   ├── models.py               # Modèles de données Wagtail
-│   ├── templates/              # Templates HTML personnalisés
-├── static/                     # Fichiers statiques (CSS, JS, images)
-│   ├── css/
-│   ├── js/
-├── templates/                  # Templates HTML globaux
-│   ├── base.html               # Modèle de base du site
-├── .env.example                # Exemple de fichier de configuration
-├── pyproject.toml              # Configuration Poetry
-├── README.md                   # Documentation du projet
-└── manage.py                   # Commandes Django
+# Exécuter des commandes dans le conteneur web
+docker-compose exec web python manage.py [commande]
 ```
 
----
+### Base de données
 
-## 🔧 Commandes utiles
+#### Sauvegarde et restauration
+```bash
+# Sauvegarde complète de la base de données PostgreSQL
+pg_dump -U <username> -h <host> -p <port> -d <database_name> -F c -f backups/db_backup_$(date +%Y%m%d%H%M%S).dump
 
-📌 **Pendant le développement**
-- **Lancer le serveur** :
-  ```sh
-  poetry run python manage.py runserver
-  ```
-- **Recompiler Tailwind à chaque modification** :
-  ```sh
-  npm run dev
-  ```
+# Restauration complète à partir d'un backup
+pg_restore -U <username> -h <host> -p <port> -d <database_name> --clean --if-exists backups/nom_du_fichier.dump
 
-📌 **Gestion de la base de données**
-- **Créer les migrations** :
-  ```sh
-  poetry run python manage.py makemigrations
-  ```
-- **Appliquer les migrations** :
-  ```sh
-  poetry run python manage.py migrate
-  ```
-- **Accéder au shell Django** :
-  ```sh
-  poetry run python manage.py shell
-  ```
+# Sauvegarde des données Django en JSON (utile pour des migrations internes)
+python manage.py dumpdata > backups/backup_$(date +%Y%m%d%H%M%S).json
 
-📌 **Autres**
-- **Créer un super-utilisateur pour Wagtail** :
-  ```sh
-  poetry run python manage.py createsuperuser
-  ```
-- **Collecter les fichiers statiques pour la production** :
-  ```sh
-  poetry run python manage.py collectstatic --noinput
-  ```
----
+# Restauration des données Django depuis un JSON
+python manage.py loaddata backups/nom_du_fichier.json
+```
 
-## ℹ️ Informations utiles
+## 🧩 Applications
 
-### 📁 Fichiers à la racine
+### Activités
+Gère les activités proposées par la MJC, avec catégorisation, planification et inscriptions.
 
-**config/** :
-Contient les fichiers de configuration Django
+### Agenda
+Gère les événements organisés par la MJC.
 
-**mysite/** :
-C'est l'application principale Django/Wagtail.
+### Association
+Contient les informations sur l'association, son histoire, son équipe.
 
-**Static/** :
-Contient les fichiers statiques (CSS, JS, images) utilisés par Django.
-Avec Tailwind, les fichiers CSS générés peuvent être placés ici après la compilation.
+### Common
+Fonctionnalités partagées entre les applications, comme les modèles de base, les snippets et les utilitaires.
 
-**Templates/** :
-Contient les fichiers HTML utilisés par Django/Wagtail.
+### Home
+Gère la page d'accueil et la navigation principale du site.
 
-**LICENSE** :
-Contient la licence open-source ou propriétaire du projet. Indique comment le code peut être utilisé ou distribué. Ici, c'est une license MIT donc libre.
+### Search
+Implémente la fonctionnalité de recherche sur l'ensemble du site.
 
-**README.md** :
-Le fichier que vous êtes en train de lire. C'est la documentation du projet.
+## 🌐 Déploiement
 
-**manage.py** : 
-Script principal de Django permettant d'exécuter des commandes (runserver, migrate, createsuperuser, etc.).
+### Configuration pour la production
+1. Modifier les paramètres dans `core/settings/prod.py`
+2. Configurer les variables d'environnement (voir `.env.example`)
+3. Utiliser un serveur WSGI comme Gunicorn
+4. Configurer Nginx comme proxy inverse (voir `nginx.conf` pour un exemple)
 
-**package.json** :
-Fichier de configuration pour npm. Il liste les dépendances JavaScript et les scripts associés (ex : compilation Tailwind).
+### Procédure de déploiement
+```bash
+# Sur le serveur de production
+git pull
+poetry install
+npm ci
+npm run build
+python manage.py migrate
+python manage.py collectstatic --noinput
+systemctl restart gunicorn
+systemctl restart nginx
+```
 
-**pyproject.toml** :
-Fichier principal de configuration pour Poetry. Il définit les dépendances Python et les métadonnées du projet.
+## 🔧 Configuration
 
----
+### Variables d'environnement
+Créez un fichier `.env` à la racine du projet avec les variables suivantes :
+```
+# Django settings
+SECRET_KEY='votre clé secrète'
+DJANGO_ENV=dev
+
+# Database settings
+DATABASE_URL=postgres://utilisateur:mot_de_passe@localhost:5432/nom_db
+POSTGRES_USER='utilisateur'
+POSTGRES_PASSWORD='mot_de_passe'
+
+# Wagtail settings
+WAGTAIL_SITE_NAME='MJC Mauguio carnon'
+```
+
+## 🛠️ Technologies utilisées
+| Technologie  | Utilisation                                               |
+|-------------|-----------------------------------------------------------|
+| **[Django](https://www.djangoproject.com/)**  | Framework backend (Python)                                |
+| **[Wagtail CMS](https://wagtail.org/)**  | Gestionnaire de contenu basé sur Django                   |
+| **[PostgreSQL](https://www.postgresql.org/)**  | Base de données                                           |
+| **[Tailwind CSS](https://tailwindcss.com/)**  | Framework CSS moderne                                     |
+| **[Poetry](https://python-poetry.org/)**  | Gestion des dépendances et environnements virtuels Python |
+| **[Docker](https://docs.docker.com/)** | Pour la conteuneurisation                                  |
+
+
+## 📝 Licence
+Ce projet est sous licence [MIT](LICENSE).
 
 ## 📧 Contact
 Pour toute question ou suggestion, vous pouvez me contacter à **[theodoredeboisseson@gmail.com](mailto:theodoredeboisseson@gmail.com)**.
-
-Backup la DB : 
-` pg_dump -U <username> -h <host> -p <port> <database_name> > backup_$(date +\%Y\%m\%d\%H\%M\%S).sql `

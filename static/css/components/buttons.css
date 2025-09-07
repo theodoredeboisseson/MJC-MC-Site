@@ -28,7 +28,7 @@
   NAVIGATION
 -----------------------------------------*/
 .nav-link {
-    @apply flex items-center px-2 xl:px-2 py-3 text-xl font-bold text-light-text transition-colors hover:text-link-hover;
+    @apply flex items-center px-4 xl:px-6 py-3 text-xl font-bold text-light-text transition-colors hover:text-link-hover transform hover:-translate-y-0.5 transition-transform;
 }
 
 .nav-submenu-link {
@@ -36,10 +36,10 @@
 }
 
 .mobile-nav-link {
-    @apply flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-light-text transition-colors hover:text-link-hover hover:bg-primary-light;
+    @apply flex w-full items-center justify-between rounded-lg py-4 pr-3.5 pl-3 text-base/7 font-semibold transition-colors hover:text-link-hover hover:bg-black/10;
 }
 
-.nav-link.active, .nav_submenu-link.active, .mobile-nav-link.active {
+.nav-link.active, .nav_submenu-link.active, .mobile-nav-link.active, .mobile-nav-link > *.active {
     @apply text-link-hover!;
 }
 

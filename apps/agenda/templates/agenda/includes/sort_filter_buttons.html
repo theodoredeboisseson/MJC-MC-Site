@@ -4,7 +4,7 @@
     <div>
         <label for="sort_by" class="mr-2">Trier par :</label>
         <select id="sort_by" name="sort_by" onchange="updateURLParameter('sort_by', this.value);" class="p-2 pl-4 rounded-xl border">
-            <option value="date" {% if sort_by == 'date' %}selected{% endif %}>Date</option>
+            <option value="start_date" {% if sort_by == 'start_date' %}selected{% endif %}>Date</option>
             <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Titre</option>
         </select>
     </div>

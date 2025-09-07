@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     # Project apps
     "apps.activites",
     "apps.agenda",
-    "apps.association",
     "apps.common",
     "apps.home",
     "apps.search",
@@ -58,6 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [
@@ -216,5 +216,12 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
                 'ul',
             ]
         }
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
     }
 }

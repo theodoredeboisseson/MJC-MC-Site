@@ -3,21 +3,19 @@
 {% block section_class %}agenda-index{% endblock %}
 
 {% block additional_actions %}
-    {% if past_events_page %}
-        <div class="my-6 flex justify-end">
-            <a href="{{ past_events_page.url }}" class="btn btn-primary">Voir les événements passés</a>
-        </div>
-    {% endif %}
+    <div class="my-6 flex justify-end">
+        <a href="{{ toggle_url }}" class="btn btn-primary">
+            {% if showing_past %}Voir les événements à venir{% else %}Voir les événements passés{% endif %}
+        </a>
+    </div>
 {% endblock %}
 
 {% block event_list %}
-    {% with event_list=upcoming_events %}
-        {% for event in event_list %}
-            {% include "agenda/includes/event_card.html" %}
-            {% empty %}
-            <div class="col-span-full text-center py-8">
-                <p>Aucun événement à venir n'est prévu avec votre sélection pour le moment.</p>
-            </div>
-        {% endfor %}
-    {% endwith %}
+    {% for event in event_list %}
+        {% include "agenda/includes/event_card.html" %}
+        {% empty %}
+        <div class="col-span-full text-center py-8">
+            <p>Aucun événement {% if showing_past %}passé{% else %}à venir{% endif %} trouvé.</p>
+        </div>
+    {% endfor %}
 {% endblock %}

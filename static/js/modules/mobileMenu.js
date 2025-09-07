@@ -6,6 +6,7 @@ const MobileMenu = {
 
         this.panel = this.menu.querySelector('.fixed.inset-y-0');
         this.overlay = this.menu.querySelector('.fixed.inset-0');
+        this.body = document.body;
         this.bindEvents();
     },
 
@@ -23,12 +24,14 @@ const MobileMenu = {
         requestAnimationFrame(() => {
             this.overlay.classList.add('opacity-100');
             this.panel.classList.remove('translate-x-full');
+            this.body.classList.add('no-scroll');
         });
     },
 
     close() {
         this.overlay.classList.remove('opacity-100');
         this.panel.classList.add('translate-x-full');
+        this.body.classList.remove('no-scroll');
         setTimeout(() => this.menu.classList.add('hidden'), this.menuTransitionDelay);
     }
 };
