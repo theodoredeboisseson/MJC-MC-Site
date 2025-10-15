@@ -1,13 +1,14 @@
 # 🌐 Site Web de la MJC Mauguio-Carnon
 
-Ce projet vise à refondre le site web de la Maison des Jeunes et de la Culture (MJC) de Mauguio-Carnon. L’objectif est de proposer une plateforme ergonomique, esthétique et facile à maintenir, permettant aux visiteurs d’accéder rapidement aux informations sur les activités de l’association.
+Ce projet vise à refondre le site web de la Maison des Jeunes et de la Culture (MJC) de Mauguio-Carnon. L’objectif est de proposer une plateforme ergonomique, esthétique et facile à maintenir, permettant aux visiteurs d’accéder rapidement aux informations sur les activités et autres pages de l’association.
+Ce document peut vous permettre de reprendre la main sur le développement ou la maintenance site.
 
 ---
 
-## 🚀 Objectifs du projet
-✅ **Interface moderne et responsive** : Utilisation de **Tailwind CSS** pour un design épuré et adaptatif.  
-✅ **Gestion simplifiée du contenu** : Intégration de **Wagtail CMS** pour permettre aux non-développeurs de gérer facilement le site (actualités, activités, événements…).  
-✅ **Maintenance optimisée** : Code organisé et utilisation d’outils modernes pour réduire la charge de maintenance.
+## 🏹 Objectifs du projet
+- **Interface moderne et responsive** : Utilisation de **Tailwind CSS** pour un design épuré et adaptatif.  
+- **Gestion simplifiée du contenu** : Intégration de **Wagtail CMS** pour permettre aux non-développeurs de gérer facilement le site (actualités, activités, événements…).  
+- **Maintenance optimisée** : Code organisé, simplifié et utilisation d’outils modernes pour réduire la charge de maintenance tel que les sauvegardes auto de la base de données ou encore l'auto-deploiement avec le script deploy.sh.
 
 ---
 
@@ -21,12 +22,12 @@ Ce projet vise à refondre le site web de la Maison des Jeunes et de la Culture 
 | **[Poetry](https://python-poetry.org/)**  | Gestion des dépendances Python |
 | **[dotenv](https://pypi.org/project/python-dotenv/)**  | Gestion des variables d’environnement |
 
-📌 D’autres technologies comme **Alpine.js** et **AWS S3** pourraient être ajoutées à l’avenir.
+D’autres technologies comme Docker pour conteneuriser et sécuriser et un cloud externe pourraient être ajoutées à l’avenir si souhaité.
 
 ---
 
 ## 📋 Prérequis
-Avant de commencer, assurez-vous d’avoir installé :
+Avant de commencer, assurez-vous d’avoir installé (avec `sudo apt install`):
 - **Python 3.10+**
 - **Poetry** *(gestion des dépendances Python)*
 - **Node.js & npm** *(pour Tailwind CSS)*
@@ -36,31 +37,31 @@ Avant de commencer, assurez-vous d’avoir installé :
 
 ## ⚙️ Installation et configuration
 
-### 🔹 1. Cloner le projet
+### 1. Cloner le projet
 ```sh
 git clone git@github.com:theodoredeboisseson/MJC-MC-Site.git
 cd MJC-MC-Site
 ```
 
-### 🔹 2. Installer les dépendances
+### 2. Installer les dépendances
 ```sh
 poetry install
 poetry env use python3.12  # (ou une version compatible)
 ```
 
-### 🔹 3. Configurer les variables d’environnement
+### 3. Configurer les variables d’environnement
 Copiez l’exemple de fichier `.env` et modifiez-le avec vos informations :
 ```sh
 cp .env.example .env
 ```
 Exemple de contenu du `.env` :
 ```
-DEBUG=True
-SECRET_KEY=supersecretkey
-DATABASE_URL=postgres://user:password@localhost/dbname
+DEBUG=True # False en production
+SECRET_KEY=supersecretkey # Pas encore utilisé (Modifier ceci évidemment si vous l'utilisez) 
+DATABASE_URL=postgres://user:password@localhost/dbname # Modifier selon votre bdd
 ```
 
-### 🔹 4. Configurer la base de données
+### 4. Configurer la base de données
 Si vous n’avez pas encore de base de données, créez-la avec PostgreSQL :
 ```sql
 CREATE USER mjc_user WITH PASSWORD 'mot_de_passe';
@@ -74,26 +75,27 @@ Appliquez ensuite les migrations :
 poetry run python manage.py migrate
 ```
 
-### 🔹 5. Installer et configurer Tailwind CSS
+### 5. Installer et configurer Tailwind CSS
 Installez les dépendances :
 ```sh
 npm install -D tailwindcss postcss autoprefixer
+# TailwindCSS 4.0 utilise uniquement tailwindcss et @tailwindcss/cli pour son CLI. Adapter si vous voulez la version 4.0
 npx tailwindcss init -p
 ```
 
 Lance la compilation de Tailwind :
 ```sh
 npm run dev
-# Vous pouvez ajouter votre commande personnalisée dans package.json
+# Vous pouvez ajouter (ou modifier) votre commande personnalisée dans package.json
 ```
 
-### 🔹 6. Créer un super-utilisateur pour l’administration Wagtail
+### 6. Créer un super-utilisateur pour l’administration Wagtail
 ```sh
 poetry run python manage.py createsuperuser
 ```
 Suivez les instructions pour définir un **nom d’utilisateur, un e-mail et un mot de passe**.
 
-### 🔹 7. Lancer le serveur
+### 7. Lancer le serveur
 ```sh
 poetry run python manage.py runserver
 ```
@@ -193,10 +195,19 @@ Fichier de configuration pour npm. Il liste les dépendances JavaScript et les s
 **pyproject.toml** :
 Fichier principal de configuration pour Poetry. Il définit les dépendances Python et les métadonnées du projet.
 
+### Backup la DB : 
+**Extraire un fichier de sauvegarde complet de la bdd** :
+` pg_dump -U <username> -h <host> -p <port> <database_name> > backup_$(date +\%Y\%m\%d\%H\%M\%S).sql `
+Consulter la documentation de PostgreSQL pour appliquer une backup.
+
+### Organisation des administrateurs
+Django permet de se créer un compte admin sur le site pour gérer le contenu. Wagtail lui permet un système plus pratique et moderne de la gestion de contenu (CMS). À la fin de mon stage, chaque pôle technique/administratif de la MJC avait son compte administrateur (Directrice, Directrice-Adj, Secrétariat, Directrice Carnon, etc...). 
+La directrice, Mme Gourmelon Dominique, détiens les identifiants au compte OVH sur lequel est souscrit un VPS sur lequel tourne [le site](https://www.mjcmauguiocarnon.com/).
+
+### Serveur de production
+Le serveur de production est donc un VPS chez OVH dont la directrice détiens également les codes pour se connecter via SSH. Toutes les opérations dans le serveur se font via ligne de commande à distance via connection SSH, donc pas d'interface normalement. Vous pourrez trouver un fichier README.md également dans le répertoire courant de l'utilisateur **mjc-user** où se trouve la documentation propre à la configuration interne du serveur.
+
 ---
 
 ## 📧 Contact
 Pour toute question ou suggestion, vous pouvez me contacter à **[theodoredeboisseson@gmail.com](mailto:theodoredeboisseson@gmail.com)**.
-
-Backup la DB : 
-` pg_dump -U <username> -h <host> -p <port> <database_name> > backup_$(date +\%Y\%m\%d\%H\%M\%S).sql `
